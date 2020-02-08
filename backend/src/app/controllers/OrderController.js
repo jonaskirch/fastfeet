@@ -4,6 +4,9 @@ import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
+import NewOrderMail from '../jobs/NewOrderMail';
+import Queue from '../../lib/Queue';
+
 class OrderController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -26,14 +29,24 @@ class OrderController {
     const { recipient_id, deliveryman_id } = req.body;
     const recipient = await Recipient.findByPk(recipient_id);
     if (!recipient) {
-      res.status(400).json({ error: 'Recipient does not exists' });
+      return res.status(400).json({ error: 'Recipient does not exists' });
     }
-    const deliveryman = await Recipient.findByPk(deliveryman_id);
+    const deliveryman = await Deliveryman.findByPk(deliveryman_id);
     if (!deliveryman) {
-      res.status(400).json({ error: 'Deliveryman does not exists' });
+      return res.status(400).json({ error: 'Deliveryman does not exists' });
     }
 
     const order = await Order.create(req.body);
+
+    if (deliveryman.email) {
+      await Queue.add(NewOrderMail.key, {
+        date: order.createdAt,
+        product: order.product,
+        recipient,
+        deliveryman,
+      });
+    }
+
     return res.json(order);
   }
 
@@ -49,26 +62,43 @@ class OrderController {
       return res.status(400).json('Validation fails');
     }
 
-    const { id } = req.query.params;
+    const { id } = req.params;
     const order = await Order.findByPk(id);
     if (!order) {
-      res.status(400).json({ error: 'Recipient does not exists' });
+      return res.status(400).json({ error: 'Recipient does not exists' });
     }
 
     /**
      * check exists recipient and deliveryman
      */
     const { recipient_id, deliveryman_id } = req.body;
-    const recipient = await Recipient.findByPk(recipient_id);
-    if (!recipient) {
-      res.status(400).json({ error: 'Recipient does not exists' });
+
+    if (recipient_id) {
+      const recipient = await Recipient.findByPk(recipient_id);
+      if (!recipient) {
+        return res.status(400).json({ error: 'Recipient does not exists' });
+      }
     }
-    const deliveryman = await Recipient.findByPk(deliveryman_id);
-    if (!deliveryman) {
-      res.status(400).json({ error: 'Deliveryman does not exists' });
+
+    if (deliveryman_id) {
+      const deliveryman = await Deliveryman.findByPk(deliveryman_id);
+      if (!deliveryman) {
+        return res.status(400).json({ error: 'Deliveryman does not exists' });
+      }
+      // const newDeliveryman = deliveryman_id !== order.deliveryman_id;
     }
 
     await order.update(req.body);
+
+    // if (newDeliveryman && deliveryman.email) {
+    //   await Queue.add(NewOrderMail.key, {
+    //     date: order.createdAt,
+    //     product: order.product,
+    //     recipient: recipient || order.recipient,
+    //     deliveryman: deliveryman || order.deliveryman,
+    //   });
+    // }
+
     return res.json(order);
   }
 
