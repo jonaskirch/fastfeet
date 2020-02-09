@@ -7,6 +7,7 @@ import RecipientController from './app/controllers/RecipientController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import FileController from './app/controllers/FileController';
 import OrderController from './app/controllers/OrderController';
+import DeliveryStartController from './app/controllers/DeliveryStartController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -14,6 +15,21 @@ const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+
+// entregador visualiza suas entregas abertas e não canceladas
+routes.get('/deliverymen/:id/deliveries', DeliverymanController.index);
+// entregador visualiza suas entregas finalizadas
+routes.get('/deliverymen/:id/deliveried', DeliverymanController.index);
+// entregador inicia entrega
+routes.post('/orders/:id/startdelivery', DeliveryStartController.store);
+// entregador finaliza entrega
+routes.post('/orders/:id/enddelivery', OrderController.update);
+// visualizar problemas na entrega de uma encomenda
+routes.get('/orders/:id/problems', OrderController.update);
+// adicionar problemas na entrega de uma encomenda
+routes.post('/orders/:id/problems', OrderController.update);
+// cancelar encomenda com base em um problema
+routes.delete('/problem/:id/canceldelivery', OrderController.update);
 
 routes.use(authMiddleware);
 routes.put('/users', UserController.update);

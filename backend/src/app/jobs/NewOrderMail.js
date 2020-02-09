@@ -8,9 +8,6 @@ class NewOrderMail {
   }
 
   async handle({ data }) {
-    console.log('data', data);
-    console.log('typeof', typeof data.createdAt);
-
     await Mail.sendMail({
       to: `${data.deliveryman.name} <${data.deliveryman.email}>`,
       subject: 'Nova encomenda',
