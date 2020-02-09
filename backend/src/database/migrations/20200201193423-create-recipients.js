@@ -16,12 +16,12 @@ module.exports = {
         allowNull: false,
       },
       number: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: true, // no interior as vezes nao tem numero...
       },
       complement: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       state: {
         type: Sequelize.STRING,

@@ -2,16 +2,16 @@ import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import Mail from '../../lib/Mail';
 
-class NewOrderMail {
+class NewDeliveryMail {
   get Key() {
-    return 'NewOrderMail';
+    return 'NewDeliveryMail';
   }
 
   async handle({ data }) {
     await Mail.sendMail({
       to: `${data.deliveryman.name} <${data.deliveryman.email}>`,
       subject: 'Nova encomenda',
-      template: 'order',
+      template: 'newDelivery',
       context: {
         deliveryman: data.deliveryman.name,
         recipient: data.recipient.name,
@@ -24,4 +24,4 @@ class NewOrderMail {
   }
 }
 
-export default new NewOrderMail();
+export default new NewDeliveryMail();

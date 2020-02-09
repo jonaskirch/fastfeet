@@ -1,13 +1,13 @@
 import * as Yup from 'yup';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
-import NewOrderMail from '../jobs/NewOrderMail';
+import NewDeliveryMail from '../jobs/NewDeliveryMail';
 import Queue from '../../lib/Queue';
 
-class OrderController {
+class DeliveryController {
   async store(req, res) {
     const schema = Yup.object().shape({
       recipient_id: Yup.number()
@@ -36,18 +36,18 @@ class OrderController {
       return res.status(400).json({ error: 'Deliveryman does not exists' });
     }
 
-    const order = await Order.create(req.body);
+    const delivery = await Delivery.create(req.body);
 
     if (deliveryman.email) {
-      await Queue.add(NewOrderMail.key, {
-        date: order.createdAt,
-        product: order.product,
+      await Queue.add(NewDeliveryMail.key, {
+        date: delivery.createdAt,
+        product: delivery.product,
         recipient,
         deliveryman,
       });
     }
 
-    return res.json(order);
+    return res.json(delivery);
   }
 
   async update(req, res) {
@@ -63,8 +63,8 @@ class OrderController {
     }
 
     const { id } = req.params;
-    const order = await Order.findByPk(id);
-    if (!order) {
+    const delivery = await Delivery.findByPk(id);
+    if (!delivery) {
       return res.status(400).json({ error: 'Recipient does not exists' });
     }
 
@@ -85,27 +85,27 @@ class OrderController {
       if (!deliveryman) {
         return res.status(400).json({ error: 'Deliveryman does not exists' });
       }
-      // const newDeliveryman = deliveryman_id !== order.deliveryman_id;
+      // const newDeliveryman = deliveryman_id !== delivery.deliveryman_id;
     }
 
-    await order.update(req.body);
+    await delivery.update(req.body);
 
     // if (newDeliveryman && deliveryman.email) {
-    //   await Queue.add(NewOrderMail.key, {
-    //     date: order.createdAt,
-    //     product: order.product,
-    //     recipient: recipient || order.recipient,
-    //     deliveryman: deliveryman || order.deliveryman,
+    //   await Queue.add(NewDeliveryMail.key, {
+    //     date: delivery.createdAt,
+    //     product: delivery.product,
+    //     recipient: recipient || delivery.recipient,
+    //     deliveryman: deliveryman || delivery.deliveryman,
     //   });
     // }
 
-    return res.json(order);
+    return res.json(delivery);
   }
 
   async index(req, res) {
     const { page = 1 } = req.query;
 
-    const orders = await Order.findAll({
+    const deliverys = await Delivery.findAll({
       attributes: ['id', 'product'],
       include: [
         {
@@ -124,12 +124,12 @@ class OrderController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      order: [['created_at', 'DESC']],
+      delivery: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
     });
 
-    return res.json(orders);
+    return res.json(deliverys);
   }
 
   async delete(req, res) {
@@ -137,4 +137,4 @@ class OrderController {
   }
 }
 
-export default new OrderController();
+export default new DeliveryController();

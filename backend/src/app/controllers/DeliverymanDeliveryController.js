@@ -1,4 +1,4 @@
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
 
@@ -11,7 +11,7 @@ class DeliverymanDeliveries {
     }
 
     const { page = 1 } = req.query;
-    const orders = await Order.findAll({
+    const deliverys = await Delivery.findAll({
       where: {
         deliveryman_id: id,
         canceled_at: null,
@@ -25,12 +25,12 @@ class DeliverymanDeliveries {
           attributes: ['id', 'name'],
         },
       ],
-      order: ['created_at'],
+      delivery: ['created_at'],
       limit: 20,
       offset: (page - 1) * 20,
     });
 
-    return res.json(orders);
+    return res.json(deliverys);
   }
 }
 

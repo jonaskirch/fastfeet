@@ -1,38 +1,38 @@
 import { Op } from 'sequelize';
 import { startOfDay, endOfDay } from 'date-fns';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 
 class DeliveryStart {
   async store(req, res) {
     const { id } = req.params;
-    const order = await Order.findByPk(id);
-    if (!order) {
-      return res.status(400).json({ error: 'Order not found' });
+    const delivery = await Delivery.findByPk(id);
+    if (!delivery) {
+      return res.status(400).json({ error: 'Delivery not found' });
     }
 
-    if (order.start_date) {
+    if (delivery.start_date) {
       return res.status(401).json({ error: 'Delivery already is start' });
     }
 
     const date = new Date();
-    const orderCount = await Order.count({
+    const deliveryCount = await Delivery.count({
       where: {
-        deliveryman_id: order.deliveryman_id,
+        deliveryman_id: delivery.deliveryman_id,
         start_date: {
           [Op.between]: [startOfDay(date), endOfDay(date)],
         },
       },
     });
 
-    if (orderCount >= 5) {
+    if (deliveryCount >= 5) {
       return res
         .status(401)
         .json({ error: 'You can only do 5 deliveries per day' });
     }
 
-    order.start_date = date;
-    await order.save();
-    return res.json(order);
+    delivery.start_date = date;
+    await delivery.save();
+    return res.json(delivery);
   }
 }
 

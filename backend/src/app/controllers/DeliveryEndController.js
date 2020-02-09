@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 
 class DeliveryEndController {
   async store(req, res) {
@@ -14,24 +14,24 @@ class DeliveryEndController {
     }
 
     const { id } = req.params;
-    const order = await Order.findByPk(id);
-    if (!order) {
-      return res.status(400).json({ error: 'Order not found' });
+    const delivery = await Delivery.findByPk(id);
+    if (!delivery) {
+      return res.status(400).json({ error: 'Delivery not found' });
     }
 
-    if (order.end_date) {
+    if (delivery.end_date) {
       return res.status(401).json({ error: 'Delivery already is finish' });
     }
 
-    if (!order.start_date) {
+    if (!delivery.start_date) {
       return res.status(401).json({ error: 'Delivery not already start' });
     }
 
-    order.signature_id = req.body.signature_id;
-    order.end_date = new Date();
-    await order.save();
+    delivery.signature_id = req.body.signature_id;
+    delivery.end_date = new Date();
+    await delivery.save();
 
-    return res.json(order);
+    return res.json(delivery);
   }
 }
 

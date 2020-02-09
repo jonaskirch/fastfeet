@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
 import File from '../models/File';
@@ -13,7 +13,7 @@ class DeliverymanDelivered {
     }
 
     const { page = 1 } = req.query;
-    const orders = await Order.findAll({
+    const deliveries = await Delivery.findAll({
       where: {
         deliveryman_id: id,
         end_date: {
@@ -33,12 +33,12 @@ class DeliverymanDelivered {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      order: [['created_at', 'DESC']],
+      delivery: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
     });
 
-    return res.json(orders);
+    return res.json(deliveries);
   }
 }
 
