@@ -9,6 +9,8 @@ import FileController from './app/controllers/FileController';
 import OrderController from './app/controllers/OrderController';
 import DeliveryStartController from './app/controllers/DeliveryStartController';
 import DeliveryEndController from './app/controllers/DeliveryEndController';
+import DeliverymanDeliveriesController from './app/controllers/DeliverymanDeliveries';
+import DeliverymanDeliveredController from './app/controllers/DeliverymanDelivered';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -18,9 +20,12 @@ routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
 // entregador visualiza suas entregas abertas e não canceladas
-routes.get('/deliverymen/:id/deliveries', DeliverymanController.index);
+routes.get(
+  '/deliverymen/:id/deliveries',
+  DeliverymanDeliveriesController.index
+);
 // entregador visualiza suas entregas finalizadas
-routes.get('/deliverymen/:id/deliveried', DeliverymanController.index);
+routes.get('/deliverymen/:id/deliveried', DeliverymanDeliveredController.index);
 // entregador inicia entrega
 routes.post('/orders/:id/startdelivery', DeliveryStartController.store);
 // entregador finaliza entrega
