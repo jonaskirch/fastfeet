@@ -8,6 +8,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import FileController from './app/controllers/FileController';
 import OrderController from './app/controllers/OrderController';
 import DeliveryStartController from './app/controllers/DeliveryStartController';
+import DeliveryEndController from './app/controllers/DeliveryEndController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -23,7 +24,7 @@ routes.get('/deliverymen/:id/deliveried', DeliverymanController.index);
 // entregador inicia entrega
 routes.post('/orders/:id/startdelivery', DeliveryStartController.store);
 // entregador finaliza entrega
-routes.post('/orders/:id/enddelivery', OrderController.update);
+routes.post('/orders/:id/enddelivery', DeliveryEndController.store);
 // visualizar problemas na entrega de uma encomenda
 routes.get('/orders/:id/problems', OrderController.update);
 // adicionar problemas na entrega de uma encomenda

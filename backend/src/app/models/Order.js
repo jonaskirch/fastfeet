@@ -9,6 +9,7 @@ class Order extends Model {
         signature_id: Sequelize.INTEGER,
         product: Sequelize.STRING,
         start_date: Sequelize.DATE,
+        end_date: Sequelize.DATE,
       },
       { sequelize }
     );
