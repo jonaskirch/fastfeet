@@ -38,14 +38,12 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    if (deliveryman.email) {
-      await Queue.add(NewDeliveryMail.key, {
-        date: delivery.createdAt,
-        product: delivery.product,
-        recipient,
-        deliveryman,
-      });
-    }
+    await Queue.add(NewDeliveryMail.key, {
+      date: delivery.createdAt,
+      product: delivery.product,
+      recipient,
+      deliveryman,
+    });
 
     return res.json(delivery);
   }
@@ -85,19 +83,9 @@ class DeliveryController {
       if (!deliveryman) {
         return res.status(400).json({ error: 'Deliveryman does not exists' });
       }
-      // const newDeliveryman = deliveryman_id !== delivery.deliveryman_id;
     }
 
     await delivery.update(req.body);
-
-    // if (newDeliveryman && deliveryman.email) {
-    //   await Queue.add(NewDeliveryMail.key, {
-    //     date: delivery.createdAt,
-    //     product: delivery.product,
-    //     recipient: recipient || delivery.recipient,
-    //     deliveryman: deliveryman || delivery.deliveryman,
-    //   });
-    // }
 
     return res.json(delivery);
   }
@@ -124,7 +112,7 @@ class DeliveryController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      delivery: [['created_at', 'DESC']],
+      order: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
     });

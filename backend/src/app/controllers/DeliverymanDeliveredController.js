@@ -33,7 +33,7 @@ class DeliverymanDelivered {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      delivery: [['created_at', 'DESC']],
+      order: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
     });

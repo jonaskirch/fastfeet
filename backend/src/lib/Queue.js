@@ -1,8 +1,9 @@
 import Bee from 'bee-queue';
-import NewDeliveryMail from '../app/jobs/NewDeliveryMail';
 import redisConfig from '../config/redis';
+import NewDeliveryMail from '../app/jobs/NewDeliveryMail';
+import CancelDeliveryMail from '../app/jobs/CancelDeliveryMail';
 
-const jobs = [NewDeliveryMail];
+const jobs = [NewDeliveryMail, CancelDeliveryMail];
 
 class Queue {
   constructor() {

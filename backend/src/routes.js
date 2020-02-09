@@ -12,6 +12,7 @@ import DeliveryEndController from './app/controllers/DeliveryEndController';
 import DeliverymanDeliveryController from './app/controllers/DeliverymanDeliveryController';
 import DeliverymanDeliveredController from './app/controllers/DeliverymanDeliveredController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
+import DeliveryCancelController from './app/controllers/DeliveryCancelController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -28,16 +29,18 @@ routes.get('/deliverymen/:id/deliveried', DeliverymanDeliveredController.index);
 routes.post('/deliveries/:id/start', DeliveryStartController.store);
 // entregador finaliza entrega
 routes.post('/deliveries/:id/end', DeliveryEndController.store);
+// adicionar problemas na entrega de uma encomenda
+routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
+
+routes.use(authMiddleware);
+
 // visualziar todas as entregas com problemas
 routes.get('/deliveries/problems', DeliveryProblemController.index);
 // visualizar problemas na entrega de uma encomenda
 routes.get('/deliveries/:id/problems', DeliveryProblemController.show);
-// adicionar problemas na entrega de uma encomenda
-routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
 // cancelar encomenda com base em um problema
-routes.delete('/problem/:id/canceldelivery', DeliveryController.update);
+routes.delete('/problem/:id/canceldelivery', DeliveryCancelController.store);
 
-routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);

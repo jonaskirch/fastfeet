@@ -25,7 +25,7 @@ class DeliverymanDeliveries {
           attributes: ['id', 'name'],
         },
       ],
-      delivery: ['created_at'],
+      order: ['created_at'],
       limit: 20,
       offset: (page - 1) * 20,
     });
