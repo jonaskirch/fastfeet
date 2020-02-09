@@ -9,6 +9,11 @@ class DeliveryStart {
     if (!order) {
       return res.status(400).json({ error: 'Order not found' });
     }
+
+    if (order.start_date) {
+      return res.status(401).json({ error: 'Delivery already is start' });
+    }
+
     const date = new Date();
     const orderCount = await Order.count({
       where: {

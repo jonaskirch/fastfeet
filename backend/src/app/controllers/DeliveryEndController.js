@@ -19,6 +19,14 @@ class DeliveryEndController {
       return res.status(400).json({ error: 'Order not found' });
     }
 
+    if (order.end_date) {
+      return res.status(401).json({ error: 'Delivery already is finish' });
+    }
+
+    if (!order.start_date) {
+      return res.status(401).json({ error: 'Delivery not already start' });
+    }
+
     order.signature_id = req.body.signature_id;
     order.end_date = new Date();
     await order.save();
