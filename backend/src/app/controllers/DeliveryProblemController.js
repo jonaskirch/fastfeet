@@ -1,8 +1,6 @@
 import * as Yup from 'yup';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Delivery from '../models/Delivery';
-import Recipient from '../models/Recipient';
-import Deliveryman from '../models/Deliveryman';
 
 class DeliveryProblemController {
   async store(req, res) {
@@ -28,39 +26,6 @@ class DeliveryProblemController {
   }
 
   async index(req, res) {
-    const { page = 1 } = req.query;
-
-    const deliveries = await Delivery.findAll({
-      attributes: ['id', 'product'],
-      include: [
-        {
-          model: DeliveryProblem,
-          as: 'problem',
-          attributes: ['id', 'description'],
-        },
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['id', 'name'],
-        },
-      ],
-      // where: {
-      //   delivery_id: id,
-      // },
-      order: ['created_at'],
-      limit: 20,
-      offset: (page - 1) * 20,
-    });
-
-    return res.json(deliveries);
-  }
-
-  async show(req, res) {
     const { id } = req.params;
     const delivery = await Delivery.findByPk(id);
     if (!delivery) {

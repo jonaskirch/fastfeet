@@ -63,7 +63,7 @@ class DeliveryController {
     const { id } = req.params;
     const delivery = await Delivery.findByPk(id);
     if (!delivery) {
-      return res.status(400).json({ error: 'Recipient does not exists' });
+      return res.status(400).json({ error: 'Delivery does not exists' });
     }
 
     /**
@@ -121,7 +121,27 @@ class DeliveryController {
   }
 
   async delete(req, res) {
-    res.json({ type: 'delete' });
+    const { id } = req.params;
+    const delivery = await Delivery.findByPk(id);
+    if (!delivery) {
+      return res.status(400).json({ error: 'Delivery does not exists' });
+    }
+
+    if (delivery.end_date) {
+      return res.status(400).json({
+        error: 'Delivery does not can be delete because already was end',
+      });
+    }
+
+    if (delivery.start_date) {
+      return res.status(400).json({
+        error: 'Delivery does not can be delete because already was start',
+      });
+    }
+
+    await delivery.destroy();
+
+    return res.json({ id: delivery.id });
   }
 }
 

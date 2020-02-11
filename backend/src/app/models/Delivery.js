@@ -4,7 +4,7 @@ class Delivery extends Model {
   static init(sequelize) {
     super.init(
       {
-        recipient_id: Sequelize.INTEGER,
+        // recipient_id: Sequelize.INTEGER,
         deliveryman_id: Sequelize.INTEGER,
         signature_id: Sequelize.INTEGER,
         product: Sequelize.STRING,
@@ -30,6 +30,10 @@ class Delivery extends Model {
     this.belongsTo(models.File, {
       foreignKey: 'signature_id',
       as: 'signature',
+    });
+    this.hasMany(models.DeliveryProblem, {
+      foreignKey: 'delivery_id',
+      as: 'problems',
     });
   }
 }

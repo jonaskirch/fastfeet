@@ -13,6 +13,8 @@ import DeliverymanDeliveryController from './app/controllers/DeliverymanDelivery
 import DeliverymanDeliveredController from './app/controllers/DeliverymanDeliveredController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 import DeliveryCancelController from './app/controllers/DeliveryCancelController';
+import DeliveryWithProblemController from './app/controllers/DeliveryWithProblemController';
+
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -35,9 +37,9 @@ routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
 routes.use(authMiddleware);
 
 // visualziar todas as entregas com problemas
-routes.get('/deliveries/problems', DeliveryProblemController.index);
+routes.get('/deliveries/problems', DeliveryWithProblemController.index);
 // visualizar problemas na entrega de uma encomenda
-routes.get('/deliveries/:id/problems', DeliveryProblemController.show);
+routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
 // cancelar encomenda com base em um problema
 routes.delete('/problem/:id/canceldelivery', DeliveryCancelController.store);
 
