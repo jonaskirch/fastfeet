@@ -41,9 +41,10 @@ routes.get('/deliveries/problems', DeliveryWithProblemController.index);
 // visualizar problemas na entrega de uma encomenda
 routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
 // cancelar encomenda com base em um problema
-routes.delete('/problem/:id/canceldelivery', DeliveryCancelController.store);
+routes.post('/problem/:id/canceldelivery', DeliveryCancelController.store);
 
 routes.put('/users', UserController.update);
+routes.get('/recipients', RecipientController.index);
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
 

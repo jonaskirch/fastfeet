@@ -7,6 +7,8 @@ import File from '../models/File';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
 import Queue from '../../lib/Queue';
 
+const { Op } = require('sequelize');
+
 class DeliveryController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -91,7 +93,7 @@ class DeliveryController {
   }
 
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, product } = req.query;
 
     const deliverys = await Delivery.findAll({
       attributes: ['id', 'product'],
@@ -112,6 +114,11 @@ class DeliveryController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      where: product && {
+        product: {
+          [Op.iLike]: `%${product}%`,
+        },
+      },
       order: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
