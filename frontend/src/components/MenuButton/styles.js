@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
+
+  div {
+    margin: 0;
+    padding: 0;
+    display: inline;
+  }
 `;
 
 export const MenuList = styled.ul`
@@ -28,7 +34,7 @@ export const MenuList = styled.ul`
   }
 `;
 
-export const ItemMenu = styled.li`
+export const Item = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -48,5 +54,10 @@ export const ItemMenu = styled.li`
 
   a {
     color: #999;
+  }
+
+  a:hover {
+    color: #666;
+    font-weight: bold;
   }
 `;

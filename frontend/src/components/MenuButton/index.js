@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { MdMenu } from 'react-icons/md';
-import { Container, MenuList, ItemMenu } from './styles';
+import PropTypes from 'prop-types';
+import { MdMoreHoriz } from 'react-icons/md';
+import { Container, MenuList, Item } from './styles';
 
 export function MenuItem({ children }) {
-  return <ItemMenu>{children}</ItemMenu>;
+  return <Item>{children}</Item>;
 }
 
 export default function MenuButton({ children }) {
@@ -11,8 +12,20 @@ export default function MenuButton({ children }) {
 
   return (
     <Container>
-      <MdMenu color="#999" size={20} onClick={() => setMenuOpen(!menuOpen)} />
+      <MdMoreHoriz
+        color="#999"
+        size={20}
+        onClick={() => setMenuOpen(!menuOpen)}
+      />
       <MenuList visible={menuOpen}>{children}</MenuList>
     </Container>
   );
 }
+
+MenuItem.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+MenuButton.propTypes = {
+  children: PropTypes.node.isRequired,
+};

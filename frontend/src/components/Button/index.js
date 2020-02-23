@@ -6,6 +6,7 @@ import colors from '~/styles/colors';
 const Button = styled.button`
   display: flex;
   align-items: center;
+  height: 40px;
   width: ${props => props.fullWidth && '100%'};
   justify-content: center;
   border: 0;
