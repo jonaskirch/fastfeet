@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { MdSearch } from 'react-icons/md';
 
@@ -6,10 +6,11 @@ import colors from '~/styles/colors';
 import { Container, Input } from './styles';
 
 export default function InputSearch({ onSearch, placeholder }) {
+  const inputRef = useRef(null);
   const [active, setActive] = useState(false);
 
   function setFocusSearch() {
-    document.getElementById('search').focus();
+    inputRef.current.focus();
   }
 
   function handleSearch(e) {
@@ -26,7 +27,7 @@ export default function InputSearch({ onSearch, placeholder }) {
 
       <Input
         active={active}
-        id="search"
+        ref={inputRef}
         autoComplete="off"
         placeholder={placeholder}
         onFocus={() => setActive(true)}

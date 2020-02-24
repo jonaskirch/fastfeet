@@ -6,7 +6,7 @@ import Button from '~/components/Button';
 import InputSearch from '~/components/InputSearch';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
 
-import { Container, Title, Table } from './styles';
+import { Container, Title, Status } from './styles';
 
 export default function Delivery() {
   return (
@@ -19,7 +19,7 @@ export default function Delivery() {
           CADASTRAR
         </Button>
       </div>
-      <Table>
+      <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -38,22 +38,28 @@ export default function Delivery() {
             <td>John Lenon</td>
             <td>Lajeado</td>
             <td>Rio Grande do Sul</td>
-            <td>ENTREGUE</td>
             <td>
-              <MenuButton>
-                <MenuItem>
-                  <MdAdd color="#333" size={18} />
-                  <Link to="/recipient">Visualizar</Link>
-                </MenuItem>
-                <MenuItem>
-                  <MdAdd color="#333" size={18} />
-                  <Link to="/recipient">Editar</Link>
-                </MenuItem>
-                <MenuItem>
-                  <MdAdd color="#333" size={18} />
-                  <Link to="/recipient">Cancelar encomenda</Link>
-                </MenuItem>
-              </MenuButton>
+              <div>
+                <Status>ENTREGUE</Status>
+              </div>
+            </td>
+            <td>
+              <div>
+                <MenuButton>
+                  <MenuItem>
+                    <MdAdd color="#333" size={18} />
+                    <Link to="/recipient">Visualizar</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <MdAdd color="#333" size={18} />
+                    <Link to="/recipient">Editar</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <MdAdd color="#333" size={18} />
+                    <Link to="/recipient">Cancelar encomenda</Link>
+                  </MenuItem>
+                </MenuButton>
+              </div>
             </td>
           </tr>
           <tr>
@@ -84,7 +90,7 @@ export default function Delivery() {
             <td>...</td>
           </tr>
         </tbody>
-      </Table>
+      </table>
     </Container>
   );
 }

@@ -1,14 +1,15 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
-  padding: 20px 50px;
+  padding: 30px 80px;
   /* display: flex; */
   /* flex-direction: column; */
   /* margin: auto; */
   /* align-items: center; */
   /* justify-content: center; */
 
-  div {
+  > div {
     display: flex;
     /* width: 100%; */
     justify-content: space-between;
@@ -24,41 +25,25 @@ export const Title = styled.h1`
   font-weight: bold;
 `;
 
-export const InputSearch = styled.input`
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px;
-`;
+export const Status = styled.div`
+  position: relative;
+  display: inline;
+  /* margin: auto; */
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 5px 10px 5px 20px;
+  color: #2ca42b;
+  background: ${lighten(0.4, '#2ca42b')};
 
-export const Table = styled.table`
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 20px;
-  /* text-align: left; */
-
-  thead th {
-    padding: 0 20px;
-  }
-
-  tbody tr {
-    background: #fff;
-    color: #666;
-  }
-
-  tbody td {
-    padding: 20px;
-
-    &:first-child {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-
-    &:last-child {
-      /* width: 5px; */
-      /* padding: 0;
-      margin: 0; */
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 5px);
+    left: 5px;
+    background: #2ca42b;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
   }
 `;

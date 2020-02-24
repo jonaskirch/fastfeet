@@ -5,17 +5,18 @@ import colors from '~/styles/colors';
 
 const Button = styled.button`
   display: flex;
-  align-items: center;
-  height: 40px;
-  width: ${props => props.fullWidth && '100%'};
   justify-content: center;
+  align-items: center;
+  /* margin: auto; */
+  /* height: 40px; */
+  width: ${props => props.fullWidth && '100%'};
   border: 0;
   padding: 10px 20px;
   background: ${props => (props.color ? props.color : colors.primary)};
   border-radius: 5px;
   color: #fff;
   font-weight: bold;
-  transition: background 2s;
+  transition: background 0.2s;
 
   &:hover {
     background: ${props =>
@@ -23,6 +24,7 @@ const Button = styled.button`
   }
 
   & > * {
+    margin: auto;
     margin-right: 10px;
   }
 `;

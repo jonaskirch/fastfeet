@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
+  display: flex;
+  align-items: center;
   border: 1px solid ${props => (props.active ? colors.primary : '#ddd')};
   border-radius: 4px;
   padding: 10px;
   background: #fff;
   width: 300px;
-  margin: 0;
 `;
 
 export const Input = styled.input`
