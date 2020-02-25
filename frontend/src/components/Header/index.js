@@ -7,19 +7,19 @@ import { Container, MenuItem } from './styles';
 const pages = [
   {
     name: 'ENCOMENDAS',
-    link: '/delivery',
+    link: '/deliveries',
   },
   {
     name: 'ENTREGADORES',
-    link: '/deliveryman',
+    link: '/deliverymen',
   },
   {
     name: 'DESTINATÁRIOS',
-    link: '/recipient',
+    link: '/recipients',
   },
   {
     name: 'PROBLEMAS',
-    link: '/problem',
+    link: '/problems',
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Header() {
       </div>
       <aside>
         <span>Nome do usuário</span>
-        <Link to="/delivery">sair do sistema</Link>
+        <Link to="/deliveries">sair do sistema</Link>
       </aside>
     </Container>
   );

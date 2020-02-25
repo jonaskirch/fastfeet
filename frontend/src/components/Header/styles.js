@@ -8,13 +8,13 @@ export const Container = styled.div`
   padding: 0 20px;
 
   div {
-    padding: 10px;
+    padding: 15px;
     display: flex;
     align-items: center;
 
     img {
       width: 160px;
-      height: 100%;
+      max-height: 100%;
       padding-right: 20px;
       border-right: 1px solid #ddd;
       margin-right: 20px;

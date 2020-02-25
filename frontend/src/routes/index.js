@@ -3,13 +3,13 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 
 import SignIn from '~/pages/SignIn';
+import Deliveries from '~/pages/Deliveries';
 import DeliveryRegister from '~/pages/DeliveryRegister';
-import Delivery from '~/pages/Delivery';
-import Deliveryman from '~/pages/Deliveryman';
+import Deliverymen from '~/pages/Deliverymen';
 import DeliverymanRegister from '~/pages/DeliverymanRegister';
+import Recipients from '~/pages/Recipients';
 import RecipientRegister from '~/pages/RecipientRegister';
-import Recipient from '~/pages/Recipient';
-import Problem from '~/pages/Problem';
+import Problems from '~/pages/Problems';
 
 export default function Routes() {
   return (
@@ -17,17 +17,37 @@ export default function Routes() {
       <Route path="/" exact component={SignIn} />
       {/* <Route path="/register" component={SignUp} /> */}
 
-      <Route path="/delivery/:id" component={DeliveryRegister} isPrivate />
-      <Route path="/delivery" component={Delivery} isPrivate />
+      <Route path="/deliveries" exact component={Deliveries} isPrivate />
+      <Route path="/delivery" exact component={DeliveryRegister} isPrivate />
       <Route
-        path="/deliveryman/:id"
+        path="/delivery/:id"
+        exact
+        component={DeliveryRegister}
+        isPrivate
+      />
+      <Route path="/deliverymen" exact component={Deliverymen} isPrivate />
+      <Route
+        path="/deliveryman"
+        exact
         component={DeliverymanRegister}
         isPrivate
       />
-      <Route path="/deliveryman" component={Deliveryman} isPrivate />
-      <Route path="/recipient/:id" component={RecipientRegister} isPrivate />
-      <Route path="/recipient" component={Recipient} isPrivate />
-      <Route path="/problem" component={Problem} isPrivate />
+      <Route
+        path="/deliveryman/:id"
+        exact
+        component={DeliverymanRegister}
+        isPrivate
+      />
+
+      <Route path="/recipients" exact component={Recipients} isPrivate />
+      <Route path="/recipient" exact component={RecipientRegister} isPrivate />
+      <Route
+        path="/recipient/:id"
+        exact
+        component={RecipientRegister}
+        isPrivate
+      />
+      <Route path="/problems" exact component={Problems} isPrivate />
     </Switch>
   );
 }

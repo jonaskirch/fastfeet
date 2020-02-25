@@ -8,13 +8,17 @@ import MenuButton, { MenuItem } from '~/components/MenuButton';
 
 import { Container, Title, Status } from './styles';
 
-export default function Delivery() {
+export default function Delivery({ history }) {
+  function handleRegister() {
+    history.push('/delivery');
+  }
+
   return (
     <Container>
       <Title>Gerenciando encomendas</Title>
       <div>
         <InputSearch placeholder="Busca por encomendas" />
-        <Button>
+        <Button onClick={handleRegister}>
           <MdAdd color="#FFF" size={18} />
           CADASTRAR
         </Button>
