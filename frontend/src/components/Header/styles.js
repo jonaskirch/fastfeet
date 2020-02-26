@@ -34,9 +34,11 @@ export const Container = styled.div`
       margin-bottom: 3px;
     }
 
-    a {
+    button {
       font-size: 12px;
       color: #de3b3b;
+      border: 0;
+      background: none;
     }
   }
 `;

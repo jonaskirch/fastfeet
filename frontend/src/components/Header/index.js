@@ -1,7 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-
 import logo from '~/assets/logo.png';
+import { signOut } from '~/store/modules/auth/actions';
 import { Container, MenuItem } from './styles';
 
 const pages = [
@@ -24,7 +25,13 @@ const pages = [
 ];
 
 export default function Header() {
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
   const location = useLocation();
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
 
   return (
     <Container>
@@ -48,8 +55,10 @@ export default function Header() {
         </nav>
       </div>
       <aside>
-        <span>Nome do usuário</span>
-        <Link to="/deliveries">sair do sistema</Link>
+        <span>{user.name}</span>
+        <button type="button" onClick={handleSignOut}>
+          sair do sistema
+        </button>
       </aside>
     </Container>
   );
