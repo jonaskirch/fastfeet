@@ -70,6 +70,22 @@ class DeliverymanController {
     return res.json(deliverymen);
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+    const deliveryman = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'name', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(deliveryman);
+  }
+
   async delete(req, res) {
     const { id } = req.params;
     const deliveryman = await Deliveryman.findByPk(id);

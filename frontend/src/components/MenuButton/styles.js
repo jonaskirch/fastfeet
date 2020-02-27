@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const MenuList = styled.ul`
   display: ${props => (props.visible ? 'block' : 'none')};
   position: absolute;
+  z-index: 999;
   width: 200px;
   top: 30px;
   left: calc(50% - 100px);
@@ -50,7 +51,7 @@ export const Item = styled.li`
     margin-bottom: 0;
   }
 
-  & > * {
+  & * {
     margin-right: 5px;
   }
 
