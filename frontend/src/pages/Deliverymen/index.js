@@ -10,16 +10,19 @@ import { Container, Title, Avatar } from './styles';
 
 export default function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
+  const [search, setSearch] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     async function loadDeliverymen() {
-      const resp = await api.get('deliverymen');
+      const resp = await api.get(
+        search ? `deliverymen?name=${search}` : 'deliverymen'
+      );
       setDeliverymen(resp.data);
     }
 
     loadDeliverymen();
-  }, []);
+  }, [search]);
 
   function handleRegister() {
     history.push('/deliveryman');
@@ -29,18 +32,26 @@ export default function Deliverymen() {
     try {
       const resp = await api.delete(`/deliverymen/${deliveryman.id}`);
       const { id } = resp.data;
-      const index = deliverymen.findIndex(d => d.id === id);
-      setDeliverymen(deliverymen.splice(index, 1));
+      const newList = deliverymen.filter(d => Number(d.id) !== Number(id));
+      setDeliverymen(newList);
     } catch {
       toast.error('Falha ao excluir entregador');
     }
   }
 
+  function handleSearch(newSearch) {
+    setSearch(newSearch);
+  }
+
   return (
     <Container>
+      {console.tron.log('render')}
       <Title>Gerenciando entregadores</Title>
       <div>
-        <InputSearch placeholder="Busca por entregadores" />
+        <InputSearch
+          placeholder="Busca por entregadores"
+          onSearch={handleSearch}
+        />
         <Button onClick={handleRegister}>
           <MdAdd color="#FFF" size={18} />
           CADASTRAR
