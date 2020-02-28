@@ -40,12 +40,12 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    await Queue.add(NewDeliveryMail.key, {
-      date: delivery.createdAt,
-      product: delivery.product,
-      recipient,
-      deliveryman,
-    });
+    // await Queue.add(NewDeliveryMail.key, {
+    //   date: delivery.createdAt,
+    //   product: delivery.product,
+    //   recipient,
+    //   deliveryman,
+    // });
 
     return res.json(delivery);
   }
@@ -125,6 +125,36 @@ class DeliveryController {
     });
 
     return res.json(deliverys);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+    const delivery = await Delivery.findByPk(id, {
+      attributes: ['id', 'product'],
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+    return res.json(delivery);
+    // return res.json({
+    //   recipient_id: delivery.recipient.id,
+    //   deliveryman_id: delivery.deliveryman.id,
+    //   product: delivery.product,
+    // });
   }
 
   async delete(req, res) {

@@ -11,8 +11,7 @@ export const Row = styled.div`
     margin-right: 10px;
   }
 
-  /* input {
-    display: block;
-  } */
-  /* align-items: center; */
+  & :last-child {
+    margin-right: 0;
+  }
 `;

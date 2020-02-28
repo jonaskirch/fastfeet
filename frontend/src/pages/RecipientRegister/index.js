@@ -31,6 +31,7 @@ export default function RecipientRegister() {
   }, [id]);
 
   async function handleSubmit(data) {
+    console.log(data);
     try {
       if (id) {
         await api.put(`/recipients/${id}`, data);
@@ -52,6 +53,18 @@ export default function RecipientRegister() {
       onBack={() => history.push('/recipients')}
     >
       <Input name="name" label="Nome" />
+      <Row>
+        <div style={{ flex: 2 }}>
+          <Input name="street" label="Rua" />
+        </div>
+        <div>
+          <Input name="number" label="Número" />
+        </div>
+        <div>
+          <Input name="complement" label="Complemento" />
+        </div>
+      </Row>
+
       <Row>
         <div>
           <Input name="city" label="Cidade" />
