@@ -5,11 +5,18 @@ import * as Yup from 'yup';
 import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
+import CepInput from './CepInput';
 
 import { Row } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
+  street: Yup.string().required('A rua é obrigatória'),
+  number: Yup.number().integer(),
+  complement: Yup.string(),
+  city: Yup.string().required('A cidade é obrigatória'),
+  state: Yup.string().required('O estado é obrigatório'),
+  zipcode: Yup.string().required('O CEP é obrigatório'),
 });
 
 export default function RecipientRegister() {
@@ -73,7 +80,7 @@ export default function RecipientRegister() {
           <Input name="state" label="Estado" />
         </div>
         <div>
-          <Input name="zipcode" label="CEP" />
+          <CepInput name="zipcode" label="CEP" />
         </div>
       </Row>
     </RegisterForm>
