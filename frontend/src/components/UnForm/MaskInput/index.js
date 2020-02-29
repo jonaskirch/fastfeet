@@ -3,7 +3,7 @@ import ReactInputMask from 'react-input-mask';
 
 import { useField } from '@rocketseat/unform';
 
-export default function Input({ name, label, ...rest }) {
+export default function MaskInput({ name, label, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -24,12 +24,7 @@ export default function Input({ name, label, ...rest }) {
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <ReactInputMask
-        mask="99999-999"
-        ref={inputRef}
-        defaultValue={defaultValue}
-        {...rest}
-      />
+      <ReactInputMask ref={inputRef} defaultValue={defaultValue} {...rest} />
       {error && <span className="error">{error}</span>}
     </>
   );

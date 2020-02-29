@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
-import CepInput from './CepInput';
+import MaskInput from '~/components/UnForm/MaskInput';
 
 import { Row } from './styles';
 
@@ -80,7 +80,7 @@ export default function RecipientRegister() {
           <Input name="state" label="Estado" />
         </div>
         <div>
-          <CepInput name="zipcode" label="CEP" />
+          <MaskInput name="zipcode" label="CEP" mask="99999-999" />
         </div>
       </Row>
     </RegisterForm>

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { MdAdd, MdEdit, MdDeleteForever } from 'react-icons/md';
 import api from '~/services/api';
 import Button from '~/components/Button';
-import InputSearch from '~/components/InputSearch';
+import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
@@ -20,15 +20,20 @@ export default function Deliverymen() {
 
   useEffect(() => {
     async function loadDeliverymen() {
-      console.log(page);
-      setLoading(true);
-      const resp = await api.get(
-        `deliverymen?page=${page}${search && `&name=${search}`}`
-      );
-      const { totalRecords, records } = resp.data;
-      setTotalRecords(totalRecords);
-      setDeliverymen(records);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const resp = await api.get('deliverymen', {
+          params: {
+            page,
+            name: search,
+          },
+        });
+        const { totalRecords, records } = resp.data;
+        setTotalRecords(totalRecords);
+        setDeliverymen(records);
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadDeliverymen();
@@ -39,13 +44,15 @@ export default function Deliverymen() {
   }
 
   async function handleDelete(deliveryman) {
-    try {
-      const resp = await api.delete(`/deliverymen/${deliveryman.id}`);
-      const { id } = resp.data;
-      const newList = deliverymen.filter(d => Number(d.id) !== Number(id));
-      setDeliverymen(newList);
-    } catch {
-      toast.error('Falha ao excluir entregador');
+    if (window.confirm('Deseja realmente excluir este registro?')) {
+      try {
+        const resp = await api.delete(`/deliverymen/${deliveryman.id}`);
+        const { id } = resp.data;
+        const newList = deliverymen.filter(d => Number(d.id) !== Number(id));
+        setDeliverymen(newList);
+      } catch {
+        toast.error('Falha ao excluir entregador');
+      }
     }
   }
 
@@ -74,7 +81,7 @@ export default function Deliverymen() {
             <tr key={deliveryman.id}>
               <td>{deliveryman.id}</td>
               <td>
-                <Avatar />
+                <Avatar src={deliveryman.avatar && deliveryman.avatar.url} />
               </td>
               <td>{deliveryman.name}</td>
               <td>{deliveryman.email}</td>
@@ -108,10 +115,10 @@ export default function Deliverymen() {
 
   return (
     <Container>
-      {console.tron.log('render')}
+      {console.log(deliverymen)}
       <Title>Gerenciando entregadores</Title>
       <Toolbar>
-        <InputSearch
+        <SearchInput
           placeholder="Busca por entregadores"
           onSearch={handleSearch}
         />
@@ -121,8 +128,9 @@ export default function Deliverymen() {
         </Button>
       </Toolbar>
       {loading
-        ? Array.from(new Array(20)).map((line, i) => (
+        ? Array.from(new Array(20)).map((_, i) => (
             <Skeleton
+              key={i}
               height="80px"
               // width="900px"
               radius="5px"

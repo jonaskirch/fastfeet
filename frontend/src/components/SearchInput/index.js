@@ -5,7 +5,7 @@ import { MdSearch } from 'react-icons/md';
 import colors from '~/styles/colors';
 import { Container, Input } from './styles';
 
-export default function InputSearch({ onSearch, placeholder }) {
+export default function SearchInput({ onSearch, placeholder }) {
   const inputRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -38,7 +38,7 @@ export default function InputSearch({ onSearch, placeholder }) {
   );
 }
 
-InputSearch.propTypes = {
+SearchInput.propTypes = {
   onSearch: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
 };

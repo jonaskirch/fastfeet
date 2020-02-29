@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
-import AsyncSelectInput from './AsyncSelectInput';
+import AsyncSelectInput from '~/components/UnForm/AsyncSelectInput';
 
 import { Row } from './styles';
 

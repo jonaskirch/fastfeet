@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { Input } from '@rocketseat/unform';
-import AvatarInput from './AvatarInput';
+import AvatarInput from '~/components/UnForm/AvatarInput';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
 

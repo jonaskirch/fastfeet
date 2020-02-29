@@ -47,7 +47,9 @@ export const Avatar = styled.img`
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  border: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
 `;
 
 export const Footer = styled.div`

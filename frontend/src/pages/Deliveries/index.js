@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
 import Button from '~/components/Button';
-import InputSearch from '~/components/InputSearch';
+import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
 
 import { Container, Title, Status } from './styles';
@@ -17,7 +17,7 @@ export default function Delivery({ history }) {
     <Container>
       <Title>Gerenciando encomendas</Title>
       <div>
-        <InputSearch placeholder="Busca por encomendas" />
+        <SearchInput placeholder="Busca por encomendas" />
         <Button onClick={handleRegister}>
           <MdAdd color="#FFF" size={18} />
           CADASTRAR

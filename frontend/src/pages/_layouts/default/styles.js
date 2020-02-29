@@ -44,11 +44,5 @@ export const Content = styled.div`
         }
       }
     }
-
-    tfoot {
-      div {
-        display: flex;
-      }
-    }
   }
 `;
