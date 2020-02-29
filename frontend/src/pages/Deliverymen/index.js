@@ -6,23 +6,33 @@ import api from '~/services/api';
 import Button from '~/components/Button';
 import InputSearch from '~/components/InputSearch';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
-import { Container, Title, Avatar } from './styles';
+import Skeleton from '~/components/Skeleton';
+import Pagination from '~/components/Paginator';
+import { Container, Title, Toolbar, Avatar, Footer } from './styles';
 
 export default function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     async function loadDeliverymen() {
+      console.log(page);
+      setLoading(true);
       const resp = await api.get(
-        search ? `deliverymen?name=${search}` : 'deliverymen'
+        `deliverymen?page=${page}${search && `&name=${search}`}`
       );
-      setDeliverymen(resp.data);
+      const { totalRecords, records } = resp.data;
+      setTotalRecords(totalRecords);
+      setDeliverymen(records);
+      setLoading(false);
     }
 
     loadDeliverymen();
-  }, [search]);
+  }, [page, search]);
 
   function handleRegister() {
     history.push('/deliveryman');
@@ -43,20 +53,12 @@ export default function Deliverymen() {
     setSearch(newSearch);
   }
 
-  return (
-    <Container>
-      {console.tron.log('render')}
-      <Title>Gerenciando entregadores</Title>
-      <div>
-        <InputSearch
-          placeholder="Busca por entregadores"
-          onSearch={handleSearch}
-        />
-        <Button onClick={handleRegister}>
-          <MdAdd color="#FFF" size={18} />
-          CADASTRAR
-        </Button>
-      </div>
+  function handleChangePage(newPage) {
+    setPage(newPage);
+  }
+
+  function renderTable() {
+    return (
       <table>
         <thead>
           <tr>
@@ -101,6 +103,42 @@ export default function Deliverymen() {
           ))}
         </tbody>
       </table>
+    );
+  }
+
+  return (
+    <Container>
+      {console.tron.log('render')}
+      <Title>Gerenciando entregadores</Title>
+      <Toolbar>
+        <InputSearch
+          placeholder="Busca por entregadores"
+          onSearch={handleSearch}
+        />
+        <Button onClick={handleRegister}>
+          <MdAdd color="#FFF" size={18} />
+          CADASTRAR
+        </Button>
+      </Toolbar>
+      {loading
+        ? Array.from(new Array(20)).map((line, i) => (
+            <Skeleton
+              height="80px"
+              // width="900px"
+              radius="5px"
+              margin="20px 0"
+            />
+          ))
+        : renderTable()}
+
+      <Footer>
+        <Pagination
+          activePage={page}
+          totalRecords={totalRecords}
+          limitPage={20}
+          onChange={handleChangePage}
+        />
+      </Footer>
     </Container>
   );
 }

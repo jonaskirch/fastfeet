@@ -48,9 +48,12 @@ class DeliverymanController {
   }
 
   async index(req, res) {
-    const { name } = req.query;
+    const { name, page = 1 } = req.query;
 
-    const deliverymen = await Deliveryman.findAll({
+    const {
+      rows: records,
+      count: totalRecords,
+    } = await Deliveryman.findAndCountAll({
       attributes: ['id', 'name', 'email'],
       include: [
         {
@@ -65,9 +68,14 @@ class DeliverymanController {
         },
       },
       order: ['name'],
+      limit: 20,
+      offset: (page - 1) * 20,
     });
 
-    return res.json(deliverymen);
+    return res.json({
+      totalRecords,
+      records,
+    });
   }
 
   async show(req, res) {

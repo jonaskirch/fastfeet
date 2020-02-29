@@ -8,15 +8,6 @@ export const Container = styled.div`
   /* align-items: center; */
   /* justify-content: center; */
 
-  > div {
-    display: flex;
-    /* width: 100%; */
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-
   table button {
     display: flex;
     border: 0;
@@ -34,6 +25,15 @@ export const Container = styled.div`
   }
 `;
 
+export const Toolbar = styled.div`
+  display: flex;
+  /* width: 100%; */
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
+
 export const Title = styled.h1`
   font-size: 18px;
   color: #333;
@@ -48,4 +48,10 @@ export const Avatar = styled.img`
   width: 32px;
   border-radius: 50%;
   border: none;
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
