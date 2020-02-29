@@ -2,11 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 30px 80px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* margin: auto; */
-  /* align-items: center; */
-  /* justify-content: center; */
 
   table button {
     display: flex;
@@ -27,7 +22,6 @@ export const Container = styled.div`
 
 export const Toolbar = styled.div`
   display: flex;
-  /* width: 100%; */
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
@@ -41,15 +35,11 @@ export const Title = styled.h1`
 `;
 
 export const Avatar = styled.img`
-  background: red;
-  color: red;
-  border-color: red;
+  background: #ddd;
   height: 32px;
   width: 32px;
   border-radius: 50%;
   border: 0;
-  margin: 0;
-  padding: 0;
 `;
 
 export const Footer = styled.div`

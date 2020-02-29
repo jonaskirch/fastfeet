@@ -4,25 +4,30 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const { name } = req.query;
+    const { page = 1, name } = req.query;
 
-    const recipients = await Recipient.findAll({
+    const { count: total, rows: records } = await Recipient.findAndCountAll({
       where: name && {
         name: {
           [Op.iLike]: `%${name}%`,
         },
       },
       order: ['name'],
+      limit: 20,
+      offset: (page - 1) * 20,
     });
 
-    return res.json(recipients);
+    return res.json({
+      total,
+      records,
+    });
   }
 
   async show(req, res) {
     const { id } = req.params;
     const recipient = await Recipient.findByPk(id);
     return res.json(recipient);
-  }  
+  }
 
   async store(req, res) {
     const schema = Yup.object().shape({

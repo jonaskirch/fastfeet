@@ -28,8 +28,8 @@ export default function Deliverymen() {
             name: search,
           },
         });
-        const { totalRecords, records } = resp.data;
-        setTotalRecords(totalRecords);
+        const { total, records } = resp.data;
+        setTotalRecords(total);
         setDeliverymen(records);
       } finally {
         setLoading(false);
@@ -38,10 +38,6 @@ export default function Deliverymen() {
 
     loadDeliverymen();
   }, [page, search]);
-
-  function handleRegister() {
-    history.push('/deliveryman');
-  }
 
   async function handleDelete(deliveryman) {
     if (window.confirm('Deseja realmente excluir este registro?')) {
@@ -54,14 +50,6 @@ export default function Deliverymen() {
         toast.error('Falha ao excluir entregador');
       }
     }
-  }
-
-  function handleSearch(newSearch) {
-    setSearch(newSearch);
-  }
-
-  function handleChangePage(newPage) {
-    setPage(newPage);
   }
 
   function renderTable() {
@@ -115,27 +103,20 @@ export default function Deliverymen() {
 
   return (
     <Container>
-      {console.log(deliverymen)}
       <Title>Gerenciando entregadores</Title>
       <Toolbar>
         <SearchInput
           placeholder="Busca por entregadores"
-          onSearch={handleSearch}
+          onSearch={newSearch => setSearch(newSearch)}
         />
-        <Button onClick={handleRegister}>
+        <Button onClick={() => history.push('/deliveryman')}>
           <MdAdd color="#FFF" size={18} />
           CADASTRAR
         </Button>
       </Toolbar>
       {loading
         ? Array.from(new Array(20)).map((_, i) => (
-            <Skeleton
-              key={i}
-              height="80px"
-              // width="900px"
-              radius="5px"
-              margin="20px 0"
-            />
+            <Skeleton key={i} height="80px" radius="5px" margin="20px 0" />
           ))
         : renderTable()}
 
@@ -144,7 +125,7 @@ export default function Deliverymen() {
           activePage={page}
           totalRecords={totalRecords}
           limitPage={20}
-          onChange={handleChangePage}
+          onChange={newPage => setPage(newPage)}
         />
       </Footer>
     </Container>

@@ -50,10 +50,7 @@ class DeliverymanController {
   async index(req, res) {
     const { name, page = 1 } = req.query;
 
-    const {
-      rows: records,
-      count: totalRecords,
-    } = await Deliveryman.findAndCountAll({
+    const { rows: records, count: total } = await Deliveryman.findAndCountAll({
       attributes: ['id', 'name', 'email'],
       include: [
         {
@@ -73,7 +70,7 @@ class DeliverymanController {
     });
 
     return res.json({
-      totalRecords,
+      total,
       records,
     });
   }

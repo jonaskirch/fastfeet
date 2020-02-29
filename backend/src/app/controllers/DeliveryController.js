@@ -95,7 +95,7 @@ class DeliveryController {
   async index(req, res) {
     const { page = 1, product } = req.query;
 
-    const deliverys = await Delivery.findAll({
+    const { count: total, rows: records } = await Delivery.findAndCountAll({
       attributes: ['id', 'product'],
       include: [
         {
@@ -124,7 +124,10 @@ class DeliveryController {
       offset: (page - 1) * 20,
     });
 
-    return res.json(deliverys);
+    return res.json({
+      total,
+      records,
+    });
   }
 
   async show(req, res) {

@@ -38,7 +38,6 @@ export default function RecipientRegister() {
   }, [id]);
 
   async function handleSubmit(data) {
-    console.log(data);
     try {
       if (id) {
         await api.put(`/recipients/${id}`, data);
