@@ -54,8 +54,8 @@ export default function DeliveryRegister() {
   }, [id]);
 
   async function loadRecipients(name) {
-    const resp = await api.get(`/recipients${name && `?name=${name}`}`);
-    const data = resp.data.map(recipient => {
+    const resp = await api.get('/recipients', { params: { name } });
+    const data = resp.data.records.map(recipient => {
       const { id: value, name: label } = recipient;
       return { value, label };
     });
@@ -63,8 +63,8 @@ export default function DeliveryRegister() {
   }
 
   async function loadDeliverymen(name) {
-    const resp = await api.get(`/deliverymen${name && `?name=${name}`}`);
-    const data = resp.data.map(deliveryman => {
+    const resp = await api.get('/deliverymen', { params: { name } });
+    const data = resp.data.records.map(deliveryman => {
       const { id: value, name: label } = deliveryman;
       return { value, label };
     });
@@ -82,7 +82,6 @@ export default function DeliveryRegister() {
     });
 
   async function handleSubmit(data) {
-    console.log(data);
     try {
       if (id) {
         await api.put(`/deliveries/${id}`, data);
@@ -123,7 +122,6 @@ export default function DeliveryRegister() {
           />
         </div>
       </Row>
-
       <Input name="product" label="Nome do produto" />
     </RegisterForm>
   );

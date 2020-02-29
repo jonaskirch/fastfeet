@@ -96,17 +96,40 @@ class DeliveryController {
     const { page = 1, product } = req.query;
 
     const { count: total, rows: records } = await Delivery.findAndCountAll({
-      attributes: ['id', 'product'],
+      attributes: [
+        'id',
+        'product',
+        'start_date',
+        'end_date',
+        'canceled_at',
+        'status',
+      ],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'city',
+            'state',
+            'zipcode',
+          ],
         },
         {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
         },
         {
           model: File,
