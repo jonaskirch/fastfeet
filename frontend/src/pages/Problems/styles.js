@@ -39,3 +39,18 @@ export const Footer = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
+export const ModalStyle = styled.div`
+  span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 12px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: #666;
+  }
+`;

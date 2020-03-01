@@ -3,6 +3,7 @@ import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
+import DeliveryProblem from '../models/DeliveryProblem';
 
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
 import Queue from '../../lib/Queue';
@@ -93,7 +94,49 @@ class DeliveryController {
   }
 
   async index(req, res) {
-    const { page = 1, product } = req.query;
+    const { page = 1, product, onlyproblems } = req.query;
+
+    const includes = [
+      {
+        model: Recipient,
+        as: 'recipient',
+        attributes: [
+          'id',
+          'name',
+          'street',
+          'number',
+          'complement',
+          'city',
+          'state',
+          'zipcode',
+        ],
+      },
+      {
+        model: Deliveryman,
+        as: 'deliveryman',
+        attributes: ['id', 'name'],
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+            attributes: ['id', 'path', 'url'],
+          },
+        ],
+      },
+      {
+        model: File,
+        as: 'signature',
+        attributes: ['id', 'path', 'url'],
+      },
+    ];
+
+    if (onlyproblems === 'true') {
+      includes.push({
+        model: DeliveryProblem,
+        as: 'problems',
+        required: true,
+      });
+    }
 
     const { count: total, rows: records } = await Delivery.findAndCountAll({
       attributes: [
@@ -102,41 +145,11 @@ class DeliveryController {
         'start_date',
         'end_date',
         'canceled_at',
+        'created_at',
         'status',
       ],
-      include: [
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: [
-            'id',
-            'name',
-            'street',
-            'number',
-            'complement',
-            'city',
-            'state',
-            'zipcode',
-          ],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['id', 'name'],
-          include: [
-            {
-              model: File,
-              as: 'avatar',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-        },
-        {
-          model: File,
-          as: 'signature',
-          attributes: ['id', 'path', 'url'],
-        },
-      ],
+      distinct: true,
+      include: includes,
       where: product && {
         product: {
           [Op.iLike]: `%${product}%`,

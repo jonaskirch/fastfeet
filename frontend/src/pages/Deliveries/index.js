@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { MdAdd, MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
+import { format, parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+import {
+  MdAdd,
+  MdRemoveRedEye,
+  MdEdit,
+  MdDeleteForever,
+  MdFilterList,
+} from 'react-icons/md';
 import api from '~/services/api';
 import Button from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
+import Modal from '~/components/Modal';
 import {
   Container,
   Title,
@@ -16,15 +25,21 @@ import {
   Deliveryman,
   Avatar,
   Status,
+  FilterButton,
+  ModalStyle,
 } from './styles';
+
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState(false);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [delivery, setDelivery] = useState(null);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -34,6 +49,7 @@ export default function Deliveries() {
           params: {
             page,
             name: search,
+            onlyproblems: filter,
           },
         });
         const { total, records } = resp.data;
@@ -45,7 +61,7 @@ export default function Deliveries() {
     }
 
     loadDeliveries();
-  }, [page, search]);
+  }, [page, search, filter]);
 
   async function handleDelete(delivery) {
     if (window.confirm('Deseja realmente excluir este registro?')) {
@@ -99,10 +115,13 @@ export default function Deliveries() {
                 <div>
                   <MenuButton>
                     <MenuItem>
-                      <Link to="/">
+                      <button
+                        type="button"
+                        onClick={() => setDelivery(delivery)}
+                      >
                         <MdRemoveRedEye color="#666" size={18} />
                         Visualizar
-                      </Link>
+                      </button>
                     </MenuItem>
                     <MenuItem>
                       <Link to={`/delivery/${delivery.id}`}>
@@ -130,31 +149,78 @@ export default function Deliveries() {
   }
 
   return (
-    <Container>
-      <Title>Gerenciando encomendas</Title>
-      <Toolbar>
-        <SearchInput
-          placeholder="Busca por encomendas"
-          onSearch={newSearch => setSearch(newSearch)}
-        />
-        <Button onClick={() => history.push('/delivery')}>
-          <MdAdd color="#FFF" size={18} />
-          CADASTRAR
-        </Button>
-      </Toolbar>
-      {loading
-        ? Array.from(new Array(20)).map((_, i) => (
-            <Skeleton key={i} height="80px" radius="5px" margin="20px 0" />
-          ))
-        : renderTable()}
-      <Footer>
-        <Pagination
-          activePage={page}
-          totalRecords={totalRecords}
-          limitPage={20}
-          onChange={newPage => setPage(newPage)}
-        />
-      </Footer>
-    </Container>
+    <>
+      <Container>
+        <Title>Gerenciando encomendas</Title>
+        <Toolbar>
+          <SearchInput
+            placeholder="Busca por encomendas"
+            onSearch={newSearch => setSearch(newSearch)}
+          />
+          <FilterButton active={filter} onClick={() => setFilter(!filter)}>
+            <MdFilterList size={18} />
+            {filter
+              ? 'Desabilitar filtro de entregas com problemas'
+              : 'Filtrar entregas com problemas'}
+          </FilterButton>
+          <Button onClick={() => history.push('/delivery')}>
+            <MdAdd color="#FFF" size={18} />
+            CADASTRAR
+          </Button>
+        </Toolbar>
+        {loading
+          ? Array.from(new Array(20)).map((_, i) => (
+              <Skeleton key={i} height="80px" radius="5px" margin="20px 0" />
+            ))
+          : renderTable()}
+        <Footer>
+          <Pagination
+            activePage={page}
+            totalRecords={totalRecords}
+            limitPage={20}
+            onChange={newPage => setPage(newPage)}
+          />
+        </Footer>
+      </Container>
+      {delivery && (
+        <Modal onCloseRequest={() => setDelivery(null)}>
+          <ModalStyle>
+            <span>Informações da encomenda</span>
+            <p>
+              {delivery.recipient.street}
+              {delivery.recipient.number && ` ,${delivery.recipient.number}`}
+              {delivery.recipient.complement &&
+                ` -${delivery.recipient.complement}`}
+            </p>
+            <p>{`${delivery.recipient.city} - ${delivery.recipient.state}`}</p>
+            <p>{delivery.recipient.zipcode}</p>
+            <hr />
+            <span>Datas</span>
+            <p>
+              <strong>Retirada:</strong>
+              {delivery.start_date &&
+                format(
+                  utcToZonedTime(parseISO(delivery.start_date), timezone),
+                  'dd/MM/yyyy'
+                )}
+            </p>
+            <p>
+              <strong>Entrega:</strong>
+              {delivery.end_date &&
+                format(
+                  utcToZonedTime(parseISO(delivery.end_date), timezone),
+                  'dd/MM/yyyy'
+                )}
+            </p>
+            <hr />
+            <span>Assinatura do destinatário</span>
+            <img
+              src={delivery.signature && delivery.signature.url}
+              alt="assinatura"
+            />
+          </ModalStyle>
+        </Modal>
+      )}
+    </>
   );
 }

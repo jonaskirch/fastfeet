@@ -84,3 +84,47 @@ export const Status = styled.div`
     margin-right: 10px;
   }
 `;
+
+export const FilterButton = styled.div`
+  padding: 10px 20px;
+  border: 1px solid ${props => (props.active ? '#333' : '#ddd')};
+  background: #fefefe;
+  color: ${props => (props.active ? '#333' : '#999')};
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+
+  svg {
+    color: ${props => (props.active ? '#333' : '#999')};
+    margin-right: 5px;
+  }
+
+  &:hover {
+    background: #ddd;
+    cursor: pointer;
+  }
+`;
+
+export const ModalStyle = styled.div`
+  span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: #666;
+  }
+
+  hr {
+    margin-bottom: 10px;
+    border-top: 1px solid #fefefe;
+  }
+
+  img {
+    width: 400px;
+  }
+`;

@@ -12,6 +12,18 @@ class DeliveryWithProblem {
       rows: records,
     } = await DeliveryProblem.findAndCountAll({
       // attributes: ['id', 'product', 'created_at'],
+      include: [
+        {
+          model: Delivery,
+          as: 'delivery',
+          required: true,
+          attributes: [],
+          where: {
+            canceled_at: null,
+            end_date: null,
+          },
+        },
+      ],
       order: [['created_at', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
