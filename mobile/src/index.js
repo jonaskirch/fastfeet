@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-
+import { StatusBar, View, Text } from 'react-native';
+import colors from '~/styles/colors';
 // import { Container } from './styles';
 
 export default function App() {
   return (
-    <View>
-      <Text>Okay 2</Text>
-    </View>
+    <>
+      <StatusBar backgroundColor={colors.primary} />
+      <View>
+        <Text>Okay</Text>
+      </View>
+    </>
   );
 }
