@@ -27,7 +27,7 @@ function AppDashboard() {
   );
 }
 
-export default function Routes({ signed = false }) {
+export default function Routes({ signed = true }) {
   return (
     <NavigationContainer>
       {signed ? (
