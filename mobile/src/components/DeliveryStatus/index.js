@@ -10,7 +10,7 @@ export default function DeliveryStatus({ delivery }) {
   return (
     <Container>
       <Header>
-        <Icon name="menu" color={colors.primary} size={20} />
+        <Icon name="local-shipping" color={colors.primary} size={20} />
         <Title>{`Encomenda ${delivery.id}`}</Title>
       </Header>
       <TimeLine status={delivery.status} />
