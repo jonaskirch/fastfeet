@@ -6,8 +6,8 @@ export const Container = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  height: 120;
-  width: 120;
+  height: 120px;
+  width: 120px;
   background: #ccc;
   border-radius: 60px;
   align-self: center;
