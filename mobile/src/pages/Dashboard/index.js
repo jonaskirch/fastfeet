@@ -35,7 +35,7 @@ const deliveries = [
   },
 ];
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
   return (
     <Container>
       <User>
@@ -58,7 +58,9 @@ export default function Dashboard() {
       <List
         data={deliveries}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <DeliveryStatus delivery={item} />}
+        renderItem={({ item }) => (
+          <DeliveryStatus delivery={item} navigation={navigation} />
+        )}
       />
     </Container>
   );

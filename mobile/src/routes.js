@@ -17,7 +17,7 @@ function AppDashboard() {
     <Stack.Navigator
       screenOptions={{
         headerTintColor: '#FFF',
-        headerBackTitleVisible: true,
+        headerBackTitleVisible: false,
         headerStyle: { backgroundColor: colors.primary },
       }}
     >

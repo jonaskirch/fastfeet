@@ -6,7 +6,7 @@ import TimeLine from './TimeLine';
 
 import { Container, Header, Title, Footer, Label, Text, Link } from './styles';
 
-export default function DeliveryStatus({ delivery }) {
+export default function DeliveryStatus({ navigation, delivery }) {
   return (
     <Container>
       <Header>
@@ -23,7 +23,9 @@ export default function DeliveryStatus({ delivery }) {
           <Label>Cidade</Label>
           <Text>{delivery.recipient.city}</Text>
         </View>
-        <Link>Ver detalhes</Link>
+        <Link onPress={() => navigation.navigate('Delivery')}>
+          Ver detalhes
+        </Link>
       </Footer>
     </Container>
   );
