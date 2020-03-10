@@ -8,6 +8,7 @@ import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import Delivery from '~/pages/Delivery';
+import DeliveryEnd from '~/pages/DeliveryEnd';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,6 +22,7 @@ function AppDashboard() {
         headerStyle: { backgroundColor: colors.primary },
       }}
     >
+      <Stack.Screen name="DeliveryEnd" component={DeliveryEnd} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="Delivery" component={Delivery} />
     </Stack.Navigator>
