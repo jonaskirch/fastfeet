@@ -12,10 +12,10 @@ export const User = styled.View`
   align-items: center;
 `;
 export const Avatar = styled.Image`
-  height: 50px;
-  width: 50px;
+  height: 68px;
+  width: 68px;
   background: #ccc;
-  border-radius: 25px;
+  border-radius: 34px;
 `;
 
 export const Welcome = styled.View`
@@ -23,12 +23,13 @@ export const Welcome = styled.View`
   flex: 1;
 `;
 export const WelcomeText = styled.Text`
-  font-size: 11px;
+  font-size: 12px;
   color: #666;
 `;
 export const WelcomeUserName = styled.Text`
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
+  color: #444;
 `;
 
 export const ExitButton = styled.TouchableOpacity``;
@@ -40,14 +41,16 @@ export const Toolbar = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
+  color: #444;
   flex: 1;
 `;
 export const FilterText = styled.Text`
-  margin-left: 20px;
-  font-size: 13px;
-  color: ${props => (props.active ? colors.primary : '#666')};
+  margin-left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: ${props => (props.active ? colors.primary : '#999')};
 
   text-decoration: ${props => (props.active ? 'underline' : 'none')};
 `;

@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
-import { TouchableHighlight } from 'react-native';
 import colors from '~/styles/colors';
 
 export const Container = styled.View`

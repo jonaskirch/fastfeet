@@ -9,18 +9,18 @@ export const Container = styled.View`
 `;
 
 export const Point = styled.View`
-  height: 12px;
-  width: 12px;
-  border-radius: 6px;
+  height: 9px;
+  width: 9px;
+  border-radius: 4.5px;
   background: ${props => (props.marker ? colors.primary : '#FFF')};
   border: 2px solid ${colors.primary};
 `;
 
 export const Line = styled.View`
   position: absolute;
-  height: 2px;
+  height: 1px;
   width: 100%;
-  top: 5px;
+  top: 4px;
   left: 0px;
   background: ${colors.primary};
   z-index: 0;
@@ -33,8 +33,8 @@ export const Legend = styled.View`
 `;
 
 export const Label = styled.Text`
-  color: #666;
-  font-size: 10px;
+  color: #999;
+  font-size: 8px;
   width: 70px;
   text-align: center;
 `;

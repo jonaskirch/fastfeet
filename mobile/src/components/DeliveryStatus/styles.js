@@ -3,7 +3,7 @@ import colors from '~/styles/colors';
 
 export const Container = styled.View`
   /* padding: 10px; */
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   border-radius: 4px;
   margin-bottom: 30px;
 `;
@@ -16,7 +16,6 @@ export const Header = styled.View`
 export const Title = styled.Text`
   margin-left: 10px;
   color: ${colors.primary};
-  /* font-size: 14px; */
   font-weight: bold;
 `;
 
@@ -33,15 +32,19 @@ export const Footer = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-size: 10px;
-  color: #666;
+  font-size: 8px;
+  color: #999;
+  font-weight: bold;
 `;
 
 export const Text = styled.Text`
+  font-size: 12px;
+  color: #444;
   font-weight: bold;
 `;
 
 export const Link = styled.Text`
+  font-size: 12px;
   font-weight: bold;
   color: ${colors.primary};
 `;

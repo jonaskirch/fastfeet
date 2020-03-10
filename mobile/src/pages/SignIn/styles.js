@@ -13,16 +13,17 @@ export const Image = styled.Image`
 `;
 
 export const Form = styled.View`
-  padding: 20px;
+  padding: 25px;
 `;
 export const Input = styled.TextInput.attrs({
-  placeholderTextColor: 'rgba(0, 0, 0, 0.3)',
+  placeholderTextColor: '#999',
 })`
   background: #fff;
   border-radius: 4px;
   padding-left: 15px;
   font-size: 16px;
   margin-top: 20px;
+  height: 45px;
 `;
 
 export const SubmitButton = styled(Button).attrs({

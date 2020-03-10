@@ -6,10 +6,10 @@ export const Container = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  height: 120px;
-  width: 120px;
+  height: 136px;
+  width: 136px;
   background: #ccc;
-  border-radius: 60px;
+  border-radius: 68px;
   align-self: center;
   margin: 20px 0;
 `;
@@ -20,9 +20,10 @@ export const Label = styled.Text`
 `;
 
 export const Text = styled.Text`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 10px;
+  color: #444;
+  margin-bottom: 15px;
 `;
 
 export const Button = styled(CButton).attrs({
