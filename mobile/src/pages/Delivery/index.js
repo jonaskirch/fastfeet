@@ -61,11 +61,19 @@ export default function Delivery({ navigation }) {
           <Toolbar>
             <Button>
               <Icon name="highlight-off" size={20} color="#E74040" />
-              <ButtonText>Informar problema</ButtonText>
+              <ButtonText onPress={() => navigation.navigate('NewProblem')}>
+                Informar problema
+              </ButtonText>
             </Button>
             <Button>
               <Icon name="info-outline" size={20} color="#E7BA40" />
-              <ButtonText>Visualizar problemas</ButtonText>
+              <ButtonText
+                onPress={() =>
+                  navigation.navigate('Problems', { deliveryId: 5 })
+                }
+              >
+                Visualizar problemas
+              </ButtonText>
             </Button>
             <Button>
               <Icon name="check-circle" size={20} color={colors.primary} />

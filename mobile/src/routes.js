@@ -9,6 +9,8 @@ import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import Delivery from '~/pages/Delivery';
+import NewProblem from '~/pages/NewProblem';
+import Problems from '~/pages/Problems';
 import DeliveryEnd from '~/pages/DeliveryEnd';
 
 const Stack = createStackNavigator();
@@ -54,6 +56,44 @@ function AppDashboard() {
           //   height: 155,
           //   backgroundColor: colors.primary,
           // },
+        })}
+      />
+      <Stack.Screen
+        name="NewProblem"
+        component={NewProblem}
+        options={({ navigation }) => ({
+          title: 'Informar problema',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={20} color="#FFF" />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontSize: 16,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="Problems"
+        component={Problems}
+        options={({ navigation }) => ({
+          title: 'Visualizar problemas',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={20} color="#FFF" />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontSize: 16,
+          },
         })}
       />
       <Stack.Screen
