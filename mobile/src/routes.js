@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,12 +20,61 @@ function AppDashboard() {
       screenOptions={{
         headerTintColor: '#FFF',
         headerBackTitleVisible: false,
+        headerLeftContainerStyle: {
+          marginLeft: 20,
+        },
         headerStyle: { backgroundColor: colors.primary },
       }}
     >
-      <Stack.Screen name="DeliveryEnd" component={DeliveryEnd} />
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="Delivery" component={Delivery} />
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Delivery"
+        component={Delivery}
+        options={({ navigation }) => ({
+          title: 'Detalhes da encomenda',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={20} color="#FFF" />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontSize: 16,
+          },
+          // headerStyle: {
+          //   height: 155,
+          //   backgroundColor: colors.primary,
+          // },
+        })}
+      />
+      <Stack.Screen
+        name="DeliveryEnd"
+        component={DeliveryEnd}
+        options={({ navigation }) => ({
+          title: 'Confirmar entrega',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Icon name="chevron-left" size={20} color="#FFF" />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontSize: 16,
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 }
@@ -46,8 +96,8 @@ export default function Routes({ signed = true }) {
               component={AppDashboard}
               options={{
                 tabBarLabel: 'Entregas',
-                tabBarIcon: () => (
-                  <Icon name="menu" color={colors.primary} size={20} />
+                tabBarIcon: ({ color }) => (
+                  <Icon name="menu" color={color} size={20} />
                 ),
               }}
             />
@@ -56,12 +106,8 @@ export default function Routes({ signed = true }) {
               component={Profile}
               options={{
                 tabBarLabel: 'Meu perfil',
-                tabBarIcon: () => (
-                  <Icon
-                    name="account-circle"
-                    color={colors.primary}
-                    size={20}
-                  />
+                tabBarIcon: ({ color }) => (
+                  <Icon name="account-circle" color={color} size={20} />
                 ),
               }}
             />

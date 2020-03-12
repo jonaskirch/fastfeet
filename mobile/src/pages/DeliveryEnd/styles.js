@@ -14,7 +14,7 @@ export const Form = styled.View`
 
 export const ImageContainer = styled.View`
   flex: 1;
-  background: #c8e;
+  background: #ccc;
   border-radius: 4px;
   position: relative;
   align-items: center;
@@ -22,15 +22,8 @@ export const ImageContainer = styled.View`
 
 export const Image = styled.Image`
   background: #666;
-  /* flex: 2; */
-  /* display: flex; */
-  /* height: 200px; */
-  /* width: 200px; */
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: 0; */
-
-  /* bottom: 0; */
+  align-self: stretch;
+  flex: 1;
 `;
 
 export const ImageButton = styled(RectButton)`

@@ -1,5 +1,8 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import logo from '~/assets/logo.png';
+
 import {
   Container,
   Form,
@@ -14,7 +17,7 @@ export default function DeliveryEnd() {
     <Container>
       <Form>
         <ImageContainer>
-          <Image />
+          <Image source={logo} />
           <ImageButton>
             <Icon name="photo-camera" color="#fff" size={24} />
           </ImageButton>
