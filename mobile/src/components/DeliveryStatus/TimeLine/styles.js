@@ -13,7 +13,7 @@ export const Point = styled.View`
   width: 9px;
   border-radius: 4.5px;
   background: ${props => (props.marker ? colors.primary : '#FFF')};
-  border: 2px solid ${colors.primary};
+  border: 1px solid ${colors.primary};
 `;
 
 export const Line = styled.View`
