@@ -92,7 +92,7 @@ export default function Delivery({ navigation, route }) {
               <Icon name="info-outline" size={20} color="#E7BA40" />
               <ButtonText
                 onPress={() =>
-                  navigation.navigate('Problems', { deliveryId: 5 })
+                  navigation.navigate('Problems', { deliveryId: delivery.id })
                 }
               >
                 Visualizar problemas

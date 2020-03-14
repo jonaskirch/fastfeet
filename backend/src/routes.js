@@ -33,6 +33,8 @@ routes.post('/deliveries/:id/start', DeliveryStartController.store);
 routes.post('/deliveries/:id/end', DeliveryEndController.store);
 // adicionar problemas na entrega de uma encomenda
 routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
+// visualizar problemas na entrega de uma encomenda
+routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
 
 routes.get('/deliverymen/:id', DeliverymanController.show);
 
@@ -40,8 +42,7 @@ routes.use(authMiddleware);
 
 // visualziar todas as entregas com problemas
 routes.get('/deliveries/problems', DeliveryWithProblemController.index);
-// visualizar problemas na entrega de uma encomenda
-routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
+
 // cancelar encomenda com base em um problema
 routes.post('/problem/:id/canceldelivery', DeliveryCancelController.store);
 

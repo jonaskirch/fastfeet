@@ -33,7 +33,7 @@ class DeliveryProblemController {
     }
 
     const problems = await DeliveryProblem.findAll({
-      attributes: ['id', 'description'],
+      attributes: ['id', 'description', 'created_at'],
       where: {
         delivery_id: id,
       },
