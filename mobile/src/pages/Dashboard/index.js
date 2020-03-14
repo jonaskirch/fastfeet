@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import api from '~/services/api';
 import { signOut } from '~/store/modules/auth/actions';
 import DeliveryStatus from '~/components/DeliveryStatus';
 
@@ -19,27 +20,30 @@ import {
   List,
 } from './styles';
 
-const deliveries = [
-  {
-    status: 'PENDENTE',
-    id: 6,
-    created_at: '2020-02-29T18:40:44.909Z',
-    recipient: {
-      city: 'Lajeado',
-    },
-  },
-  {
-    status: 'RETIRADA',
-    id: 5,
-    created_at: '2020-02-29T18:27:56.922Z',
-    recipient: {
-      city: 'Lajeado',
-    },
-  },
-];
-
 export default function Dashboard({ navigation }) {
   const dispatch = useDispatch();
+  const profile = useSelector(state => state.user.profile);
+  const [deliveries, setDeliveries] = useState([]);
+  const [deliveredFilter, setDeliveredFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function loadDeliveries() {
+      try {
+        setLoading(true);
+        const resp = await api.get(
+          `/deliverymen/${profile.id}/${
+            deliveredFilter ? 'delivered' : 'deliveries'
+          }`
+        );
+        setDeliveries(resp.data);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadDeliveries();
+  }, [deliveredFilter, profile.id]);
 
   function handleLogout() {
     dispatch(signOut());
@@ -48,10 +52,10 @@ export default function Dashboard({ navigation }) {
   return (
     <Container>
       <User>
-        <Avatar />
+        <Avatar source={{ uri: profile.avatar && profile.avatar.url }} />
         <Welcome>
           <WelcomeText>Bem vindo de volta,</WelcomeText>
-          <WelcomeUserName>Gaspar Antunes</WelcomeUserName>
+          <WelcomeUserName>{profile.name}</WelcomeUserName>
         </Welcome>
         <ExitButton onPress={handleLogout}>
           <Icon name="exit-to-app" color="#E74040" size={20} />
@@ -60,8 +64,22 @@ export default function Dashboard({ navigation }) {
 
       <Toolbar>
         <Title>Entregas</Title>
-        <FilterText active>Pendentes</FilterText>
-        <FilterText>Entregues</FilterText>
+        <ExitButton>
+          <FilterText
+            active={!deliveredFilter}
+            onPress={() => setDeliveredFilter(false)}
+          >
+            Pendentes
+          </FilterText>
+        </ExitButton>
+        <ExitButton>
+          <FilterText
+            active={deliveredFilter}
+            onPress={() => setDeliveredFilter(true)}
+          >
+            Entregues
+          </FilterText>
+        </ExitButton>
       </Toolbar>
 
       <List

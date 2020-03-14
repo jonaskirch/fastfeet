@@ -23,7 +23,7 @@ export default function DeliveryStatus({ navigation, delivery }) {
           <Label>Cidade</Label>
           <Text>{delivery.recipient.city}</Text>
         </View>
-        <Link onPress={() => navigation.navigate('Delivery')}>
+        <Link onPress={() => navigation.navigate('Delivery', { delivery })}>
           Ver detalhes
         </Link>
       </Footer>

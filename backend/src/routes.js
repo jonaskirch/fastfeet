@@ -26,7 +26,7 @@ routes.post('/sessions', SessionController.store);
 // entregador visualiza suas entregas abertas e não canceladas
 routes.get('/deliverymen/:id/deliveries', DeliverymanDeliveryController.index);
 // entregador visualiza suas entregas finalizadas
-routes.get('/deliverymen/:id/deliveried', DeliverymanDeliveredController.index);
+routes.get('/deliverymen/:id/delivered', DeliverymanDeliveredController.index);
 // entregador inicia entrega
 routes.post('/deliveries/:id/start', DeliveryStartController.store);
 // entregador finaliza entrega

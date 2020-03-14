@@ -20,12 +20,21 @@ class DeliverymanDelivered {
           [Op.ne]: null,
         },
       },
-      attributes: ['id', 'product', 'start_date', 'end_date'],
+      attributes: ['id', 'product', 'start_date', 'end_date', 'status'],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'zipcode',
+          ],
         },
         {
           model: File,

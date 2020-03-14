@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-
+import { format, parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '~/styles/colors';
 import {
@@ -19,7 +20,11 @@ import {
   ButtonText,
 } from './styles';
 
-export default function Delivery({ navigation }) {
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+export default function Delivery({ navigation, route }) {
+  const { delivery } = route.params;
+
   return (
     <>
       {/* <BackgroundHeader />
@@ -32,11 +37,17 @@ export default function Delivery({ navigation }) {
               <Title>Informações da entrega</Title>
             </Header>
             <Label>DESTINATÁRIO</Label>
-            <Text>Ludwig van Beethoven</Text>
+            <Text>{delivery.recipient.name}</Text>
             <Label>ENDEREÇO DE ENTREGA</Label>
-            <Text>Rua Beethowen, 1729, Diadema - SP, 09960-558</Text>
+            <Text>
+              {delivery.recipient.street}
+              {delivery.recipient.number && `, ${delivery.recipient.number}`}
+              {delivery.recipient.complement &&
+                ` - ${delivery.recipient.complement}`}
+              {`, ${delivery.recipient.city} - ${delivery.recipient.state}, ${delivery.recipient.zipcode}`}
+            </Text>
             <Label>PRODUTO</Label>
-            <Text>Yamaha x7</Text>
+            <Text>{delivery.product}</Text>
           </Box>
 
           <Box>
@@ -45,15 +56,27 @@ export default function Delivery({ navigation }) {
               <Title>Situação da entrega</Title>
             </Header>
             <Label>STATUS</Label>
-            <Text>Pendente</Text>
+            <Text>{delivery.status}</Text>
             <Row>
               <View>
                 <Label>DATA DE RETIRADA</Label>
-                <Text>14/01/2020</Text>
+                <Text>
+                  {delivery.start_date &&
+                    format(
+                      utcToZonedTime(parseISO(delivery.start_date), timezone),
+                      'dd/MM/yyyy'
+                    )}
+                </Text>
               </View>
               <View>
                 <Label>DATA DE ENTREGA</Label>
-                <Text>--/--/--</Text>
+                <Text>
+                  {delivery.end_date &&
+                    format(
+                      utcToZonedTime(parseISO(delivery.end_date), timezone),
+                      'dd/MM/yyyy'
+                    )}
+                </Text>
               </View>
             </Row>
           </Box>

@@ -17,12 +17,21 @@ class DeliverymanDeliveries {
         canceled_at: null,
         end_date: null,
       },
-      attributes: ['id', 'product', 'start_date'],
+      attributes: ['id', 'product', 'start_date', 'status'],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'zipcode',
+          ],
         },
       ],
       order: ['created_at'],
