@@ -88,6 +88,10 @@ class DeliverymanController {
       ],
     });
 
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'Deliveryman does not exists' });
+    }
+
     return res.json(deliveryman);
   }
 

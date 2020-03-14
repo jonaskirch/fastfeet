@@ -7,9 +7,7 @@ export function* signIn({ payload }) {
   try {
     const { deliverymanId } = payload;
 
-    const resp = yield call(api.post, '/deliverymen', {
-      deliverymanId,
-    });
+    const resp = yield call(api.get, `/deliverymen/${deliverymanId}`);
 
     const deliveryman = resp.data;
 

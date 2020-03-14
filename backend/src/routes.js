@@ -34,6 +34,8 @@ routes.post('/deliveries/:id/end', DeliveryEndController.store);
 // adicionar problemas na entrega de uma encomenda
 routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
 
+routes.get('/deliverymen/:id', DeliverymanController.show);
+
 routes.use(authMiddleware);
 
 // visualziar todas as entregas com problemas
@@ -52,7 +54,6 @@ routes.put('/recipients/:id', RecipientController.update);
 routes.post('/deliverymen', DeliverymanController.store);
 routes.put('/deliverymen/:id', DeliverymanController.update);
 routes.get('/deliverymen', DeliverymanController.index);
-routes.get('/deliverymen/:id', DeliverymanController.show);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
 
 routes.post('/deliveries', DeliveryController.store);

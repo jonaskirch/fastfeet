@@ -1,5 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import { signOut } from '~/store/modules/auth/actions';
 import DeliveryStatus from '~/components/DeliveryStatus';
 
 import {
@@ -36,6 +39,12 @@ const deliveries = [
 ];
 
 export default function Dashboard({ navigation }) {
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <User>
@@ -44,7 +53,7 @@ export default function Dashboard({ navigation }) {
           <WelcomeText>Bem vindo de volta,</WelcomeText>
           <WelcomeUserName>Gaspar Antunes</WelcomeUserName>
         </Welcome>
-        <ExitButton>
+        <ExitButton onPress={handleLogout}>
           <Icon name="exit-to-app" color="#E74040" size={20} />
         </ExitButton>
       </User>

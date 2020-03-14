@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { signInRequest } from '~/store/modules/auth/actions';
 import logo from '~/assets/logo.png';
 import { Container, Image, Form, Input, SubmitButton } from './styles';
 
 export default function SignIn() {
-  const { id, setId } = useState('');
+  const [id, setId] = useState('');
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    dispatch(signInRequest(id));
+  }
 
   return (
     <Container>
@@ -21,7 +28,9 @@ export default function SignIn() {
           value={id}
           onChangeText={setId}
         />
-        <SubmitButton onPress={handleSubmit}>Entrar no sistema</SubmitButton>
+        <SubmitButton loading={loading} onPress={handleSubmit}>
+          Entrar no sistema
+        </SubmitButton>
       </Form>
     </Container>
   );
