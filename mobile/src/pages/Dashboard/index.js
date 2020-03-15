@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -46,7 +47,18 @@ export default function Dashboard({ navigation }) {
   }, [deliveredFilter, profile.id]);
 
   function handleLogout() {
-    dispatch(signOut());
+    Alert.alert(
+      'Logout',
+      'Tem certeza que deseja desconectar?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        { text: 'OK', onPress: () => dispatch(signOut()) },
+      ],
+      { cancelable: true }
+    );
   }
 
   return (

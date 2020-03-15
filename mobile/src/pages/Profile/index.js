@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
@@ -13,7 +14,18 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   function handleSubmit() {
-    dispatch(signOut());
+    Alert.alert(
+      'Logout',
+      'Tem certeza que deseja desconectar?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        { text: 'OK', onPress: () => dispatch(signOut()) },
+      ],
+      { cancelable: true }
+    );
   }
 
   return (

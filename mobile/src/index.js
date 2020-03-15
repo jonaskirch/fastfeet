@@ -10,13 +10,11 @@ import colors from '~/styles/colors';
 
 export default function Index() {
   return (
-    <>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <StatusBar backgroundColor={colors.primary} />
-          <App />
-        </PersistGate>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <StatusBar backgroundColor={colors.primary} />
+        <App />
+      </PersistGate>
+    </Provider>
   );
 }
