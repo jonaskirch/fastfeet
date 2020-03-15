@@ -4,7 +4,15 @@ import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import api from '~/services/api';
 
-import { Container, Title, List, Problem, Description, Date } from './styles';
+import {
+  Container,
+  Title,
+  List,
+  Problem,
+  Description,
+  Date,
+  Loading,
+} from './styles';
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -32,21 +40,25 @@ export default function Problems({ route }) {
   return (
     <Container>
       <Title>{`Encomenda ${deliveryId}`}</Title>
-      <List
-        data={problems}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
-          <Problem>
-            <Description>{item.description}</Description>
-            <Date>
-              {format(
-                utcToZonedTime(parseISO(item.created_at), timezone),
-                'dd/MM/yyyy'
-              )}
-            </Date>
-          </Problem>
-        )}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <List
+          data={problems}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => (
+            <Problem>
+              <Description>{item.description}</Description>
+              <Date>
+                {format(
+                  utcToZonedTime(parseISO(item.created_at), timezone),
+                  'dd/MM/yyyy'
+                )}
+              </Date>
+            </Problem>
+          )}
+        />
+      )}
     </Container>
   );
 }

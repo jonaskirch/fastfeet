@@ -20,6 +20,7 @@ import {
   FilterButton,
   FilterText,
   List,
+  Loading,
 } from './styles';
 
 export default function Dashboard({ navigation }) {
@@ -92,13 +93,17 @@ export default function Dashboard({ navigation }) {
         </FilterButton>
       </Toolbar>
 
-      <List
-        data={deliveries}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
-          <DeliveryStatus delivery={item} navigation={navigation} />
-        )}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <List
+          data={deliveries}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => (
+            <DeliveryStatus delivery={item} navigation={navigation} />
+          )}
+        />
+      )}
     </Container>
   );
 }

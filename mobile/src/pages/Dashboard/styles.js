@@ -63,3 +63,10 @@ export const List = styled.FlatList.attrs({
 })`
   margin-top: 10px;
 `;
+
+export const Loading = styled.ActivityIndicator.attrs({
+  color: colors.primary,
+  size: 'large',
+})`
+  flex: 1;
+`;

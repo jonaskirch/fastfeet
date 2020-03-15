@@ -41,3 +41,10 @@ export const Date = styled.Text`
   font-size: 12px;
   color: #c1c1c1;
 `;
+
+export const Loading = styled.ActivityIndicator.attrs({
+  color: colors.primary,
+  size: 'large',
+})`
+  flex: 1;
+`;
