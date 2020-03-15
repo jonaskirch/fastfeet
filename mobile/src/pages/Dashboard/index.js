@@ -38,6 +38,8 @@ export default function Dashboard({ navigation }) {
           }`
         );
         setDeliveries(resp.data);
+      } catch {
+        Alert.alert('Falha', 'Ocorreu uma falha ao listar as entregas');
       } finally {
         setLoading(false);
       }

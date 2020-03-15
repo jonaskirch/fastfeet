@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import api from '~/services/api';
 import { Container, Form, Input, SubmitButton } from './styles';
 
@@ -14,6 +15,8 @@ export default function NewProblem({ navigation, route }) {
         description: problem,
       });
       navigation.goBack();
+    } catch {
+      Alert.alert('Falha', 'Ocorreu uma falha ao inserir o problema');
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import api from '~/services/api';
@@ -18,6 +19,8 @@ export default function Problems({ route }) {
         setLoading(true);
         const resp = await api.get(`/deliveries/${deliveryId}/problems`);
         setProblems(resp.data);
+      } catch {
+        Alert.alert('Falha', 'Ocorreu uma falha ao listar os problemas');
       } finally {
         setLoading(false);
       }
