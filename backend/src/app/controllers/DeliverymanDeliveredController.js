@@ -20,7 +20,14 @@ class DeliverymanDelivered {
           [Op.ne]: null,
         },
       },
-      attributes: ['id', 'product', 'start_date', 'end_date', 'status'],
+      attributes: [
+        'id',
+        'product',
+        'created_at',
+        'start_date',
+        'end_date',
+        'status',
+      ],
       include: [
         {
           model: Recipient,

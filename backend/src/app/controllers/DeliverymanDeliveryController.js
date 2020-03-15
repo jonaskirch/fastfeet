@@ -17,7 +17,7 @@ class DeliverymanDeliveries {
         canceled_at: null,
         end_date: null,
       },
-      attributes: ['id', 'product', 'start_date', 'status'],
+      attributes: ['id', 'product', 'created_at', 'start_date', 'status'],
       include: [
         {
           model: Recipient,
