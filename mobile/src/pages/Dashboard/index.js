@@ -28,27 +28,46 @@ export default function Dashboard({ navigation }) {
   const profile = useSelector(state => state.user.profile);
   const [deliveries, setDeliveries] = useState([]);
   const [deliveredFilter, setDeliveredFilter] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function loadDeliveries() {
-      try {
-        setLoading(true);
-        const resp = await api.get(
-          `/deliverymen/${profile.id}/${
-            deliveredFilter ? 'delivered' : 'deliveries'
-          }`
+  async function loadDeliveries() {
+    try {
+      setLoading(true);
+      const resp = await api.get(
+        `/deliverymen/${profile.id}/${
+          deliveredFilter ? 'delivered' : 'deliveries'
+        }`,
+        {
+          params: { page },
+        }
+      );
+      setTotalRecords(resp.data.total);
+      if (resp.data && resp.data.records.length > 0) {
+        setDeliveries(
+          page > 1 ? [...deliveries, resp.data.records] : resp.data.records
         );
-        setDeliveries(resp.data);
-      } catch {
-        Alert.alert('Falha', 'Ocorreu uma falha ao listar as entregas');
-      } finally {
-        setLoading(false);
       }
+    } catch {
+      Alert.alert('Falha', 'Ocorreu uma falha ao listar as entregas');
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadDeliveries();
-  }, [deliveredFilter, profile.id]);
+  }, [page, deliveredFilter, profile.id]);
+
+  function handlePage() {
+    if (deliveries.length < totalRecords) setPage(page + 1);
+  }
+
+  function handleRefreshList() {
+    if (page !== 1) setPage(1);
+    else loadDeliveries();
+  }
 
   function handleLogout() {
     Alert.alert(
@@ -99,6 +118,10 @@ export default function Dashboard({ navigation }) {
         <List
           data={deliveries}
           keyExtractor={item => String(item.id)}
+          onEndReachedThreshold={0.2}
+          onEndReached={handlePage}
+          onRefresh={handleRefreshList} // Função dispara quando o usuário arrasta a lista pra baixo
+          refreshing={loading}
           renderItem={({ item }) => (
             <DeliveryStatus delivery={item} navigation={navigation} />
           )}

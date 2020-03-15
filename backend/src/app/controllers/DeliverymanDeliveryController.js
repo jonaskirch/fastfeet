@@ -11,7 +11,7 @@ class DeliverymanDeliveries {
     }
 
     const { page = 1 } = req.query;
-    const deliverys = await Delivery.findAll({
+    const { count: total, rows: records } = await Delivery.findAndCountAll({
       where: {
         deliveryman_id: id,
         canceled_at: null,
@@ -39,7 +39,10 @@ class DeliverymanDeliveries {
       offset: (page - 1) * 20,
     });
 
-    return res.json(deliverys);
+    return res.json({
+      total,
+      records,
+    });
   }
 }
 
