@@ -43,7 +43,11 @@ export const Text = styled.Text`
   font-weight: bold;
 `;
 
-export const Link = styled.Text`
+export const LinkButton = styled.TouchableOpacity`
+  padding-top: 10px;
+`;
+
+export const LinkText = styled.Text`
   font-size: 12px;
   font-weight: bold;
   color: ${colors.primary};

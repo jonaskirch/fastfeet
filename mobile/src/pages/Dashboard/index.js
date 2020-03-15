@@ -17,6 +17,7 @@ import {
   ExitButton,
   Toolbar,
   Title,
+  FilterButton,
   FilterText,
   List,
 } from './styles';
@@ -78,22 +79,17 @@ export default function Dashboard({ navigation }) {
 
       <Toolbar>
         <Title>Entregas</Title>
-        <ExitButton>
-          <FilterText
-            active={!deliveredFilter}
-            onPress={() => setDeliveredFilter(false)}
-          >
-            Pendentes
-          </FilterText>
-        </ExitButton>
-        <ExitButton>
+        <FilterButton onPress={() => setDeliveredFilter(false)}>
+          <FilterText active={!deliveredFilter}>Pendentes</FilterText>
+        </FilterButton>
+        <FilterButton onPress={() => setDeliveredFilter(false)}>
           <FilterText
             active={deliveredFilter}
             onPress={() => setDeliveredFilter(true)}
           >
             Entregues
           </FilterText>
-        </ExitButton>
+        </FilterButton>
       </Toolbar>
 
       <List

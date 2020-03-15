@@ -7,7 +7,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '~/styles/colors';
 import TimeLine from './TimeLine';
 
-import { Container, Header, Title, Footer, Label, Text, Link } from './styles';
+import {
+  Container,
+  Header,
+  Title,
+  Footer,
+  Label,
+  Text,
+  LinkButton,
+  LinkText,
+} from './styles';
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -33,9 +42,11 @@ export default function DeliveryStatus({ navigation, delivery }) {
           <Label>Cidade</Label>
           <Text>{delivery.recipient.city}</Text>
         </View>
-        <Link onPress={() => navigation.navigate('Delivery', { delivery })}>
-          Ver detalhes
-        </Link>
+        <LinkButton
+          onPress={() => navigation.navigate('Delivery', { delivery })}
+        >
+          <LinkText>Ver detalhes</LinkText>
+        </LinkButton>
       </Footer>
     </Container>
   );

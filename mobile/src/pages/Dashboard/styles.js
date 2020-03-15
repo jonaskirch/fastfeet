@@ -46,6 +46,9 @@ export const Title = styled.Text`
   color: #444;
   flex: 1;
 `;
+
+export const FilterButton = styled.TouchableOpacity``;
+
 export const FilterText = styled.Text`
   margin-left: 15px;
   font-size: 12px;
