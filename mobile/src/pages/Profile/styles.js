@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
-import CButton from '~/components/Button';
+import Button from '~/components/Button';
 
 export const Container = styled.View`
   padding: 20px;
 `;
+
+export const Form = styled.View``;
 
 export const Avatar = styled.Image`
   height: 136px;
@@ -26,7 +28,7 @@ export const Text = styled.Text`
   margin-bottom: 15px;
 `;
 
-export const Button = styled(CButton).attrs({
+export const SubmitButton = styled(Button).attrs({
   color: '#E74040',
 })`
   margin-top: 15px;
