@@ -82,31 +82,29 @@ export default function Delivery({ navigation, route }) {
           </Box>
 
           <Toolbar>
-            <Button>
+            <Button
+              onPress={() =>
+                navigation.navigate('NewProblem', { deliveryId: delivery.id })
+              }
+            >
               <Icon name="highlight-off" size={20} color="#E74040" />
-              <ButtonText
-                onPress={() =>
-                  navigation.navigate('NewProblem', { deliveryId: delivery.id })
-                }
-              >
-                Informar problema
-              </ButtonText>
+              <ButtonText>Informar problema</ButtonText>
             </Button>
-            <Button>
+            <Button
+              onPress={() =>
+                navigation.navigate('Problems', { deliveryId: delivery.id })
+              }
+            >
               <Icon name="info-outline" size={20} color="#E7BA40" />
-              <ButtonText
-                onPress={() =>
-                  navigation.navigate('Problems', { deliveryId: delivery.id })
-                }
-              >
-                Visualizar problemas
-              </ButtonText>
+              <ButtonText>Visualizar problemas</ButtonText>
             </Button>
-            <Button>
+            <Button
+              onPress={() =>
+                navigation.navigate('DeliveryEnd', { deliveryId: delivery.id })
+              }
+            >
               <Icon name="check-circle" size={20} color={colors.primary} />
-              <ButtonText onPress={() => navigation.navigate('DeliveryEnd')}>
-                Confirmar entrega
-              </ButtonText>
+              <ButtonText>Confirmar entrega</ButtonText>
             </Button>
           </Toolbar>
         </ScrollView>

@@ -38,6 +38,8 @@ routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
 
 routes.get('/deliverymen/:id', DeliverymanController.show);
 
+routes.post('/files', upload.single('file'), FileController.store);
+
 routes.use(authMiddleware);
 
 // visualziar todas as entregas com problemas
@@ -62,7 +64,5 @@ routes.put('/deliveries/:id', DeliveryController.update);
 routes.get('/deliveries', DeliveryController.index);
 routes.get('/deliveries/:id', DeliveryController.show);
 routes.delete('/deliveries/:id', DeliveryController.delete);
-
-routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;
