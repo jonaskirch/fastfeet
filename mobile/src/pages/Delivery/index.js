@@ -1,8 +1,10 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, View } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '~/services/api';
 import colors from '~/styles/colors';
 import {
   Container,
@@ -16,14 +18,33 @@ import {
   Text,
   Row,
   Toolbar,
-  Button,
-  ButtonText,
+  ToolbarButton,
+  ToolbarButtonText,
+  ButtonStart,
 } from './styles';
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-export default function Delivery({ navigation, route }) {
+export default function Delivery() {
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
+  const route = useRoute();
   const { delivery } = route.params;
+
+  async function handleDeliveryStart() {
+    try {
+      setLoading(true);
+      await api.post(`deliveries/${delivery.id}/start`, {
+        date: Date.now(),
+      });
+      setLoading(false);
+      navigation.navigate('Dashboard');
+    } catch (e) {
+      Alert.alert('Falha', 'Falha ao iniciar entrega');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -81,32 +102,40 @@ export default function Delivery({ navigation, route }) {
             </Row>
           </Box>
 
-          <Toolbar>
-            <Button
-              onPress={() =>
-                navigation.navigate('NewProblem', { deliveryId: delivery.id })
-              }
-            >
-              <Icon name="highlight-off" size={20} color="#E74040" />
-              <ButtonText>Informar problema</ButtonText>
-            </Button>
-            <Button
-              onPress={() =>
-                navigation.navigate('Problems', { deliveryId: delivery.id })
-              }
-            >
-              <Icon name="info-outline" size={20} color="#E7BA40" />
-              <ButtonText>Visualizar problemas</ButtonText>
-            </Button>
-            <Button
-              onPress={() =>
-                navigation.navigate('DeliveryEnd', { deliveryId: delivery.id })
-              }
-            >
-              <Icon name="check-circle" size={20} color={colors.primary} />
-              <ButtonText>Confirmar entrega</ButtonText>
-            </Button>
-          </Toolbar>
+          {delivery.status === 'PENDENTE' ? (
+            <ButtonStart onPress={handleDeliveryStart} loading={loading}>
+              RETIRAR PRODUTO
+            </ButtonStart>
+          ) : (
+            <Toolbar>
+              <ToolbarButton
+                onPress={() =>
+                  navigation.navigate('NewProblem', { deliveryId: delivery.id })
+                }
+              >
+                <Icon name="highlight-off" size={20} color="#E74040" />
+                <ToolbarButtonText>Informar problema</ToolbarButtonText>
+              </ToolbarButton>
+              <ToolbarButton
+                onPress={() =>
+                  navigation.navigate('Problems', { deliveryId: delivery.id })
+                }
+              >
+                <Icon name="info-outline" size={20} color="#E7BA40" />
+                <ToolbarButtonText>Visualizar problemas</ToolbarButtonText>
+              </ToolbarButton>
+              <ToolbarButton
+                onPress={() =>
+                  navigation.navigate('DeliveryEnd', {
+                    deliveryId: delivery.id,
+                  })
+                }
+              >
+                <Icon name="check-circle" size={20} color={colors.primary} />
+                <ToolbarButtonText>Confirmar entrega</ToolbarButtonText>
+              </ToolbarButton>
+            </Toolbar>
+          )}
         </ScrollView>
       </Container>
       {/* </Wrapper> */}

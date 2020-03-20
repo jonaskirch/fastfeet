@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
@@ -23,7 +24,7 @@ import {
   Loading,
 } from './styles';
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
   const [deliveries, setDeliveries] = useState([]);
@@ -31,6 +32,7 @@ export default function Dashboard({ navigation }) {
   const [page, setPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
+  const isFocused = useIsFocused();
 
   async function loadDeliveries() {
     try {
@@ -44,11 +46,9 @@ export default function Dashboard({ navigation }) {
         }
       );
       setTotalRecords(resp.data.total);
-      if (resp.data && resp.data.records.length > 0) {
-        setDeliveries(
-          page > 1 ? [...deliveries, resp.data.records] : resp.data.records
-        );
-      }
+      setDeliveries(
+        page > 1 ? [...deliveries, resp.data.records] : resp.data.records
+      );
     } catch {
       Alert.alert('Falha', 'Ocorreu uma falha ao listar as entregas');
     } finally {
@@ -59,6 +59,12 @@ export default function Dashboard({ navigation }) {
   useEffect(() => {
     loadDeliveries();
   }, [page, deliveredFilter, profile.id]);
+
+  useEffect(() => {
+    if (isFocused) {
+      loadDeliveries();
+    }
+  }, [isFocused]);
 
   function handlePage() {
     if (deliveries.length < totalRecords) setPage(page + 1);
@@ -122,9 +128,7 @@ export default function Dashboard({ navigation }) {
           onEndReached={handlePage}
           onRefresh={handleRefreshList} // Função dispara quando o usuário arrasta a lista pra baixo
           refreshing={loading}
-          renderItem={({ item }) => (
-            <DeliveryStatus delivery={item} navigation={navigation} />
-          )}
+          renderItem={({ item }) => <DeliveryStatus delivery={item} />}
         />
       )}
     </Container>

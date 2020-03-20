@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
@@ -20,7 +21,9 @@ import {
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-export default function DeliveryStatus({ navigation, delivery }) {
+export default function DeliveryStatus({ delivery }) {
+  const navigation = useNavigation();
+
   return (
     <Container>
       <Header>

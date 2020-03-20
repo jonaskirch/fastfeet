@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import api from '~/services/api';
@@ -16,7 +17,8 @@ import {
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-export default function Problems({ route }) {
+export default function Problems() {
+  const route = useRoute();
   const { deliveryId } = route.params;
   const [loading, setLoading] = useState(false);
   const [problems, setProblems] = useState([]);

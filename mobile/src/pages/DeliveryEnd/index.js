@@ -37,7 +37,7 @@ export default function DeliveryEnd() {
       const resp = await api.post('files', data);
       const { id } = resp.data;
       await api.post(`/deliveries/${deliveryId}/end`, {
-        date: new Date(),
+        date: Date.now(),
         signature_id: id,
       });
       navigation.navigate('Dashboard');
@@ -92,7 +92,7 @@ export default function DeliveryEnd() {
       ) : (
         <Form>
           <ImageContainer>
-            <Image source={{ uri: uriImg }} />
+            <Image source={{ uri: uriImg || null }} />
             <ImageButton onPress={() => setCameraOn(true)}>
               <Icon name="photo-camera" color="#fff" size={24} />
             </ImageButton>

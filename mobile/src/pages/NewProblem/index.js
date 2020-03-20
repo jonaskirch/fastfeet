@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '~/services/api';
 import { Container, Form, Input, SubmitButton } from './styles';
 
-export default function NewProblem({ navigation, route }) {
+export default function NewProblem() {
+  const navigation = useNavigation();
+  const route = useRoute();
   const { deliveryId } = route.params;
   const [problem, setProblem] = useState('');
   const [loading, setLoading] = useState(false);

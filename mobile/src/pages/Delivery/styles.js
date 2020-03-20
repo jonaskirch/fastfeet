@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import Button from '~/components/Button';
 import colors from '~/styles/colors';
 
 export const Wrapper = styled.View`
@@ -69,16 +70,20 @@ export const Toolbar = styled.View`
   border-radius: 4px;
 `;
 
-export const Button = styled(RectButton)`
+export const ToolbarButton = styled(RectButton)`
   flex: 1;
   justify-content: center;
   align-items: center;
   border: 1px solid #000;
 `;
 
-export const ButtonText = styled.Text`
+export const ToolbarButtonText = styled.Text`
   color: #999;
   font-size: 12px;
   text-align: center;
   width: 70px;
+`;
+
+export const ButtonStart = styled(Button)`
+  margin-top: 5px;
 `;

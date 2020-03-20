@@ -31,7 +31,7 @@ export default function Profile() {
   return (
     <Container>
       <Form>
-        <Avatar />
+        <Avatar source={{ uri: profile.avatar && profile.avatar.url }} />
         <Label>Nome completo</Label>
         <Text>{profile.name}</Text>
         <Label>Email</Label>
