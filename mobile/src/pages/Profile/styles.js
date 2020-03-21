@@ -3,6 +3,8 @@ import Button from '~/components/Button';
 
 export const Container = styled.View`
   padding: 20px;
+  background: #fff;
+  flex: 1;
 `;
 
 export const Form = styled.View``;

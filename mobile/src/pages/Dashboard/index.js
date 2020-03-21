@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import api from '~/services/api';
 import { signOut } from '~/store/modules/auth/actions';
@@ -78,7 +79,7 @@ export default function Dashboard() {
   function handleLogout() {
     Alert.alert(
       'Logout',
-      'Tem certeza que deseja desconectar?',
+      'Tem certeza que deseja sair?',
       [
         {
           text: 'Cancel',
@@ -88,6 +89,10 @@ export default function Dashboard() {
       ],
       { cancelable: true }
     );
+  }
+
+  function renderLeft() {
+    return <Text>teste left</Text>;
   }
 
   return (
@@ -103,34 +108,42 @@ export default function Dashboard() {
         </ExitButton>
       </User>
 
-      <Toolbar>
-        <Title>Entregas</Title>
-        <FilterButton onPress={() => setDeliveredFilter(false)}>
-          <FilterText active={!deliveredFilter}>Pendentes</FilterText>
-        </FilterButton>
-        <FilterButton onPress={() => setDeliveredFilter(false)}>
-          <FilterText
-            active={deliveredFilter}
-            onPress={() => setDeliveredFilter(true)}
-          >
-            Entregues
-          </FilterText>
-        </FilterButton>
-      </Toolbar>
+      <GestureRecognizer
+        onSwipeRight={() => setDeliveredFilter(false)}
+        onSwipeLeft={() => setDeliveredFilter(true)}
+        style={{
+          flex: 1,
+        }}
+      >
+        <Toolbar>
+          <Title>Entregas</Title>
+          <FilterButton onPress={() => setDeliveredFilter(false)}>
+            <FilterText active={!deliveredFilter}>Pendentes</FilterText>
+          </FilterButton>
+          <FilterButton onPress={() => setDeliveredFilter(false)}>
+            <FilterText
+              active={deliveredFilter}
+              onPress={() => setDeliveredFilter(true)}
+            >
+              Entregues
+            </FilterText>
+          </FilterButton>
+        </Toolbar>
 
-      {loading ? (
-        <Loading />
-      ) : (
-        <List
-          data={deliveries}
-          keyExtractor={item => String(item.id)}
-          onEndReachedThreshold={0.2}
-          onEndReached={handlePage}
-          onRefresh={handleRefreshList} // Função dispara quando o usuário arrasta a lista pra baixo
-          refreshing={loading}
-          renderItem={({ item }) => <DeliveryStatus delivery={item} />}
-        />
-      )}
+        {loading ? (
+          <Loading />
+        ) : (
+          <List
+            data={deliveries}
+            keyExtractor={item => String(item.id)}
+            onEndReachedThreshold={0.2}
+            onEndReached={handlePage}
+            onRefresh={handleRefreshList} // Função dispara quando o usuário arrasta a lista pra baixo
+            refreshing={loading}
+            renderItem={({ item }) => <DeliveryStatus delivery={item} />}
+          />
+        )}
+      </GestureRecognizer>
     </Container>
   );
 }

@@ -82,21 +82,23 @@ export default function Delivery() {
               <View>
                 <Label>DATA DE RETIRADA</Label>
                 <Text>
-                  {delivery.start_date &&
-                    format(
-                      utcToZonedTime(parseISO(delivery.start_date), timezone),
-                      'dd/MM/yyyy'
-                    )}
+                  {delivery.start_date
+                    ? format(
+                        utcToZonedTime(parseISO(delivery.start_date), timezone),
+                        'dd/MM/yyyy'
+                      )
+                    : '--/--/--'}
                 </Text>
               </View>
               <View>
                 <Label>DATA DE ENTREGA</Label>
                 <Text>
-                  {delivery.end_date &&
-                    format(
-                      utcToZonedTime(parseISO(delivery.end_date), timezone),
-                      'dd/MM/yyyy'
-                    )}
+                  {delivery.end_date
+                    ? format(
+                        utcToZonedTime(parseISO(delivery.end_date), timezone),
+                        'dd/MM/yyyy'
+                      )
+                    : '--/--/--'}
                 </Text>
               </View>
             </Row>
@@ -107,34 +109,38 @@ export default function Delivery() {
               RETIRAR PRODUTO
             </ButtonStart>
           ) : (
-            <Toolbar>
-              <ToolbarButton
-                onPress={() =>
-                  navigation.navigate('NewProblem', { deliveryId: delivery.id })
-                }
-              >
-                <Icon name="highlight-off" size={20} color="#E74040" />
-                <ToolbarButtonText>Informar problema</ToolbarButtonText>
-              </ToolbarButton>
-              <ToolbarButton
-                onPress={() =>
-                  navigation.navigate('Problems', { deliveryId: delivery.id })
-                }
-              >
-                <Icon name="info-outline" size={20} color="#E7BA40" />
-                <ToolbarButtonText>Visualizar problemas</ToolbarButtonText>
-              </ToolbarButton>
-              <ToolbarButton
-                onPress={() =>
-                  navigation.navigate('DeliveryEnd', {
-                    deliveryId: delivery.id,
-                  })
-                }
-              >
-                <Icon name="check-circle" size={20} color={colors.primary} />
-                <ToolbarButtonText>Confirmar entrega</ToolbarButtonText>
-              </ToolbarButton>
-            </Toolbar>
+            delivery.status !== 'ENTREGUE' && (
+              <Toolbar>
+                <ToolbarButton
+                  onPress={() =>
+                    navigation.navigate('NewProblem', {
+                      deliveryId: delivery.id,
+                    })
+                  }
+                >
+                  <Icon name="highlight-off" size={20} color="#E74040" />
+                  <ToolbarButtonText>Informar problema</ToolbarButtonText>
+                </ToolbarButton>
+                <ToolbarButton
+                  onPress={() =>
+                    navigation.navigate('Problems', { deliveryId: delivery.id })
+                  }
+                >
+                  <Icon name="info-outline" size={20} color="#E7BA40" />
+                  <ToolbarButtonText>Visualizar problemas</ToolbarButtonText>
+                </ToolbarButton>
+                <ToolbarButton
+                  onPress={() =>
+                    navigation.navigate('DeliveryEnd', {
+                      deliveryId: delivery.id,
+                    })
+                  }
+                >
+                  <Icon name="check-circle" size={20} color={colors.primary} />
+                  <ToolbarButtonText>Confirmar entrega</ToolbarButtonText>
+                </ToolbarButton>
+              </Toolbar>
+            )
           )}
         </ScrollView>
       </Container>

@@ -70,11 +70,11 @@ export const Toolbar = styled.View`
   border-radius: 4px;
 `;
 
-export const ToolbarButton = styled(RectButton)`
+export const ToolbarButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000;
+  border: 1px solid #eee;
 `;
 
 export const ToolbarButtonText = styled.Text`

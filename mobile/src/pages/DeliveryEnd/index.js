@@ -26,6 +26,13 @@ export default function DeliveryEnd() {
   const { deliveryId } = route.params;
 
   async function handleSubmit() {
+    if (uriImg === '') {
+      Alert.alert(
+        'Foto',
+        'Você precisa tirar uma foto da assinatura do destinatário'
+      );
+      return;
+    }
     try {
       setLoading(true);
       const data = new FormData();
