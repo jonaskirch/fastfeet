@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GestureRecognizer from 'react-native-swipe-gestures';
-
 import api from '~/services/api';
 import { signOut } from '~/store/modules/auth/actions';
+import Avatar from '~/components/Avatar';
 import DeliveryStatus from '~/components/DeliveryStatus';
 
 import {
   Container,
   User,
-  Avatar,
   Welcome,
   WelcomeText,
   WelcomeUserName,
@@ -94,7 +93,11 @@ export default function Dashboard() {
   return (
     <Container>
       <User>
-        <Avatar source={{ uri: profile.avatar && profile.avatar.url }} />
+        <Avatar
+          size={68}
+          imageUri={profile.avatar && profile.avatar.url}
+          name={profile.name}
+        />
         <Welcome>
           <WelcomeText>Bem vindo de volta,</WelcomeText>
           <WelcomeUserName>{profile.name}</WelcomeUserName>

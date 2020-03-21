@@ -11,12 +11,6 @@ export const User = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-export const Avatar = styled.Image`
-  height: 68px;
-  width: 68px;
-  background: #ccc;
-  border-radius: 34px;
-`;
 
 export const Welcome = styled.View`
   margin-left: 10px;

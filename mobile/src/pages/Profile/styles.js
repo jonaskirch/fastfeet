@@ -9,15 +9,6 @@ export const Container = styled.View`
 
 export const Form = styled.View``;
 
-export const Avatar = styled.Image`
-  height: 136px;
-  width: 136px;
-  background: #ccc;
-  border-radius: 68px;
-  align-self: center;
-  margin: 20px 0;
-`;
-
 export const Label = styled.Text`
   font-size: 12px;
   color: #666;

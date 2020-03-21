@@ -3,8 +3,8 @@ import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateFormat } from '~/util/date';
 import { signOut } from '~/store/modules/auth/actions';
-
-import { Container, Form, Avatar, Label, Text, SubmitButton } from './styles';
+import Avatar from '~/components/Avatar';
+import { Container, Form, Label, Text, SubmitButton } from './styles';
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
@@ -28,7 +28,11 @@ export default function Profile() {
   return (
     <Container>
       <Form>
-        <Avatar source={{ uri: profile.avatar && profile.avatar.url }} />
+        <Avatar
+          size={136}
+          imageUri={profile.avatar && profile.avatar.url}
+          name={profile.name}
+        />
         <Label>Nome completo</Label>
         <Text>{profile.name}</Text>
         <Label>Email</Label>
