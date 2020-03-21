@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -161,3 +162,7 @@ export default function Routes({ signed }) {
     </NavigationContainer>
   );
 }
+
+Routes.propTypes = {
+  signed: PropTypes.bool.isRequired,
+};

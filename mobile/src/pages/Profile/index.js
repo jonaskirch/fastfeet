@@ -16,7 +16,7 @@ export default function Profile() {
   function handleSubmit() {
     Alert.alert(
       'Logout',
-      'Tem certeza que deseja desconectar?',
+      'Tem certeza que deseja sair?',
       [
         {
           text: 'Cancel',

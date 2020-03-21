@@ -37,7 +37,6 @@ export default function Delivery() {
       await api.post(`deliveries/${delivery.id}/start`, {
         date: Date.now(),
       });
-      setLoading(false);
       navigation.navigate('Dashboard');
     } catch (e) {
       Alert.alert('Falha', 'Falha ao iniciar entrega');

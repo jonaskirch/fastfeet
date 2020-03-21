@@ -91,10 +91,6 @@ export default function Dashboard() {
     );
   }
 
-  function renderLeft() {
-    return <Text>teste left</Text>;
-  }
-
   return (
     <Container>
       <User>
@@ -138,7 +134,7 @@ export default function Dashboard() {
             keyExtractor={item => String(item.id)}
             onEndReachedThreshold={0.2}
             onEndReached={handlePage}
-            onRefresh={handleRefreshList} // Função dispara quando o usuário arrasta a lista pra baixo
+            onRefresh={handleRefreshList}
             refreshing={loading}
             renderItem={({ item }) => <DeliveryStatus delivery={item} />}
           />
