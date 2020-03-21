@@ -1,12 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
-import { format, parseISO } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '~/styles/colors';
+import { dateFormat } from '~/util/date';
 import TimeLine from './TimeLine';
+import colors from '~/styles/colors';
 
 import {
   Container,
@@ -18,8 +17,6 @@ import {
   LinkButton,
   LinkText,
 } from './styles';
-
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export default function DeliveryStatus({ delivery }) {
   const navigation = useNavigation();
@@ -34,12 +31,7 @@ export default function DeliveryStatus({ delivery }) {
       <Footer>
         <View>
           <Label>Data</Label>
-          <Text>
-            {format(
-              utcToZonedTime(parseISO(delivery.created_at), timezone),
-              'dd/MM/yyyy'
-            )}
-          </Text>
+          <Text>{dateFormat(delivery.created_at)}</Text>
         </View>
         <View>
           <Label>Cidade</Label>
@@ -54,3 +46,14 @@ export default function DeliveryStatus({ delivery }) {
     </Container>
   );
 }
+
+DeliveryStatus.propTypes = {
+  delivery: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    recipient: PropTypes.shape({
+      city: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};

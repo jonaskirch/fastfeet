@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { format, parseISO } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { dateFormat } from '~/util/date';
 import api from '~/services/api';
 
 import {
@@ -14,8 +13,6 @@ import {
   Date,
   Loading,
 } from './styles';
-
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export default function Problems() {
   const route = useRoute();
@@ -51,12 +48,7 @@ export default function Problems() {
           renderItem={({ item }) => (
             <Problem>
               <Description>{item.description}</Description>
-              <Date>
-                {format(
-                  utcToZonedTime(parseISO(item.created_at), timezone),
-                  'dd/MM/yyyy'
-                )}
-              </Date>
+              <Date>{dateFormat(item.created_at)}</Date>
             </Problem>
           )}
         />

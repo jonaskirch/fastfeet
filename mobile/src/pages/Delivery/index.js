@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Alert, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { format, parseISO } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { dateFormat } from '~/util/date';
 import api from '~/services/api';
 import colors from '~/styles/colors';
 import {
@@ -22,8 +21,6 @@ import {
   ToolbarButtonText,
   ButtonStart,
 } from './styles';
-
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export default function Delivery() {
   const [loading, setLoading] = useState(false);
@@ -82,10 +79,7 @@ export default function Delivery() {
                 <Label>DATA DE RETIRADA</Label>
                 <Text>
                   {delivery.start_date
-                    ? format(
-                        utcToZonedTime(parseISO(delivery.start_date), timezone),
-                        'dd/MM/yyyy'
-                      )
+                    ? dateFormat(delivery.start_date)
                     : '--/--/--'}
                 </Text>
               </View>
@@ -93,10 +87,7 @@ export default function Delivery() {
                 <Label>DATA DE ENTREGA</Label>
                 <Text>
                   {delivery.end_date
-                    ? format(
-                        utcToZonedTime(parseISO(delivery.end_date), timezone),
-                        'dd/MM/yyyy'
-                      )
+                    ? dateFormat(delivery.end_date)
                     : '--/--/--'}
                 </Text>
               </View>
