@@ -110,6 +110,9 @@ export default function Dashboard() {
       <GestureRecognizer
         onSwipeRight={() => setDeliveredFilter(false)}
         onSwipeLeft={() => setDeliveredFilter(true)}
+        config={{
+          velocityThreshold: 1.0,
+        }}
         style={{
           flex: 1,
         }}
