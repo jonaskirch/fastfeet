@@ -9,7 +9,6 @@ import {
   Container,
   BackgroundHeader,
   Wrapper,
-  ScrollView,
   Box,
   Header,
   Title,
@@ -35,7 +34,7 @@ export default function Delivery() {
         date: Date.now(),
       });
       navigation.navigate('Dashboard');
-    } catch (e) {
+    } catch {
       Alert.alert('Falha', 'Falha ao iniciar entrega');
     } finally {
       setLoading(false);
@@ -44,10 +43,9 @@ export default function Delivery() {
 
   return (
     <>
-      {/* <BackgroundHeader />
-      <Wrapper> */}
-      <Container>
-        <ScrollView>
+      <BackgroundHeader />
+      <Wrapper>
+        <Container>
           <Box>
             <Header>
               <Icon name="local-shipping" size={20} color={colors.primary} />
@@ -113,7 +111,9 @@ export default function Delivery() {
                 </ToolbarButton>
                 <ToolbarButton
                   onPress={() =>
-                    navigation.navigate('Problems', { deliveryId: delivery.id })
+                    navigation.navigate('Problems', {
+                      deliveryId: delivery.id,
+                    })
                   }
                 >
                   <Icon name="info-outline" size={20} color="#E7BA40" />
@@ -132,9 +132,8 @@ export default function Delivery() {
               </Toolbar>
             )
           )}
-        </ScrollView>
-      </Container>
-      {/* </Wrapper> */}
+        </Container>
+      </Wrapper>
     </>
   );
 }

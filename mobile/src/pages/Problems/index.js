@@ -5,6 +5,8 @@ import { dateFormat } from '~/util/date';
 import api from '~/services/api';
 
 import {
+  BackgroundHeader,
+  Wrapper,
   Container,
   Title,
   List,
@@ -37,22 +39,27 @@ export default function Problems() {
   }, [deliveryId]);
 
   return (
-    <Container>
-      <Title>{`Encomenda ${deliveryId}`}</Title>
-      {loading ? (
-        <Loading />
-      ) : (
-        <List
-          data={problems}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <Problem>
-              <Description>{item.description}</Description>
-              <Date>{dateFormat(item.created_at)}</Date>
-            </Problem>
+    <>
+      <BackgroundHeader />
+      <Wrapper>
+        <Container>
+          <Title>{`Encomenda ${deliveryId}`}</Title>
+          {loading ? (
+            <Loading />
+          ) : (
+            <List
+              data={problems}
+              keyExtractor={item => String(item.id)}
+              renderItem={({ item }) => (
+                <Problem>
+                  <Description>{item.description}</Description>
+                  <Date>{dateFormat(item.created_at)}</Date>
+                </Problem>
+              )}
+            />
           )}
-        />
-      )}
-    </Container>
+        </Container>
+      </Wrapper>
+    </>
   );
 }

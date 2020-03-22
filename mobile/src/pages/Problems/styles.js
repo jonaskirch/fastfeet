@@ -1,16 +1,26 @@
 import styled from 'styled-components/native';
 import colors from '~/styles/colors';
 
-export const Container = styled.View`
-  padding: 20px;
+export const BackgroundHeader = styled.View`
+  background: ${colors.primary};
+  height: 70px;
+`;
+
+export const Wrapper = styled.View`
   background: #fff;
   flex: 1;
+`;
+
+export const Container = styled.View`
+  top: -70px;
+  z-index: 99999;
+  margin: 0 20px;
 `;
 
 export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  color: ${colors.primary};
+  color: #fff;
   align-self: center;
 `;
 
@@ -30,6 +40,7 @@ export const Problem = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background: #fff;
 `;
 
 export const Description = styled.Text`

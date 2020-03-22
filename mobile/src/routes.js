@@ -1,10 +1,10 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Header from '~/components/Header';
 import colors from './styles/colors';
 import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
@@ -21,12 +21,10 @@ function AppDashboard() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: '#FFF',
-        headerBackTitleVisible: false,
-        headerLeftContainerStyle: {
-          marginLeft: 20,
+        header: ({ scene }) => {
+          const { title } = scene.descriptor.options;
+          return <Header title={title} />;
         },
-        headerStyle: { backgroundColor: colors.primary },
       }}
     >
       <Stack.Screen
@@ -39,82 +37,30 @@ function AppDashboard() {
       <Stack.Screen
         name="Delivery"
         component={Delivery}
-        options={({ navigation }) => ({
+        options={{
           title: 'Detalhes da encomenda',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Icon name="chevron-left" size={20} color="#FFF" />
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: {
-            fontSize: 16,
-          },
-          // headerStyle: {
-          //   height: 155,
-          //   backgroundColor: colors.primary,
-          // },
-        })}
+        }}
       />
       <Stack.Screen
         name="NewProblem"
         component={NewProblem}
-        options={({ navigation }) => ({
+        options={{
           title: 'Informar problema',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Icon name="chevron-left" size={20} color="#FFF" />
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: {
-            fontSize: 16,
-          },
-        })}
+        }}
       />
       <Stack.Screen
         name="Problems"
         component={Problems}
-        options={({ navigation }) => ({
+        options={{
           title: 'Visualizar problemas',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Icon name="chevron-left" size={20} color="#FFF" />
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: {
-            fontSize: 16,
-          },
-        })}
+        }}
       />
       <Stack.Screen
         name="DeliveryEnd"
         component={DeliveryEnd}
-        options={({ navigation }) => ({
+        options={{
           title: 'Confirmar entrega',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Icon name="chevron-left" size={20} color="#FFF" />
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: {
-            fontSize: 16,
-          },
-        })}
+        }}
       />
     </Stack.Navigator>
   );

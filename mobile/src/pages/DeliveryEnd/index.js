@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '~/services/api';
 
 import {
+  BackgroundHeader,
+  Wrapper,
   Container,
   Form,
   ImageContainer,
@@ -63,52 +65,57 @@ export default function DeliveryEnd() {
   };
 
   return (
-    <Container>
-      {cameraOn ? (
-        <RNCamera
-          style={{
-            flex: 1,
-            alignItems: 'center',
-          }}
-          type={RNCamera.Constants.Type.back}
-          captureAudio={false}
-          flashMode={RNCamera.Constants.FlashMode.off}
-          androidCameraPermissionOptions={{
-            title: 'Permissão para usar a camera',
-            message: 'Conceder permissão para usar a camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
-        >
-          {({ camera, status }) => {
-            if (status !== 'READY')
-              return (
-                <Container>
-                  <Loading />
-                </Container>
-              );
-            return (
-              <CameraContainer>
-                <CameraButton onPress={() => takePicture(camera)}>
-                  <Icon name="camera" color="#fff" size={52} />
-                </CameraButton>
-              </CameraContainer>
-            );
-          }}
-        </RNCamera>
-      ) : (
-        <Form>
-          <ImageContainer>
-            <Image source={{ uri: uriImg || null }} />
-            <ImageButton onPress={() => setCameraOn(true)}>
-              <Icon name="photo-camera" color="#fff" size={24} />
-            </ImageButton>
-          </ImageContainer>
-          <SubmitButton loading={loading} onPress={handleSubmit}>
-            Enviar
-          </SubmitButton>
-        </Form>
-      )}
-    </Container>
+    <>
+      <BackgroundHeader />
+      <Wrapper>
+        <Container>
+          {cameraOn ? (
+            <RNCamera
+              style={{
+                flex: 1,
+                alignItems: 'stretch',
+              }}
+              type={RNCamera.Constants.Type.back}
+              captureAudio={false}
+              flashMode={RNCamera.Constants.FlashMode.off}
+              androidCameraPermissionOptions={{
+                title: 'Permissão para usar a camera',
+                message: 'Conceder permissão para usar a camera',
+                buttonPositive: 'Ok',
+                buttonNegative: 'Cancel',
+              }}
+            >
+              {({ camera, status }) => {
+                if (status !== 'READY')
+                  return (
+                    <Container>
+                      <Loading />
+                    </Container>
+                  );
+                return (
+                  <CameraContainer>
+                    <CameraButton onPress={() => takePicture(camera)}>
+                      <Icon name="camera" color="#fff" size={52} />
+                    </CameraButton>
+                  </CameraContainer>
+                );
+              }}
+            </RNCamera>
+          ) : (
+            <Form>
+              <ImageContainer>
+                <Image source={{ uri: uriImg || null }} />
+                <ImageButton onPress={() => setCameraOn(true)}>
+                  <Icon name="photo-camera" color="#fff" size={24} />
+                </ImageButton>
+              </ImageContainer>
+              <SubmitButton loading={loading} onPress={handleSubmit}>
+                Enviar
+              </SubmitButton>
+            </Form>
+          )}
+        </Container>
+      </Wrapper>
+    </>
   );
 }

@@ -1,30 +1,22 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 import colors from '~/styles/colors';
-
-export const Wrapper = styled.View`
-  padding: 20px;
-  background: #fff;
-  flex: 1;
-`;
-
-export const Container = styled.View`
-  /* position: absolute;
-  top: -70px;
-  left: 20px;
-  z-index: 10; */
-  padding: 20px;
-  background: #fff;
-  flex: 1;
-`;
 
 export const BackgroundHeader = styled.View`
   background: ${colors.primary};
   height: 70px;
 `;
 
-export const ScrollView = styled.ScrollView``;
+export const Wrapper = styled.View`
+  background: #fff;
+  flex: 1;
+`;
+
+export const Container = styled.View`
+  top: -70px;
+  z-index: 99999;
+  margin: 0 20px;
+`;
 
 export const Box = styled.View`
   padding: 14px;

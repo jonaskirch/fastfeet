@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '~/services/api';
-import { Container, Form, Input, SubmitButton } from './styles';
+import {
+  BackgroundHeader,
+  Wrapper,
+  Container,
+  Form,
+  Input,
+  SubmitButton,
+} from './styles';
 
 export default function NewProblem() {
   const navigation = useNavigation();
@@ -26,19 +33,22 @@ export default function NewProblem() {
   }
 
   return (
-    <Container>
-      <Form>
-        <Input
-          placeholder="Inclua aqui o problema que ocorreu na entrega."
-          value={problem}
-          onChangeText={setProblem}
-          returnKeyType="send"
-          onSubmitEditing={handleSubmit}
-        />
-        <SubmitButton loading={loading} onPress={handleSubmit}>
-          Enviar
-        </SubmitButton>
-      </Form>
-    </Container>
+    <>
+      <BackgroundHeader />
+      <Wrapper>
+        <Container>
+          <Form>
+            <Input
+              placeholder="Inclua aqui o problema que ocorreu na entrega."
+              value={problem}
+              onChangeText={setProblem}
+            />
+            <SubmitButton loading={loading} onPress={handleSubmit}>
+              Enviar
+            </SubmitButton>
+          </Form>
+        </Container>
+      </Wrapper>
+    </>
   );
 }
