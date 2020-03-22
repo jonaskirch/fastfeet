@@ -11,12 +11,16 @@ export const BackgroundHeader = styled.View`
 export const Wrapper = styled.View`
   background: #fff;
   flex: 1;
+  position: relative;
 `;
 
 export const Container = styled.View`
-  top: -70px;
+  position: absolute;
   z-index: 99999;
-  margin: 0 20px;
+  top: -70px;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
   flex: 1;
 `;
 
@@ -27,7 +31,7 @@ export const Form = styled.View`
 export const ImageContainer = styled.View`
   position: relative;
   align-items: center;
-  height: 444px;
+  flex: 1;
 `;
 
 export const Image = styled.Image`

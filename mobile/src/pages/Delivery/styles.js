@@ -10,12 +10,16 @@ export const BackgroundHeader = styled.View`
 export const Wrapper = styled.View`
   background: #fff;
   flex: 1;
+  position: relative;
 `;
 
-export const Container = styled.View`
-  top: -70px;
+export const Container = styled.ScrollView`
+  position: absolute;
   z-index: 99999;
-  margin: 0 20px;
+  top: -70px;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
 `;
 
 export const Box = styled.View`
