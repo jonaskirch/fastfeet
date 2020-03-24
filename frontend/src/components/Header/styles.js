@@ -30,7 +30,7 @@ export const Container = styled.div`
     span {
       font-size: 14px;
       font-weight: bold;
-      color: #666666;
+      color: #666;
       margin-bottom: 3px;
     }
 
@@ -45,7 +45,7 @@ export const Container = styled.div`
 
 export const MenuItem = styled.li`
   display: inline;
-  color: ${props => (props.active ? '#444444' : '#999999')};
+  color: ${props => (props.active ? '#444' : '#999')};
   margin-right: 15px;
   font-size: 12;
   font-weight: bold;

@@ -15,13 +15,11 @@ export const Content = styled.div`
 
     thead th {
       padding: 0 20px;
-      /* width: 100%; */
     }
 
     tbody tr {
       background: #fff;
       color: #666;
-      /* width: 100%; */
     }
 
     tbody td {

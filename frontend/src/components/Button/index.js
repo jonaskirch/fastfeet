@@ -7,8 +7,6 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin: auto; */
-  /* height: 40px; */
   width: ${props => props.fullWidth && '100%'};
   border: 0;
   padding: 10px 20px;

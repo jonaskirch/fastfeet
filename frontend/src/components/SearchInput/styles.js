@@ -16,10 +16,4 @@ export const Input = styled.input`
   width: 100%;
   margin-left: 5px;
   color: ${props => props.active && colors.primary};
-  /* font-weight: ${props => (props.active ? 'bold' : 'normal')}; */
-
-  /* &::placeholder {
-    color: ${props => props.active && colors.primary};
-    font-weight: normal;
-  } */
 `;

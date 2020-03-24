@@ -65,7 +65,6 @@ export const Avatar = styled.img`
 export const Status = styled.div`
   position: relative;
   display: inline;
-  /* margin: auto; */
   border-radius: 15px;
   font-weight: bold;
   padding: 5px 10px 5px 20px;

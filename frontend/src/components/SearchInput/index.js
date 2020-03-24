@@ -17,7 +17,6 @@ export default function SearchInput({ onSearch, placeholder }) {
     if (e.key === 'Enter') {
       const find = e.target.value;
       onSearch(find);
-      // e.target.value = '';
     }
   }
 

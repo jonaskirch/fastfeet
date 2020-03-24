@@ -46,7 +46,6 @@ export const Form = styled(Unform)`
     padding: 0 15px;
     width: 100%;
     margin-bottom: 20px;
-    /* margin-right: 20px; */
 
     &::placeholder {
       color: #999;
