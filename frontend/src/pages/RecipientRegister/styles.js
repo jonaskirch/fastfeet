@@ -7,8 +7,15 @@ export const Row = styled.div`
   justify-content: space-between;
 
   div {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     margin-right: 10px;
+
+    label,
+    input {
+      margin-bottom: 9px;
+    }
   }
 
   & :last-child {

@@ -3,7 +3,7 @@ import { Form as Unform } from '@rocketseat/unform';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  margin: 20px auto;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   width: 900px;
@@ -17,8 +17,8 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 18px;
-  color: #333;
+  font-size: 24px;
+  color: #444;
   font-weight: bold;
 `;
 
@@ -32,24 +32,21 @@ export const Toolbar = styled.div`
 
 export const Form = styled(Unform)`
   label {
-    color: #333;
+    color: #444;
     text-align: left;
     font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
   }
 
   input {
     border: 1px solid #ddd;
     border-radius: 4px;
-    height: 40px;
+    height: 45px;
     padding: 0 15px;
     width: 100%;
-    margin-bottom: 20px;
-
-    &::placeholder {
-      color: #999;
-    }
+    margin-bottom: 9px;
+    font-size: 16px;
+    color: #999;
   }
 
   span {
@@ -64,6 +61,6 @@ export const FormContent = styled.div`
   flex-direction: column;
   margin-top: 30px;
   background: #fff;
-  padding: 20px;
+  padding: 25px;
   border-radius: 4px;
 `;
