@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 30px 80px;
+  padding: 30px 120px;
 
   table button {
     display: flex;
@@ -20,18 +20,18 @@ export const Container = styled.div`
   }
 `;
 
+export const Title = styled.h1`
+  font-size: 24px;
+  color: #444;
+  font-weight: bold;
+  margin-bottom: 35px;
+`;
+
 export const Toolbar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 10px;
-`;
-
-export const Title = styled.h1`
-  font-size: 18px;
-  color: #333;
-  font-weight: bold;
 `;
 
 export const Avatar = styled.img`

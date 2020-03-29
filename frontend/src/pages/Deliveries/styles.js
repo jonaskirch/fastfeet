@@ -28,18 +28,18 @@ export const Container = styled.div`
   }
 `;
 
-export const Toolbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 35px;
-  margin-bottom: 10px;
-`;
-
 export const Title = styled.h1`
   font-size: 24px;
   color: #444;
   font-weight: bold;
+  margin-bottom: 35px;
+`;
+
+export const Toolbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const Footer = styled.div`

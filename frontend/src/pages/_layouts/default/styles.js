@@ -27,6 +27,7 @@ export const Content = styled.div`
     }
 
     tbody td {
+      height: 57px;
       padding: 15px;
 
       &:first-child {

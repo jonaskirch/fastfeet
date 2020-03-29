@@ -101,7 +101,7 @@ export default function Problems() {
         <Title>Problemas na entrega</Title>
         {loading
           ? Array.from(new Array(20)).map((_, i) => (
-              <Skeleton key={i} height="80px" radius="5px" margin="20px 0" />
+              <Skeleton key={i} height="60px" radius="4px" margin="20px 0" />
             ))
           : renderTable()}
         <Footer>
