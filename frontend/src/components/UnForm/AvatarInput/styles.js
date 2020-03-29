@@ -13,8 +13,8 @@ export const Container = styled.div`
     }
 
     img {
-      height: 120px;
-      width: 120px;
+      height: 148px;
+      width: 148px;
       border-radius: 50%;
       border: 4px dotted ${colors.primary};
       background: #fff;
@@ -31,10 +31,23 @@ export const AddPhoto = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 120px;
-  width: 120px;
+  height: 148px;
+  width: 148px;
   border-radius: 50%;
   border: 4px dotted #ddd;
   background: #fff;
   color: #ddd;
+`;
+
+export const AvatarName = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 148px;
+  width: 148px;
+  border-radius: 50%;
+  border: 4px dotted #a28fd0;
+  background: #f4effc;
+  color: #a28fd0;
+  font-size: ${props => (props.nameSize > 3 ? 40 : 66)}px;
 `;
