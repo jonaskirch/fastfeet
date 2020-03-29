@@ -3,21 +3,22 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #fff;
   border: 1px solid #ddd;
-  padding: 0 20px;
+  padding: 0 30px;
+  height: 64px;
 
   div {
-    padding: 15px;
     display: flex;
     align-items: center;
 
     img {
-      width: 160px;
-      max-height: 100%;
-      padding-right: 20px;
+      max-width: 100%;
+      height: 26px;
+      padding-right: 30px;
       border-right: 1px solid #ddd;
-      margin-right: 20px;
+      margin-right: 30px;
     }
   }
 
@@ -31,14 +32,15 @@ export const Container = styled.div`
       font-size: 14px;
       font-weight: bold;
       color: #666;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
 
     button {
-      font-size: 12px;
+      font-size: 14px;
       color: #de3b3b;
       border: 0;
       background: none;
+      margin-bottom: 15px;
     }
   }
 `;
@@ -47,6 +49,6 @@ export const MenuItem = styled.li`
   display: inline;
   color: ${props => (props.active ? '#444' : '#999')};
   margin-right: 15px;
-  font-size: 12;
+  font-size: 15px;
   font-weight: bold;
 `;

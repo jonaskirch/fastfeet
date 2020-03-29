@@ -11,30 +11,34 @@ export const Content = styled.div`
     border-collapse: separate;
     border-spacing: 0 20px;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
 
     thead th {
-      padding: 0 20px;
+      padding: 0 15px;
+      color: #444;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     tbody tr {
       background: #fff;
       color: #666;
+      font-size: 16px;
     }
 
     tbody td {
-      padding: 20px;
+      padding: 15px;
 
       &:first-child {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
       }
 
       &:last-child {
         width: 30px;
         margin: 0;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
 
         div {
           display: flex;

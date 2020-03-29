@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { signInRequest } from '~/store/modules/auth/actions';
-import Button from '~/components/Button';
 import logo from '~/assets/logo.png';
 
 const schema = Yup.object().shape({
@@ -31,9 +30,9 @@ export default function SignIn() {
         <label>SUA SENHA</label>
         <Input name="password" type="password" />
 
-        <Button type="submit">
+        <button type="submit">
           {loading ? 'Carregando...' : 'Entrar no sistema'}
-        </Button>
+        </button>
       </Form>
     </>
   );

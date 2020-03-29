@@ -24,14 +24,14 @@ export const Content = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 40px;
 
     label {
-      color: #333;
+      color: #444;
       text-align: left;
       font-weight: bold;
-      font-size: 12px;
-      margin-bottom: 8px;
+      font-size: 14px;
+      margin-bottom: 9px;
     }
 
     input {
@@ -39,17 +39,40 @@ export const Content = styled.div`
       border-radius: 4px;
       height: 40px;
       padding: 0 15px;
-      margin-bottom: 20px;
-
-      &::placeholder {
-        color: #999;
-      }
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #999;
     }
 
     span {
       color: ${colors.error};
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       font-weight: bold;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 0;
+    padding: 10px 20px;
+    height: 45px;
+    background: ${colors.primary};
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${colors.primaryDark};
+    }
+
+    & > * {
+      margin: auto;
+      margin-right: 10px;
     }
   }
 `;

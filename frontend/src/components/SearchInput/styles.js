@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   border: 1px solid ${props => (props.active ? colors.primary : '#ddd')};
   border-radius: 4px;
+  height: 40px;
   padding: 10px;
   background: #fff;
   width: 300px;

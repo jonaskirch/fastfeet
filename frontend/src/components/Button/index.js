@@ -10,10 +10,12 @@ const Button = styled.button`
   width: ${props => props.fullWidth && '100%'};
   border: 0;
   padding: 10px 20px;
+  height: 36px;
   background: ${props => (props.color ? props.color : colors.primary)};
-  border-radius: 5px;
+  border-radius: 4px;
   color: #fff;
   font-weight: bold;
+  font-size: 14px;
   transition: background 0.2s;
 
   &:hover {
