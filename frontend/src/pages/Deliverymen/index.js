@@ -6,9 +6,10 @@ import api from '~/services/api';
 import Button from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
+import Avatar from '~/components/Avatar';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
-import { Container, Title, Toolbar, Avatar, Footer } from './styles';
+import { Container, Title, Toolbar, Footer } from './styles';
 
 export default function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
@@ -69,7 +70,11 @@ export default function Deliverymen() {
             <tr key={deliveryman.id}>
               <td>{deliveryman.id}</td>
               <td>
-                <Avatar src={deliveryman.avatar && deliveryman.avatar.url} />
+                <Avatar
+                  imageURL={deliveryman.avatar && deliveryman.avatar.url}
+                  name={deliveryman.name}
+                  size={32}
+                />
               </td>
               <td>{deliveryman.name}</td>
               <td>{deliveryman.email}</td>

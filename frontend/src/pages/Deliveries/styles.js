@@ -51,15 +51,10 @@ export const Footer = styled.div`
 export const Deliveryman = styled.div`
   display: flex;
   align-items: center;
-`;
 
-export const Avatar = styled.img`
-  background: #ddd;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  border: 0;
-  margin-right: 5px;
+  p {
+    margin-left: 5px;
+  }
 `;
 
 export const Status = styled.div`

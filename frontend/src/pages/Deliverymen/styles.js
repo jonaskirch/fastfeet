@@ -34,14 +34,6 @@ export const Toolbar = styled.div`
   margin-bottom: 10px;
 `;
 
-export const Avatar = styled.img`
-  background: #ddd;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  border: 0;
-`;
-
 export const Footer = styled.div`
   display: flex;
   justify-content: center;

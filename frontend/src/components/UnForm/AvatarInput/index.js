@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import { MdInsertPhoto } from 'react-icons/md';
+import Avatar from '~/components/Avatar';
 import api from '~/services/api';
 
-import { Container, AddPhoto, AvatarName } from './styles';
+import { Container, AddPhoto } from './styles';
 
 export default function AvatarInput() {
   const { defaultValue, registerField } = useField('avatar');
@@ -23,16 +24,6 @@ export default function AvatarInput() {
     }
   }, [ref, registerField]);
 
-  const initialsName = useMemo(() => {
-    if (!userName) return '';
-    const slices = userName.toUpperCase().split(' ');
-    const initials = slices.reduce((prev, current) => {
-      prev += current.substr(0, 1);
-      return prev;
-    }, '');
-    return initials;
-  }, [userName]);
-
   async function handleChange(e) {
     const data = new FormData();
     data.append('file', e.target.files[0]);
@@ -43,12 +34,10 @@ export default function AvatarInput() {
   }
 
   return (
-    <Container>
+    <Container avatarExists={preview || userName}>
       <label htmlFor="avatar">
-        {preview ? (
-          <img src={preview} alt="" />
-        ) : userName ? (
-          <AvatarName nameSize={initialsName.length}>{initialsName}</AvatarName>
+        {preview || userName ? (
+          <Avatar size={148} imageUri={preview} name={userName} />
         ) : (
           <AddPhoto>
             <MdInsertPhoto color="#ddd" size={40} />

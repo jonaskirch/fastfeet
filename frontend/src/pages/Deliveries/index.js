@@ -14,6 +14,7 @@ import api from '~/services/api';
 import Button from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
+import Avatar from '~/components/Avatar';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
 import Modal from '~/components/Modal';
@@ -23,7 +24,6 @@ import {
   Toolbar,
   Footer,
   Deliveryman,
-  Avatar,
   Status,
   FilterButton,
   ModalStyle,
@@ -98,12 +98,14 @@ export default function Deliveries() {
               <td>
                 <Deliveryman>
                   <Avatar
-                    src={
+                    size={32}
+                    imageURL={
                       delivery.deliveryman.avatar &&
                       delivery.deliveryman.avatar.url
                     }
+                    name={delivery.deliveryman.name}
                   />
-                  {delivery.deliveryman.name}
+                  <p>{delivery.deliveryman.name}</p>
                 </Deliveryman>
               </td>
               <td>{delivery.recipient.city}</td>
