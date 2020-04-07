@@ -23,13 +23,9 @@ export default function SignIn() {
   return (
     <>
       <img src={logo} alt="FastFeet" />
-
       <Form schema={schema} onSubmit={handleSubmit}>
-        <label>SEU E-MAIL</label>
-        <Input name="email" type="email" />
-        <label>SUA SENHA</label>
-        <Input name="password" type="password" />
-
+        <Input name="email" type="email" label="SEU E-MAIL 1" />
+        <Input name="password" type="password" label="SUA SENHA" />
         <button type="submit">
           {loading ? 'Carregando...' : 'Entrar no sistema'}
         </button>

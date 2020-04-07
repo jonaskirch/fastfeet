@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Yup from 'yup';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import Button from '~/components/Button';
 
@@ -39,8 +40,8 @@ export default function RegisterForm({
 
 RegisterForm.propTypes = {
   title: PropTypes.string.isRequired,
-  initialData: PropTypes.shape.isRequired,
-  schema: PropTypes.shape.isRequired,
+  initialData: PropTypes.shape({}).isRequired,
+  schema: PropTypes.instanceOf(Yup.object).isRequired,
   onSubmit: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
