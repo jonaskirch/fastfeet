@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Container } from './styles';
+import {
+  MdFirstPage,
+  MdChevronLeft,
+  MdChevronRight,
+  MdLastPage,
+} from 'react-icons/md';
+import { Container, Button } from './styles';
 
 export default function Paginator({
   activePage,
@@ -10,11 +15,9 @@ export default function Paginator({
   onChange,
 }) {
   const totalPages = Math.ceil(totalRecords / limitPage);
-
+  // calculate pages of exibition in paginator bar (max 5 pages, current page in middle)
   let pages = Array.from(Array(totalPages).keys()).map(x => x + 1);
-
   const slice = 4;
-
   if (activePage <= slice) pages = pages.slice(0, slice * 2 + 1);
   else if (activePage >= totalPages - slice)
     pages = pages.slice(totalPages - slice - slice - 1, totalPages);
@@ -26,55 +29,47 @@ export default function Paginator({
     <Container>
       <ul>
         <li>
-          <button
-            type="button"
-            onClick={() => onChange(1)}
-            disabled={activePage === 1}
-          >
-            {'<<'}
-          </button>
+          <Button onClick={() => onChange(1)} disabled={activePage === 1}>
+            <MdFirstPage size={20} />
+          </Button>
         </li>
 
         <li>
-          <button
-            type="button"
+          <Button
             onClick={() => onChange(activePage - 1)}
             disabled={activePage === 1}
           >
-            {'<'}
-          </button>
+            <MdChevronLeft size={20} />
+          </Button>
         </li>
 
         {pages.map(page => (
           <li key={page}>
-            <button
-              type="button"
+            <Button
               onClick={e => onChange(parseInt(e.target.innerText, 10))}
-              className={activePage === page ? 'active' : ''}
+              active={activePage === page}
             >
               {page}
-            </button>
+            </Button>
           </li>
         ))}
 
         <li>
-          <button
-            type="button"
+          <Button
             onClick={() => onChange(activePage + 1)}
             disabled={activePage === totalPages}
           >
-            {'>'}
-          </button>
+            <MdChevronRight size={20} />
+          </Button>
         </li>
 
         <li>
-          <button
-            type="button"
+          <Button
             onClick={() => onChange(totalPages)}
             disabled={activePage === totalPages}
           >
-            {'>>'}
-          </button>
+            <MdLastPage size={20} />
+          </Button>
         </li>
       </ul>
     </Container>

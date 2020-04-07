@@ -22,6 +22,7 @@ import {
   Container,
   Title,
   Toolbar,
+  Checkbox,
   Footer,
   Deliveryman,
   Status,
@@ -159,6 +160,18 @@ export default function Deliveries() {
             placeholder="Busca por encomendas"
             onSearch={newSearch => setSearch(newSearch)}
           />
+          {/* <Checkbox>
+            <label htmlFor="filterInput">
+              <input
+                id="filterInput"
+                type="checkbox"
+                checked={filter}
+                onChange={() => setFilter(!filter)}
+              />
+              <span />
+              <p>Entregas com problemas</p>
+            </label>
+          </Checkbox> */}
           <FilterButton active={filter} onClick={() => setFilter(!filter)}>
             <MdFilterList size={18} />
             {filter

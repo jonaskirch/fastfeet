@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 20px;
 
   ul {
-    display: inline-block;
+    display: flex;
     list-style: none;
     border: 1px solid black;
     border-radius: 3px;
@@ -17,27 +17,26 @@ export const Container = styled.div`
   li {
     display: inline;
   }
+`;
 
-  button {
-    height: 50px;
-    width: 50px;
+export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: ${props => (props.active ? colors.primary : '#eee')};
+  border: 1px solid black;
+
+  :hover {
+    background-color: ${lighten(0.2, colors.primary)};
+  }
+
+  :disabled {
     background-color: #eee;
-    border: 1px solid black;
   }
 
-  button:hover {
-    background-color: ${lighten(0.3, colors.primary)};
-  }
-
-  button.active {
-    background-color: ${colors.primary};
-  }
-
-  button:disabled {
-    background-color: #eee;
-  }
-
-  button:disabled:hover {
+  :disabled:hover {
     background-color: #eee;
   }
 `;
