@@ -14,18 +14,24 @@ export const Container = styled.div`
 
   table button {
     display: flex;
+    align-items: center;
     border: 0;
     background: none;
     color: #999;
-
-    & > * {
-      margin-right: 5px;
-    }
+    height: 100%;
+    width: 100%;
 
     &:hover {
       color: #666;
       font-weight: bold;
     }
+  }
+
+  table a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
 `;
 
@@ -164,6 +170,8 @@ export const FilterButton = styled.div`
 `;
 
 export const ModalStyle = styled.div`
+  min-width: 400px;
+
   span {
     display: block;
     margin-bottom: 10px;
@@ -182,6 +190,7 @@ export const ModalStyle = styled.div`
   }
 
   img {
+    height: 250px;
     width: 400px;
   }
 `;

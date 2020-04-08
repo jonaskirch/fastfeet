@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { MdMoreHoriz } from 'react-icons/md';
-import { Container, MenuList, Item } from './styles';
+import { Container, Button, MenuList, Item } from './styles';
 
 export function MenuItem({ children }) {
   return <Item>{children}</Item>;
@@ -24,11 +24,9 @@ export default function MenuButton({ children }) {
 
   return (
     <Container>
-      <MdMoreHoriz
-        color="#999"
-        size={20}
-        onClick={() => setMenuOpen(!menuOpen)}
-      />
+      <Button onClick={() => setMenuOpen(!menuOpen)}>
+        <MdMoreHoriz color="#999" size={20} />
+      </Button>
       <MenuList visible={menuOpen}>{children}</MenuList>
     </Container>
   );

@@ -5,18 +5,24 @@ export const Container = styled.div`
 
   table button {
     display: flex;
+    align-items: center;
     border: 0;
     background: none;
     color: #999;
-
-    & > * {
-      margin-right: 5px;
-    }
+    height: 100%;
+    width: 100%;
 
     &:hover {
       color: #666;
       font-weight: bold;
     }
+  }
+
+  table a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
 `;
 

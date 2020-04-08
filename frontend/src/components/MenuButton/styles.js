@@ -4,11 +4,32 @@ export const Container = styled.div`
   position: relative;
   margin: 0;
   padding: 0;
+  height: 35px;
+  width: 35px;
 
   div {
     margin: 0;
     padding: 0;
     display: inline;
+  }
+`;
+
+export const Button = styled.button`
+  border: 0;
+  background: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: #eee;
+  }
+
+  svg {
+    margin-right: 0;
   }
 `;
 
@@ -40,9 +61,8 @@ export const MenuList = styled.ul`
 export const Item = styled.li`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
   color: #999;
+  height: 35px;
   border-bottom: 1px solid #ddd;
 
   &:last-child {

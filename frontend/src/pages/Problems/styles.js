@@ -8,15 +8,20 @@ export const Container = styled.div`
     border: 0;
     background: none;
     color: #999;
-
-    & > * {
-      margin-right: 5px;
-    }
+    height: 100%;
+    width: 100%;
 
     &:hover {
       color: #666;
       font-weight: bold;
     }
+  }
+
+  table a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
 `;
 
@@ -41,6 +46,7 @@ export const Footer = styled.div`
 `;
 
 export const ModalStyle = styled.div`
+  min-width: 600px;
   span {
     display: block;
     margin-bottom: 10px;

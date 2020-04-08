@@ -5,7 +5,17 @@ import { Wrapper, Container } from './styles';
 
 export default function Modal({ onCloseRequest, children }) {
   return (
-    <Wrapper onClick={onCloseRequest}>
+    <Wrapper
+      onClick={e => {
+        if (e.target === e.currentTarget) {
+          onCloseRequest();
+        }
+      }}
+      onKeyDown={e => {
+        if (e.key === 'Escape') onCloseRequest();
+      }}
+      tabIndex="0"
+    >
       <Container>{children}</Container>
     </Wrapper>
   );

@@ -49,7 +49,7 @@ export default function Deliveries() {
         const resp = await api.get('deliveries', {
           params: {
             page,
-            name: search,
+            product: search,
             onlyproblems: filter,
           },
         });
@@ -227,12 +227,16 @@ export default function Deliveries() {
                   'dd/MM/yyyy'
                 )}
             </p>
-            <hr />
-            <span>Assinatura do destinatário</span>
-            <img
-              src={delivery.signature && delivery.signature.url}
-              alt="assinatura"
-            />
+            {delivery.signature && (
+              <>
+                <hr />
+                <span>Assinatura do destinatário</span>
+                <img
+                  src={delivery.signature && delivery.signature.url}
+                  alt="assinatura"
+                />
+              </>
+            )}
           </ModalStyle>
         </Modal>
       )}
