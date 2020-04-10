@@ -41,12 +41,12 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    // await Queue.add(NewDeliveryMail.key, {
-    //   date: delivery.createdAt,
-    //   product: delivery.product,
-    //   recipient,
-    //   deliveryman,
-    // });
+    await Queue.add(NewDeliveryMail.key, {
+      date: delivery.createdAt,
+      product: delivery.product,
+      recipient,
+      deliveryman,
+    });
 
     return res.json(delivery);
   }
@@ -189,11 +189,6 @@ class DeliveryController {
       ],
     });
     return res.json(delivery);
-    // return res.json({
-    //   recipient_id: delivery.recipient.id,
-    //   deliveryman_id: delivery.deliveryman.id,
-    //   product: delivery.product,
-    // });
   }
 
   async delete(req, res) {
