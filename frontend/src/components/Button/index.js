@@ -9,7 +9,7 @@ const Button = styled.button`
   align-items: center;
   width: ${props => props.fullWidth && '100%'};
   border: 0;
-  padding: 10px 20px;
+  padding: 0 20px;
   height: 36px;
   background: ${props => (props.color ? props.color : colors.primary)};
   border-radius: 4px;
@@ -24,7 +24,6 @@ const Button = styled.button`
   }
 
   & > * {
-    margin: auto;
     margin-right: 10px;
   }
 `;

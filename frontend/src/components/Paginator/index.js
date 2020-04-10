@@ -23,7 +23,7 @@ export default function Paginator({
     pages = pages.slice(totalPages - slice - slice - 1, totalPages);
   else pages = pages.slice(activePage - slice - 1, activePage + slice);
 
-  // if (totalPages <= 1) return null;
+  if (totalPages < 1) return null;
 
   return (
     <Container>
@@ -57,7 +57,7 @@ export default function Paginator({
         <li>
           <Button
             onClick={() => onChange(activePage + 1)}
-            disabled={activePage >= totalPages}
+            disabled={activePage === totalPages}
           >
             <MdChevronRight size={20} />
           </Button>
@@ -66,7 +66,7 @@ export default function Paginator({
         <li>
           <Button
             onClick={() => onChange(totalPages)}
-            disabled={activePage >= totalPages}
+            disabled={activePage === totalPages}
           >
             <MdLastPage size={20} />
           </Button>

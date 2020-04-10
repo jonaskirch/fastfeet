@@ -6,14 +6,16 @@ import MenuButton, { MenuItem } from '~/components/MenuButton';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
 import Modal from '~/components/Modal';
+import EmptyContainer from '~/components/EmptyContainer';
+
 import { Container, Title, Footer, ModalStyle } from './styles';
 
 export default function Problems() {
-  const [problems, setProblems] = useState([]);
+  const [problems, setProblems] = useState(null);
   const [page, setPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [problem, setProblem] = useState('');
+  const [problemView, setProblemView] = useState('');
 
   useEffect(() => {
     async function loadProblems() {
@@ -51,6 +53,9 @@ export default function Problems() {
   }
 
   function renderTable() {
+    if (!problems) return null;
+    if (problems.length === 0) return <EmptyContainer />;
+
     return (
       <table>
         <thead>
@@ -71,7 +76,7 @@ export default function Problems() {
                     <MenuItem>
                       <button
                         type="button"
-                        onClick={() => setProblem(problem.description)}
+                        onClick={() => setProblemView(problem.description)}
                       >
                         <MdRemoveRedEye color="#666" size={18} />
                         Visualizar
@@ -114,11 +119,11 @@ export default function Problems() {
           />
         </Footer>
       </Container>
-      {problem && (
-        <Modal onCloseRequest={() => setProblem('')}>
+      {problemView && (
+        <Modal onCloseRequest={() => setProblemView('')}>
           <ModalStyle>
             <span>VISUALZIAR PROBLEMA</span>
-            <p>{problem}</p>
+            <p>{problemView}</p>
           </ModalStyle>
         </Modal>
       )}

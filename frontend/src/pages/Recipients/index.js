@@ -8,10 +8,11 @@ import SearchInput from '~/components/SearchInput';
 import MenuButton, { MenuItem } from '~/components/MenuButton';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
+import EmptyContainer from '~/components/EmptyContainer';
 import { Container, Title, Toolbar, Footer } from './styles';
 
 export default function Recipients() {
-  const [recipients, setRecipients] = useState([]);
+  const [recipients, setRecipients] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [totalRecords, setTotalRecords] = useState(0);
@@ -54,6 +55,9 @@ export default function Recipients() {
   }
 
   function renderTable() {
+    if (!recipients) return null;
+    if (recipients.length === 0) return <EmptyContainer />;
+
     return (
       <table>
         <thead>

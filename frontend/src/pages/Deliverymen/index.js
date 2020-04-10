@@ -9,10 +9,11 @@ import MenuButton, { MenuItem } from '~/components/MenuButton';
 import Avatar from '~/components/Avatar';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
+import EmptyContainer from '~/components/EmptyContainer';
 import { Container, Title, Toolbar, Footer } from './styles';
 
 export default function Deliverymen() {
-  const [deliverymen, setDeliverymen] = useState([]);
+  const [deliverymen, setDeliverymen] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [totalRecords, setTotalRecords] = useState(0);
@@ -55,6 +56,9 @@ export default function Deliverymen() {
   }
 
   function renderTable() {
+    if (!deliverymen) return null;
+    if (deliverymen.length === 0) return <EmptyContainer />;
+
     return (
       <table>
         <thead>

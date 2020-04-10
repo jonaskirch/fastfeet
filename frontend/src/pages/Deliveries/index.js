@@ -18,11 +18,12 @@ import Avatar from '~/components/Avatar';
 import Skeleton from '~/components/Skeleton';
 import Pagination from '~/components/Paginator';
 import Modal from '~/components/Modal';
+import EmptyContainer from '~/components/EmptyContainer';
+
 import {
   Container,
   Title,
   Toolbar,
-  Checkbox,
   Footer,
   Deliveryman,
   Status,
@@ -33,14 +34,14 @@ import {
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export default function Deliveries() {
-  const [deliveries, setDeliveries] = useState([]);
+  const [deliveries, setDeliveries] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState(false);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const [delivery, setDelivery] = useState(null);
+  const [deliveryView, setDeliveryView] = useState(null);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -65,12 +66,12 @@ export default function Deliveries() {
     loadDeliveries();
   }, [page, search, filter]);
 
-  async function handleDelete(delivery) {
+  async function handleDelete(deliveryId) {
     if (window.confirm('Deseja realmente excluir este registro?')) {
       try {
-        const resp = await api.delete(`/deliveryies/${delivery.id}`);
+        const resp = await api.delete(`/deliveryies/${deliveryId}`);
         const { id } = resp.data;
-        const newList = delivery.filter(d => Number(d.id) !== Number(id));
+        const newList = deliveries.filter(d => Number(d.id) !== Number(id));
         setDeliveries(newList);
       } catch {
         toast.error('Falha ao excluir encomenda');
@@ -79,6 +80,9 @@ export default function Deliveries() {
   }
 
   function renderTable() {
+    if (!deliveries) return null;
+    if (deliveries.length === 0) return <EmptyContainer />;
+
     return (
       <table>
         <thead>
@@ -121,7 +125,7 @@ export default function Deliveries() {
                     <MenuItem>
                       <button
                         type="button"
-                        onClick={() => setDelivery(delivery)}
+                        onClick={() => setDeliveryView(delivery)}
                       >
                         <MdRemoveRedEye color="#666" size={18} />
                         Visualizar
@@ -136,7 +140,7 @@ export default function Deliveries() {
                     <MenuItem>
                       <button
                         type="button"
-                        onClick={() => handleDelete(delivery)}
+                        onClick={() => handleDelete(delivery.id)}
                       >
                         <MdDeleteForever color="#DE3B3B" size={18} />
                         Excluir
@@ -161,18 +165,6 @@ export default function Deliveries() {
             placeholder="Busca por encomendas"
             onSearch={newSearch => setSearch(newSearch)}
           />
-          {/* <Checkbox>
-            <label htmlFor="filterInput">
-              <input
-                id="filterInput"
-                type="checkbox"
-                checked={filter}
-                onChange={() => setFilter(!filter)}
-              />
-              <span />
-              <p>Entregas com problemas</p>
-            </label>
-          </Checkbox> */}
           <FilterButton active={filter} onClick={() => setFilter(!filter)}>
             <MdFilterList size={18} />
             {filter
@@ -198,42 +190,43 @@ export default function Deliveries() {
           />
         </Footer>
       </Container>
-      {delivery && (
-        <Modal onCloseRequest={() => setDelivery(null)}>
+      {deliveryView && (
+        <Modal onCloseRequest={() => setDeliveryView(null)}>
           <ModalStyle>
             <span>Informações da encomenda</span>
             <p>
-              {delivery.recipient.street}
-              {delivery.recipient.number && ` ,${delivery.recipient.number}`}
-              {delivery.recipient.complement &&
-                ` -${delivery.recipient.complement}`}
+              {deliveryView.recipient.street}
+              {deliveryView.recipient.number &&
+                ` ,${deliveryView.recipient.number}`}
+              {deliveryView.recipient.complement &&
+                ` -${deliveryView.recipient.complement}`}
             </p>
-            <p>{`${delivery.recipient.city} - ${delivery.recipient.state}`}</p>
-            <p>{delivery.recipient.zipcode}</p>
+            <p>{`${deliveryView.recipient.city} - ${deliveryView.recipient.state}`}</p>
+            <p>{deliveryView.recipient.zipcode}</p>
             <hr />
             <span>Datas</span>
             <p>
               <strong>Retirada:</strong>
-              {delivery.start_date &&
+              {deliveryView.start_date &&
                 format(
-                  utcToZonedTime(parseISO(delivery.start_date), timezone),
+                  utcToZonedTime(parseISO(deliveryView.start_date), timezone),
                   'dd/MM/yyyy'
                 )}
             </p>
             <p>
               <strong>Entrega:</strong>
-              {delivery.end_date &&
+              {deliveryView.end_date &&
                 format(
-                  utcToZonedTime(parseISO(delivery.end_date), timezone),
+                  utcToZonedTime(parseISO(deliveryView.end_date), timezone),
                   'dd/MM/yyyy'
                 )}
             </p>
-            {delivery.signature && (
+            {deliveryView.signature && (
               <>
                 <hr />
                 <span>Assinatura do destinatário</span>
                 <img
-                  src={delivery.signature && delivery.signature.url}
+                  src={deliveryView.signature && deliveryView.signature.url}
                   alt="assinatura"
                 />
               </>
