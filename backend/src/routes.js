@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
-// import UserController from './app/controllers/UserController';
+import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import DeliverymanController from './app/controllers/DeliverymanController';
@@ -23,39 +23,38 @@ const upload = multer(multerConfig);
 /*
   Routes without authentication
 */
-// routes.post('/users', UserController.store);
+routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
-// entregador visualiza suas entregas abertas e não canceladas
+/*
+  Routes without authentication (used by deliveryman in mobile app)
+*/
+// Deliveryman view yours deliveries start and not cancelled
 routes.get('/deliverymen/:id/deliveries', DeliverymanDeliveryController.index);
-// entregador visualiza suas entregas finalizadas
+// Deliveryman view yours delivered
 routes.get('/deliverymen/:id/delivered', DeliverymanDeliveredController.index);
-// entregador inicia entrega
+// Deliveryman start the delivery
 routes.post('/deliveries/:id/start', DeliveryStartController.store);
-// entregador finaliza entrega
+// Deliveryman end the delivery
 routes.post('/deliveries/:id/end', DeliveryEndController.store);
-// adicionar problemas na entrega de uma encomenda
+// Deliveryman can add problem in some delivery
 routes.post('/deliveries/:id/problems', DeliveryProblemController.store);
-// visualizar problemas na entrega de uma encomenda
+// Deliveryman can view the problems in some delivery
 routes.get('/deliveries/:id/problems', DeliveryProblemController.index);
 
 routes.get('/deliverymen/:id', DeliverymanController.show);
-
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.use(authMiddleware);
 
 /*
-  Routes with authentication
+  Routes with authentication (used by administrators)
 */
-
-// visualziar todas as entregas com problemas
+routes.put('/users', UserController.update);
+// View all deliveries with problems
 routes.get('/deliveries/problems', DeliveryWithProblemController.index);
-
-// cancelar encomenda com base em um problema
+// Cancel the delivery with some problem
 routes.post('/problem/:id/canceldelivery', DeliveryCancelController.store);
-
-// routes.put('/users', UserController.update);
 
 routes.get('/recipients', RecipientController.index);
 routes.get('/recipients/:id', RecipientController.show);
