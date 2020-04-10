@@ -44,9 +44,9 @@ export default function Recipients() {
   async function handleDelete(recipient) {
     if (window.confirm('Deseja realmente excluir este registro?')) {
       try {
-        const resp = await api.delete(`/deliverymen/${recipient.id}`);
+        const resp = await api.delete(`/recipients/${recipient.id}`);
         const { id } = resp.data;
-        const newList = recipient.filter(d => Number(d.id) !== Number(id));
+        const newList = recipients.filter(d => Number(d.id) !== Number(id));
         setRecipients(newList);
       } catch {
         toast.error('Falha ao excluir destinatário');

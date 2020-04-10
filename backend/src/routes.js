@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
-import UserController from './app/controllers/UserController';
+// import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import DeliverymanController from './app/controllers/DeliverymanController';
@@ -20,7 +20,10 @@ import authMiddleware from './app/middlewares/auth';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', UserController.store);
+/*
+  Routes without authentication
+*/
+// routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
 // entregador visualiza suas entregas abertas e não canceladas
@@ -42,17 +45,23 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.use(authMiddleware);
 
+/*
+  Routes with authentication
+*/
+
 // visualziar todas as entregas com problemas
 routes.get('/deliveries/problems', DeliveryWithProblemController.index);
 
 // cancelar encomenda com base em um problema
 routes.post('/problem/:id/canceldelivery', DeliveryCancelController.store);
 
-routes.put('/users', UserController.update);
+// routes.put('/users', UserController.update);
+
 routes.get('/recipients', RecipientController.index);
 routes.get('/recipients/:id', RecipientController.show);
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
+routes.delete('/recipients/:id', RecipientController.delete);
 
 routes.post('/deliverymen', DeliverymanController.store);
 routes.put('/deliverymen/:id', DeliverymanController.update);
