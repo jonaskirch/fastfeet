@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
 import MaskInput from '~/components/UnForm/MaskInput';
+import Input from '~/components/UnForm/Input';
 
 import { Row } from './styles';
 

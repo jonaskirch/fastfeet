@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import ReactInputMask from 'react-input-mask';
-
 import { useField } from '@rocketseat/unform';
+import { InputMask } from './styles';
 
 export default function MaskInput({ name, label, ...rest }) {
   const inputRef = useRef(null);
@@ -13,7 +12,7 @@ export default function MaskInput({ name, label, ...rest }) {
       ref: inputRef.current,
       path: 'value',
       setValue(ref, value) {
-        ref.setInputValue('');
+        ref.setInputValue(value);
       },
       clearValue(ref) {
         ref.setInputValue('');
@@ -24,7 +23,7 @@ export default function MaskInput({ name, label, ...rest }) {
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <ReactInputMask ref={inputRef} defaultValue={defaultValue} {...rest} />
+      <InputMask ref={inputRef} defaultValue={defaultValue} {...rest} />
       {error && <span className="error">{error}</span>}
     </>
   );

@@ -1,38 +1,22 @@
 import React, { useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import AsyncSelect from 'react-select/async';
-import { lighten } from 'polished';
 import colors from '~/styles/colors';
 
 const customStyles = {
-  container: (provided, state) => ({
+  control: provided => ({
     ...provided,
+    height: 45,
+    marginBottom: 9,
     marginTop: 9,
-    marginBottom: 20,
-    height: 35,
   }),
-  input: (provided, state) => ({
+  input: provided => ({
     ...provided,
-    height: 35,
-    display: 'flex',
-    alignItems: 'center',
     color: '#999',
   }),
-  singleValue: (provided, state) => ({
+  singleValue: provided => ({
     ...provided,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     color: '#999',
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    background: state.isSelected
-      ? colors.primary
-      : state.isFocused
-      ? lighten(0.3, colors.primary)
-      : null,
-    color: state.isSelected ? '#FFF' : state.isFocused ? '#444' : '#999',
   }),
 };
 
@@ -52,27 +36,28 @@ export default function Input({ name, label, ...rest }) {
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
-
-      <AsyncSelect
-        id={fieldName}
-        ref={inputRef}
-        // cacheOptions
-        defaultOptions
-        styles={customStyles}
-        placeholder="Selecione..."
-        noOptionsMessage={() => 'Sem opções disponíveis'}
-        theme={theme => ({
-          ...theme,
-          colors: {
-            ...theme.colors,
-            primary75: colors.primary,
-            primary50: colors.primary,
-            primary25: colors.primary,
-            primary: colors.primary,
-          },
-        })}
-        {...rest}
-      />
+      <div>
+        <AsyncSelect
+          id={fieldName}
+          ref={inputRef}
+          // cacheOptions
+          defaultOptions
+          styles={customStyles}
+          placeholder="Selecione..."
+          noOptionsMessage={() => 'Sem opções disponíveis'}
+          theme={theme => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary75: colors.primary75,
+              primary50: colors.primary50,
+              primary25: colors.primary25,
+              primary: colors.primary,
+            },
+          })}
+          {...rest}
+        />
+      </div>
 
       {error && <span className="error">{error}</span>}
     </>

@@ -38,17 +38,6 @@ export const Form = styled(Unform)`
     margin-bottom: 9px;
   }
 
-  input {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    height: 45px;
-    padding: 0 15px;
-    width: 100%;
-    margin-bottom: 9px;
-    font-size: 16px;
-    color: #999;
-  }
-
   span {
     color: ${colors.error};
     margin-bottom: 10px;
