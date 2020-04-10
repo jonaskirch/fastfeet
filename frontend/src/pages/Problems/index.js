@@ -27,6 +27,7 @@ export default function Problems() {
         const { total, records } = resp.data;
         setTotalRecords(total);
         setProblems(records);
+        window.scrollTo(0, 0);
       } finally {
         setLoading(false);
       }

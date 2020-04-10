@@ -32,6 +32,7 @@ export default function Deliverymen() {
         const { total, records } = resp.data;
         setTotalRecords(total);
         setDeliverymen(records);
+        window.scrollTo(0, 0);
       } finally {
         setLoading(false);
       }

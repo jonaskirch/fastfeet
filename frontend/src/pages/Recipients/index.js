@@ -31,6 +31,7 @@ export default function Recipients() {
         const { total, records } = resp.data;
         setTotalRecords(total);
         setRecipients(records);
+        window.scrollTo(0, 0);
       } finally {
         setLoading(false);
       }

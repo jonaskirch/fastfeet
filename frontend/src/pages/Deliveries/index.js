@@ -56,6 +56,7 @@ export default function Deliveries() {
         const { total, records } = resp.data;
         setTotalRecords(total);
         setDeliveries(records);
+        window.scrollTo(0, 0);
       } finally {
         setLoading(false);
       }

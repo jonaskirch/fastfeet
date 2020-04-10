@@ -36,7 +36,7 @@ const customStyles = {
   }),
 };
 
-export default function Input({ name, label, loadOptions, ...rest }) {
+export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
 
   const { fieldName, registerField, error } = useField(name);
@@ -56,9 +56,8 @@ export default function Input({ name, label, loadOptions, ...rest }) {
       <AsyncSelect
         id={fieldName}
         ref={inputRef}
-        cacheOptions
+        // cacheOptions
         defaultOptions
-        loadOptions={loadOptions}
         styles={customStyles}
         placeholder="Selecione..."
         noOptionsMessage={() => 'Sem opções disponíveis'}

@@ -57,7 +57,7 @@ export default function Paginator({
         <li>
           <Button
             onClick={() => onChange(activePage + 1)}
-            disabled={activePage === totalPages}
+            disabled={activePage >= totalPages}
           >
             <MdChevronRight size={20} />
           </Button>
@@ -66,7 +66,7 @@ export default function Paginator({
         <li>
           <Button
             onClick={() => onChange(totalPages)}
-            disabled={activePage === totalPages}
+            disabled={activePage >= totalPages}
           >
             <MdLastPage size={20} />
           </Button>
