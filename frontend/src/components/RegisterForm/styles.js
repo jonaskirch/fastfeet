@@ -24,6 +24,7 @@ export const Title = styled.h1`
 
 export const Toolbar = styled.div`
   display: flex;
+  flex-direction: row-reverse;
 
   * {
     margin-left: 10px;

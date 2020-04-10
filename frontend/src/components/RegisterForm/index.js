@@ -22,13 +22,13 @@ export default function RegisterForm({
         <Header>
           <Title>{title}</Title>
           <Toolbar>
-            <Button onClick={onBack}>
-              <MdKeyboardArrowLeft color="#FFF" size={18} />
-              VOLTAR
-            </Button>
             <Button type="submit">
               <MdDone color="#FFF" size={18} />
               SALVAR
+            </Button>
+            <Button onClick={onBack}>
+              <MdKeyboardArrowLeft color="#FFF" size={18} />
+              VOLTAR
             </Button>
           </Toolbar>
         </Header>

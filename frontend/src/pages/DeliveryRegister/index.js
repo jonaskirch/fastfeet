@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 import RegisterForm from '~/components/RegisterForm';
+import Input from '~/components/UnForm/Input';
 import AsyncSelectInput from '~/components/UnForm/AsyncSelectInput';
 
 import { Row } from './styles';
@@ -12,18 +12,15 @@ import { Row } from './styles';
 const schema = Yup.object().shape({
   recipient_id: Yup.number()
     .integer()
-    .required('O produto é obrigatório'),
+    .required('O destinatário é obrigatório'),
   deliveryman_id: Yup.number()
     .integer()
-    .required('O produto é obrigatório'),
+    .required('O entregador é obrigatório'),
   product: Yup.string().required('O produto é obrigatório'),
 });
 
 export default function DeliveryRegister() {
   const [delivery, setDelivery] = useState(null);
-  const [recipientSelect, setRecipientSelect] = useState();
-  const [deliverymanSelect, setDeliverymanSelect] = useState();
-
   const { id } = useParams();
   const history = useHistory();
 
@@ -31,20 +28,7 @@ export default function DeliveryRegister() {
     async function loadDelivery() {
       if (id) {
         const resp = await api.get(`/deliveries/${id}`);
-        const { product, recipient, deliveryman } = resp.data;
-        setDelivery({
-          recipient_id: recipient.id,
-          deliveryman_id: deliveryman.id,
-          product,
-        });
-        setRecipientSelect({
-          value: recipient.id,
-          label: recipient.name,
-        });
-        setDeliverymanSelect({
-          value: deliveryman.id,
-          label: deliveryman.name,
-        });
+        setDelivery(resp.data);
       } else {
         setDelivery({});
       }
@@ -55,20 +39,12 @@ export default function DeliveryRegister() {
 
   async function loadRecipients(name) {
     const resp = await api.get('/recipients', { params: { name } });
-    const data = resp.data.records.map(recipient => {
-      const { id: value, name: label } = recipient;
-      return { value, label };
-    });
-    return data;
+    return resp.data.records;
   }
 
   async function loadDeliverymen(name) {
     const resp = await api.get('/deliverymen', { params: { name } });
-    const data = resp.data.records.map(deliveryman => {
-      const { id: value, name: label } = deliveryman;
-      return { value, label };
-    });
-    return data;
+    return resp.data.records;
   }
 
   const loadRecipientsOptions = inputValue =>
@@ -94,6 +70,8 @@ export default function DeliveryRegister() {
     }
   }
 
+  if (!delivery) return null;
+
   return (
     <RegisterForm
       title={`${id ? 'Edição' : 'Cadastro'} de encomenda`}
@@ -107,8 +85,9 @@ export default function DeliveryRegister() {
           <AsyncSelectInput
             name="recipient_id"
             label="Destinatário"
-            value={recipientSelect}
-            onChange={newValue => setRecipientSelect(newValue)}
+            getOptionLabel={option => option.name}
+            getOptionValue={option => option.id}
+            defaultValue={delivery.recipient}
             loadOptions={loadRecipientsOptions}
           />
         </div>
@@ -116,8 +95,9 @@ export default function DeliveryRegister() {
           <AsyncSelectInput
             name="deliveryman_id"
             label="Entregador"
-            value={deliverymanSelect}
-            onChange={newValue => setDeliverymanSelect(newValue)}
+            getOptionLabel={option => option.name}
+            getOptionValue={option => option.id}
+            defaultValue={delivery.deliveryman}
             loadOptions={loadDeliverymenOptions}
           />
         </div>

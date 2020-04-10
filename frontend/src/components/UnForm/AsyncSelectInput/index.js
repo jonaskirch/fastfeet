@@ -29,7 +29,7 @@ export default function Input({ name, label, ...rest }) {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'select.state.value.value',
+      path: 'select.state.value.id',
     });
   }, [fieldName, registerField]);
 
