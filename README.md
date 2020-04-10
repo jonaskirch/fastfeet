@@ -3,12 +3,16 @@
 </h1>
 
 <h3 align="center">
-  Desafio 10: FastFeet, mobile
+  FastFeet - Gerenciador de Entregas
 </h3>
 
 <h3 align="center">
-  :warning: Etapa 4/4 do Desafio Final :warning:
+  Projeto final do bootcamp GoStack da RocketSeat.
 </h3>
+
+<h2>
+Metódo 1:
+</h2>
 
 <p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack, por isso é fundamental que ele seja feito com muito empenho!</p>
 
