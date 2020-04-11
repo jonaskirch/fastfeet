@@ -9,7 +9,6 @@
 <p align="center">
   <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#licença">Licença</a>
 </p>
 
 ## Projeto
@@ -27,14 +26,17 @@ Instalação via docker containers.
 
 2. Rode o comando abaixo para criar os container: 
  ```
- docker-composer up
+ docker-composer up -d
  ```
-
-3. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:migrate` para criar a base de dados;
-
-4. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:seed:all` para popular a base de dados; 
-
-4. Acesse a aplicação pelo endereço `http://localhost:3333`. Usuário: `admin@fastfeet.com` Senha: `123456`.
+3. Rode o comando abaixo para criar o banco de dados:
+```
+docker-compose run fastfeet-app yarn sequelize db:migrate
+```
+4. Rode o comando abaixo para criar o usurio padrão:
+```
+docker-compose run fastfeet-app yarn sequelize db:seed:all
+``` 
+5. Acesse a aplicação pelo endereço `http://localhost:3333`. Usuário: `admin@fastfeet.com` Senha: `123456`.
 
 ### Mobile
 
@@ -47,8 +49,3 @@ Instalação via docker containers.
 2. Rode o comando `yarn start`;
 
 3. Rode o comando `yarn android`.
-
-
-## Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
