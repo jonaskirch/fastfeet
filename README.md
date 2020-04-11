@@ -28,7 +28,7 @@ Instalação via docker containers.
  ```
  docker-compose up -d --build
  ```
-3. Rode o comando abaixo para criar o banco de dados:
+3. Rode o comando abaixo para criar as tabelas do banco de dados:
 ```
 docker-compose run fastfeet-app yarn sequelize db:migrate
 ```
