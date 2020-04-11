@@ -26,7 +26,7 @@ Instalação via docker containers.
 
 2. Rode o comando abaixo para criar os container: 
  ```
- docker-compose up -d
+ docker-compose up -d --build
  ```
 3. Rode o comando abaixo para criar o banco de dados:
 ```
