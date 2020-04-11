@@ -27,9 +27,9 @@ Instalação via docker containers.
 
 2. No diretório principal, rode o comando `docker-composer up` para criar os containers;
 
-3. Rode os comandos `xxxx` e `yyyyy` para criar e popular a base de dados; 
+3. Rode os comandos `docker-compose run fastfeet-app yarn sequelize db:migrate` e `docker-compose run fastfeet-app yarn sequelize db:seed:all` para criar e popular a base de dados; 
 
-4. Acesso a aplicação pelo endereço `xxxx`, usuário: `mmmm` senha: `nnnnn`.
+4. Acesso a aplicação pelo endereço `http://localhost:3333`, usuário: `admin@fastfeet.com` senha: `123456`.
 
 ### Mobile
 
