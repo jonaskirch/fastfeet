@@ -44,7 +44,7 @@ docker-compose run fastfeet-app yarn sequelize db:seed:all
 
 1. No diretório `mobile` rode o comando `yarn` para instalar as dependêcias;
 
-2. Copie o arquivo `.env.example` para `.env`;
+2. Copie o arquivo `.env.example` para `.env` e altere `localhost` para o `ip de sua máquina`;
 
 2. Rode o comando `yarn start`;
 
