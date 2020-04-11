@@ -21,11 +21,15 @@ Ele faz parte do desafio final do bootcamp GoStack da <a href="https://rocketsea
 
 ### Backend e frontend
 
-Antes de iniciar a parte web, **adicione as seguintes funcionalidades no back-end** da aplicação:
+Instalação via docker containers.
 
-1. Permita que a listagem de encomendas seja filtrada pelo nome do produto, recebendo um Query Parameter `?q=Piano` e buscando no banco encomendas com esse filtro (utilize os operadores `Like` ou `iLike`). Caso o parâmetro não seja passado, retorne todas as encomendas;
+1. No diretório `backend` copie o arquivo `.env.example` para `.env` e preenche as variaveis que faltam;
 
-2. Permita que a listagem de entregadores seja filtrada pelo nome do entregador, recebendo um Query Parameter `?q=John` e buscando no banco entregadores com esse filtro (utilize os operadores `Like` ou `iLike`). Caso o parâmetro não seja passado, retorne todos os entregadores;
+2. No diretório principal, rode o comando `docker-composer up` para criar os containers;
+
+3. Rode os comandos `xxxx` e `yyyyy` para criar e popular a base de dados; 
+
+4. Acesso a aplicação pelo endereço `xxxx`, usuário: `mmmm` senha: `nnnnn`.
 
 ### Mobile
 
