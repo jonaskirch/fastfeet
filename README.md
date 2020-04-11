@@ -23,9 +23,10 @@ Ele faz parte do desafio final do bootcamp GoStack da <a href="https://rocketsea
 
 Instalação via docker containers.
 
-1. No diretório `backend` copie o arquivo `.env.example` para `.env` e preenche as variaveis que faltam;
+1. Copie o arquivo `backend/.env.example` para `backend/.env` e preenche as variaveis que faltam;
 
-2. No diretório principal, rode o comando `docker-composer up` para criar os containers;
+2. Rode o comando abaixo para criar os container: 
+ ```docker-composer up```
 
 3. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:migrate` para criar a base de dados;
 
