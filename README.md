@@ -26,7 +26,9 @@ Instalação via docker containers.
 1. Copie o arquivo `backend/.env.example` para `backend/.env` e preenche as variaveis que faltam;
 
 2. Rode o comando abaixo para criar os container: 
- ```docker-composer up```
+ ```
+ docker-composer up
+ ```
 
 3. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:migrate` para criar a base de dados;
 
