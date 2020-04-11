@@ -35,11 +35,11 @@ Instalação via docker containers.
 
 ### Mobile
 
-**Testado somente no ambiente android**.
+**Obs: Testado somente no Android**.
 
-1. No diretório `mobile` rode o comando `yarn` para instalar as dependecias;
+1. No diretório `mobile` rode o comando `yarn` para instalar as dependêcias;
 
-2. Copie o arquivo `.env.example` para `.env`e altere as variaveis;
+2. Copie o arquivo `.env.example` para `.env`;
 
 2. Rode o comando `yarn start`;
 
