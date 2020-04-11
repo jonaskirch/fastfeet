@@ -6,70 +6,46 @@
   FastFeet - Gerenciador de Entregas
 </h3>
 
-<h3 align="center">
-  Projeto final do bootcamp GoStack da RocketSeat.
-</h3>
-
-<h2>
-  Instalação - Metódo 1:
-</h2>
-
-  
-<p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack, por isso é fundamental que ele seja feito com muito empenho!</p>
-
-<blockquote align="center">“O tempo que leva para realizar seus sonhos vai passar de qualquer forma”!</blockquote>
-
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-10?color=%2304D361" />
-
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361" />
-  </a>
-
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361" />
-
-  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-10/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat/bootcamp-gostack-desafio-10?style=social" />
-  </a>
+  <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
-</p>
+## Projeto
 
-## 🚀 Sobre o desafio
+Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamente de entregas.
+Ele faz parte do desafio final do bootcamp GoStack da <a href="https://rocketseat.com.br/" target="_blank">RocketSeat</a>.
 
-Durante esse desafio vamos construir o app mobile da aplicação FastFeet que criamos o back-end durante os desafios dos módulos 02 e 03 de Node.js e front-end no desafio do módulo 09 de ReactJS.
+## Instalação e Execução
 
-A versão mobile do projeto FastFeet representa a visão do entregador, ou seja, todas funcionalidades presentes nesse projeto são para entregadores.
+### Backend e frontend
 
-### Informações importantes
+Instalação via docker containers.
 
-1. Ao confirmar o recebimento da entrega, você deverá utilizar a biblioteca [React Native Camera](https://github.com/react-native-community/react-native-camera) para tirar uma foto da assinatura do destinatário.
+1. Copie o arquivo `backend/.env.example` para `backend/.env` e preenche as variaveis que faltam;
 
-### Opcionais
+2. Rode o comando abaixo para criar os container: 
+ ```
+ docker-composer up -d
+ ```
+3. Rode o comando abaixo para criar o banco de dados:
+```
+docker-compose run fastfeet-app yarn sequelize db:migrate
+```
+4. Rode o comando abaixo para criar o usurio padrão:
+```
+docker-compose run fastfeet-app yarn sequelize db:seed:all
+``` 
+5. Acesse a aplicação pelo endereço `http://localhost:3333`. Usuário: `admin@fastfeet.com` Senha: `123456`.
 
-1. Adicione scroll infinito com paginação na listagem de encomendas;
+### Mobile
 
-## 🎨 Layout
+**Obs: Testado somente no Android**.
 
-O layout do desafio está em anexo como um arquivo `.xd`.
+1. No diretório `mobile` rode o comando `yarn` para instalar as dependêcias;
 
-Caso esteja usando OS X / Windows você pode abrir esse utilizando o Adobe Xd.
+2. Copie o arquivo `.env.example` para `.env` e altere `localhost` para o `ip de sua máquina`;
 
-Caso contrário, você pode utilizar a seguinte URL para visualizar todas as telas: [Visualizar](https://xd.adobe.com/view/a5d56d7d-c1d4-48a8-70ce-8b77f5f417a5-d3e4/grid).
+2. Rode o comando `yarn start`;
 
-## 📅 Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
-## 📝 Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
----
-
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+3. Rode o comando `yarn android`.
