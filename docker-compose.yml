@@ -1,0 +1,30 @@
+version: '3'
+services:
+  fastfeet-app:
+    container_name: fastfeet-app
+    build: .
+    env_file:
+      - backend/.env
+    links:
+      - fastfeet-postgres
+      - fastfeet-redis
+    depends_on:
+      - fastfeet-postgres
+      - fastfeet-redis
+    ports:
+      - "3333:3333"
+    restart: always
+  fastfeet-postgres:
+    container_name: fastfeet-postgres
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=fastfeet
+    ports:
+      - "5432:5432"
+  fastfeet-redis:
+    container_name: fastfeet-redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"

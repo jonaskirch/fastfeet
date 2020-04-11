@@ -8,7 +8,6 @@ export function* signIn({ payload }) {
     const { deliverymanId } = payload;
 
     const resp = yield call(api.get, `/deliverymen/${deliverymanId}`);
-
     const deliveryman = resp.data;
 
     yield put(signInSuccess(deliveryman));

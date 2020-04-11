@@ -24,14 +24,16 @@ class App {
     this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(cors());
     this.server.use(express.json());
+  }
+
+  routes() {
+    this.server.use('/api',routes);
     this.server.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
-  }
-
-  routes() {
-    this.server.use(routes);
+    this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
+    // this.server.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html')));
     this.server.use(Sentry.Handlers.errorHandler());
   }
 
