@@ -27,16 +27,22 @@ Instalação via docker containers.
 
 2. No diretório principal, rode o comando `docker-composer up` para criar os containers;
 
-3. Rode os comandos `docker-compose run fastfeet-app yarn sequelize db:migrate` e `docker-compose run fastfeet-app yarn sequelize db:seed:all` para criar e popular a base de dados; 
+3. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:migrate` para criar a base de dados;
 
-4. Acesso a aplicação pelo endereço `http://localhost:3333`, usuário: `admin@fastfeet.com` senha: `123456`.
+4. Rode o comando `docker-compose run fastfeet-app yarn sequelize db:seed:all` para popular a base de dados; 
+
+4. Acesse a aplicação pelo endereço `http://localhost:3333`. Usuário: `admin@fastfeet.com` Senha: `123456`.
 
 ### Mobile
 
-1. Antes de cancelar encomendas ou deletar qualquer registro do banco crie uma verificação adicinal usando a função `confirm` do JavaScript;
+1. No diretório `mobile` rode o comando `yarn` para instalar as dependecias;
 
-2. Para formatação de datas utilize sempre a biblioteca `date-fns`;
-3. No cadastro/edição de encomendas deve ser possível buscar o entregador e o destinatário pelo nome. Utilize o método `async` da biblioteca [React Select](https://react-select.com/home#async). As encomendas devem ser buscadas da API assim que a página carregar e não devem possuir filtro.
+2. Copie o arquivo `.env.example` para `.env`e altere as variaveis;
+
+2. Rode o comando `yarn start`;
+
+3. Rode o comando `yarn android`.
+
 
 ## Licença
 
