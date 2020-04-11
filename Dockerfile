@@ -13,8 +13,9 @@ RUN yarn build
 
 FROM node:alpine
 RUN apk --no-cache add yarn
+RUN apk update
 RUN apk --no-cache add tzdata
-COPY /usr/share/zoneinfo/Brazil/East /etc/localtime
+RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
 WORKDIR /app
 
