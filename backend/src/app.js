@@ -33,7 +33,7 @@ class App {
       express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
     this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
-    // this.server.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html')));
+    this.server.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html')));
     this.server.use(Sentry.Handlers.errorHandler());
   }
 

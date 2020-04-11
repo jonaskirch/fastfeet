@@ -13,6 +13,9 @@ RUN yarn build
 
 FROM node:alpine
 RUN apk --no-cache add yarn
+RUN apk --no-cache add tzdata
+COPY /usr/share/zoneinfo/Brazil/East /etc/localtime
+
 WORKDIR /app
 
 COPY backend/package.json backend/yarn.lock ./

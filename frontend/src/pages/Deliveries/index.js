@@ -69,7 +69,7 @@ export default function Deliveries() {
   async function handleDelete(deliveryId) {
     if (window.confirm('Deseja realmente excluir este registro?')) {
       try {
-        const resp = await api.delete(`/deliveryies/${deliveryId}`);
+        const resp = await api.delete(`/deliveries/${deliveryId}`);
         const { id } = resp.data;
         const newList = deliveries.filter(d => Number(d.id) !== Number(id));
         setDeliveries(newList);
