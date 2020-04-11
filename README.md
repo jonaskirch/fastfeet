@@ -40,7 +40,7 @@ docker-compose run fastfeet-app yarn sequelize db:seed:all
 
 ### Mobile
 
-**Obs: Testado somente no Android**.
+**Obs: Somente Android**.
 
 1. No diretório `mobile` rode o comando `yarn` para instalar as dependêcias;
 
