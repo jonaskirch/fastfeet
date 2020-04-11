@@ -8,11 +8,11 @@
 
 <p align="center">
   <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#instalacao">Instalação e execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#licenca">Licença</a>
+  <a href="#instalacao-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#licença">Licença</a>
 </p>
 
-## 🚀 Projeto
+## Projeto
 
 Esse projeto é uma aplicaço completa (backend, frontend e mobile) para gerenciamente de entregas.
 Ele faz parte do desafio final do bootcamp GoStack da RocketSeat.
@@ -34,7 +34,7 @@ Antes de iniciar a parte web, **adicione as seguintes funcionalidades no back-en
 2. Para formatação de datas utilize sempre a biblioteca `date-fns`;
 3. No cadastro/edição de encomendas deve ser possível buscar o entregador e o destinatário pelo nome. Utilize o método `async` da biblioteca [React Select](https://react-select.com/home#async). As encomendas devem ser buscadas da API assim que a página carregar e não devem possuir filtro.
 
-## 📝 Licença
+## Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
