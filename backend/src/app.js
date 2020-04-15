@@ -15,9 +15,34 @@ class App {
 
     Sentry.init(sentryConfig);
 
+    this.static();
     this.middlewares();
     this.routes();
+    this.rewriteIndex();
     this.exceptionHandler();
+  }
+
+  static() {
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
+    );
+    this.server.use(
+      '/static',
+      express.static(path.resolve(__dirname, '..', 'public', 'static'))
+    );
+    this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
+
+    // this.server.use(
+    //   '/static',
+    //   express.static(
+    //     pathJoin(__dirname, 'public', 'static'),
+    //     staticConfig.static
+    //   )
+    // );
+    // this.server.use(
+    //   express.static(pathJoin(__dirname, 'public'), staticConfig.public)
+    // );
   }
 
   middlewares() {
@@ -28,19 +53,36 @@ class App {
 
   routes() {
     this.server.use('/api', routes);
-    this.server.use(
-      '/files',
-      express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
-    );
-    this.server.use(
-      '/static',
-      express.static(path.resolve(__dirname, '..', 'public', 'static'))
-    );
-    this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
-    this.server.get('*', (req, res) =>
-      res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
-    );
+    // this.server.use(
+    //   '/files',
+    //   express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
+    // );
+    // this.server.use(
+    //   '/static',
+    //   express.static(path.resolve(__dirname, '..', 'public', 'static'))
+    // );
+    // this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
+    // this.server.get('*', (req, res) =>
+    //   res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
+    // );
     this.server.use(Sentry.Handlers.errorHandler());
+  }
+
+  rewriteIndex() {
+    // if (process.env.NODE_ENV === 'development') {
+    //   this.server.get('/*', (req, res) =>
+    //     res.redirect(process.env.APP_FRONTEND_URL)
+    //   );
+    //   return;
+    // }
+    this.server.get(
+      '/*',
+      (req, res, next) => {
+        req.url = '/';
+        next();
+      },
+      express.static(path.resolve(__dirname, 'public'))
+    );
   }
 
   exceptionHandler() {
