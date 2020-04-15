@@ -37,9 +37,7 @@ class App {
       express.static(pathJoin(__dirname, '..','public','static'))
     );
     this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
-    if (process.env.NODE_ENV === 'production') {
-      this.server.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html')));
-    }
+    this.server.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html')));
     this.server.use(Sentry.Handlers.errorHandler());
   }
 
