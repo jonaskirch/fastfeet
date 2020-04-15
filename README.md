@@ -11,6 +11,10 @@
   <a href="#instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;
 </p>
 
+<p align="center">
+  <img alt="FastFeet" src=".github/fastfeet.png" width="100%">
+</p>
+
 ## Projeto
 
 <p>Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamente de entregas.</p>
