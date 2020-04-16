@@ -10,7 +10,7 @@
   <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;
 </p>
-
+<br />
 <p align="center">
   <img alt="FastFeet F" src=".github/frontend.png" width="70%">  
   <img alt="FastFeet M" src=".github/mobile.png" width="20%">
