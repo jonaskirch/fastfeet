@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
-import path from 'path';
+import path, { join as pathJoin } from 'path';
 import cors from 'cors';
 import * as Sentry from '@sentry/node';
 import Youch from 'youch';
 import sentryConfig from './config/sentry';
 import 'express-async-errors';
+import staticConfig from './config/static';
 import routes from './routes';
 import './database';
 
@@ -27,11 +28,14 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
+
     this.server.use(
       '/static',
-      express.static(path.resolve(__dirname, '..', 'public', 'static'))
+      express.static(pathJoin(__dirname, 'public/static'), staticConfig.static)
     );
-    this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
+    this.server.use(
+      express.static(pathJoin(__dirname, 'public'), staticConfig.public)
+    );
 
     // this.server.use(
     //   '/static',
@@ -81,7 +85,7 @@ class App {
         req.url = '/';
         next();
       },
-      express.static(path.resolve(__dirname, 'public'))
+      express.static(pathJoin(__dirname, 'public'), staticConfig.public)
     );
   }
 
