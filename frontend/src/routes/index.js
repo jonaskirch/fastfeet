@@ -36,7 +36,6 @@ export default function Routes() {
         component={DeliverymanRegister}
         isPrivate
       />
-
       <Route path="/recipients" exact component={Recipients} isPrivate />
       <Route path="/recipient" exact component={RecipientRegister} isPrivate />
       <Route
@@ -46,8 +45,7 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/problems" exact component={Problems} isPrivate />
-
-      <Redirect to="/deliveries" />
+      <Route path="/" component={() => <Redirect to="/" />} />
     </Switch>
   );
 }
