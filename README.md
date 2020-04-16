@@ -12,9 +12,8 @@
 </p>
 
 <p align="center">
-  <img alt="FastFeet F" src=".github/frontend.png" width="50%">
-  
-  <img alt="FastFeet M" src=".github/mobile.png" width="30%">
+  <img alt="FastFeet F" src=".github/frontend.png" width="70%">  
+  <img alt="FastFeet M" src=".github/mobile.png" width="20%">
 </p>
 
 ## Projeto
