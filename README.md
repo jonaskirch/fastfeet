@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img alt="FastFeet F" src=".github/frontend.png" width="100%">
+  <img alt="FastFeet F" src=".github/frontend.png" width="50%">
   
   <img alt="FastFeet M" src=".github/mobile.png" width="30%">
 </p>
