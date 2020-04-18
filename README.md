@@ -18,7 +18,7 @@
 
 ## Projeto
 
-<p>Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamente de entregas.</p>
+<p>Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamento de entregas.</p>
 <p>Ele faz parte do desafio final do bootcamp GoStack da <a href="https://rocketseat.com.br/" target="_blank">RocketSeat</a>.</p>
 
 ## Instalação e Execução
@@ -37,7 +37,7 @@ Instalação via docker containers.
 ```
 docker-compose run fastfeet-app yarn sequelize db:migrate
 ```
-4. Rode o comando abaixo para criar o usurio padrão:
+4. Rode o comando abaixo para criar o usuário padrão:
 ```
 docker-compose run fastfeet-app yarn sequelize db:seed:all
 ``` 
@@ -53,4 +53,4 @@ docker-compose run fastfeet-app yarn sequelize db:seed:all
 
 2. Rode o comando `yarn start`;
 
-3. Rode o comando `yarn android`.
+3. Em um novo terminal, rode o comando `yarn android`.
