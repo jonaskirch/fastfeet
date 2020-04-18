@@ -18,7 +18,7 @@
 
 ## Projeto
 
-<p>Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamente de entregas.</p>
+<p>Esse projeto é uma aplicação completa (backend, frontend e mobile) para gerenciamento de entregas.</p>
 <p>Ele faz parte do desafio final do bootcamp GoStack da <a href="https://rocketseat.com.br/" target="_blank">RocketSeat</a>.</p>
 
 ## Instalação e Execução
