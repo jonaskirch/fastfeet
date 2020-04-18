@@ -48,6 +48,7 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/problems" exact component={Problems} isPrivate />
+      {/* another router, redirect to existing router */}
       <Route
         path="/"
         component={() =>
