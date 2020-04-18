@@ -10,8 +10,11 @@ import DeliverymanRegister from '~/pages/DeliverymanRegister';
 import Recipients from '~/pages/Recipients';
 import RecipientRegister from '~/pages/RecipientRegister';
 import Problems from '~/pages/Problems';
+import { store } from '~/store';
 
 export default function Routes() {
+  const { signed } = store.getState().auth;
+
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
@@ -45,7 +48,12 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/problems" exact component={Problems} isPrivate />
-      <Route path="/" component={() => <Redirect to="/" />} />
+      <Route
+        path="/"
+        component={() =>
+          signed ? <Redirect to="/deliveries" /> : <Redirect to="/" />
+        }
+      />
     </Switch>
   );
 }
